@@ -15,7 +15,7 @@ scripted GUI, add localisation and DDS icons, run a static verifier, install int
 dsh plugin --profile web add dsh-hoi4-modding
 
 # or straight from the source repo
-dsh plugin --profile web add github:<owner>/dsh-hoi4-modding
+dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 ```
 
 Restart / refresh as the host asks. The skill appears in the session skill catalog; invoke it by asking
@@ -68,7 +68,7 @@ MIT. The skill text and scripts are original; no Paradox game assets are include
 ```sh
 dsh plugin --profile web add dsh-hoi4-modding
 # 或从源码仓库：
-dsh plugin --profile web add github:<owner>/dsh-hoi4-modding
+dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 ```
 
 刷新/重启后，技能出现在技能目录；直接说「做个 HOI4 mod」「加个国策树」「mod 报错了」即可触发，

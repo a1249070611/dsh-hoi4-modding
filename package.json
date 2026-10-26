@@ -54,5 +54,13 @@
     "modding"
   ],
   "icon": "./icon.svg",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a1249070611/dsh-hoi4-modding.git"
+  },
+  "homepage": "https://github.com/a1249070611/dsh-hoi4-modding#readme",
+  "bugs": {
+    "url": "https://github.com/a1249070611/dsh-hoi4-modding/issues"
+  }
 }
