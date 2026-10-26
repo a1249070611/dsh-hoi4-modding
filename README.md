@@ -21,6 +21,8 @@ dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 Restart / refresh as the host asks. The skill appears in the session skill catalog; invoke it by asking
 for HOI4 modding, or explicitly “load hoi4-modding”.
 
+npm: https://www.npmjs.com/package/dsh-hoi4-modding
+
 ## What is inside
 
 | Path | Purpose |
