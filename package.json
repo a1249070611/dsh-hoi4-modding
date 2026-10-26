@@ -35,7 +35,8 @@
     }
   },
   "engines": {
-    "node": "^22.19.0 || >=24.0.0"
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.0 <0.3.0"
   },
   "scripts": {
     "test": "node --test tests/smoke.test.mjs"
