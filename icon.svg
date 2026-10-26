@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="96" fill="#12202e"/>
+  <g fill="none" stroke="#5b8db8" stroke-width="10">
+    <circle cx="256" cy="256" r="176" opacity="0.35"/>
+    <circle cx="256" cy="256" r="146" opacity="0.55"/>
+  </g>
+  <g fill="#5b8db8" opacity="0.9">
+    <rect x="246" y="58" width="20" height="34" rx="6"/>
+    <rect x="246" y="420" width="20" height="34" rx="6"/>
+    <rect x="58" y="246" width="34" height="20" rx="6"/>
+    <rect x="420" y="246" width="34" height="20" rx="6"/>
+    <rect x="128" y="96" width="20" height="34" rx="6" transform="rotate(-45 138 113)"/>
+    <rect x="364" y="382" width="20" height="34" rx="6" transform="rotate(-45 374 399)"/>
+    <rect x="96" y="364" width="20" height="34" rx="6" transform="rotate(45 106 381)"/>
+    <rect x="382" y="128" width="20" height="34" rx="6" transform="rotate(45 392 145)"/>
+  </g>
+  <path d="M186 148h96l56 56v160a12 12 0 0 1-12 12H186a12 12 0 0 1-12-12V160a12 12 0 0 1 12-12z"
+        fill="#e8eef4" opacity="0.96"/>
+  <path d="M282 148v52a10 10 0 0 0 10 10h46z" fill="#b9cadb"/>
+  <g fill="#12202e">
+    <rect x="202" y="250" width="118" height="14" rx="7"/>
+    <rect x="202" y="282" width="118" height="14" rx="7"/>
+    <rect x="202" y="314" width="82" height="14" rx="7"/>
+  </g>
+  <text x="256" y="404" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="700"
+        fill="#e8eef4" text-anchor="middle" letter-spacing="2">HOI4</text>
+  <text x="256" y="440" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600"
+        fill="#8fb4d4" text-anchor="middle" letter-spacing="6">MODDING</text>
+</svg>
