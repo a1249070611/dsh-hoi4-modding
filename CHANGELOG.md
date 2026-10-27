@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+- 文档同步补丁：README 增加「Publishing」小节（2026 年可用 granular token 直发；**2027-01 起该方式移除**，
+  改用 stage only + `npm stage publish` 或 GitHub Actions Trusted Publishing），CHANGELOG 记录同项。
+  1.1.0 已包含全部功能与脚本，本版仅同步文档，避免 npm 包与仓库不一致。
+
 ## 1.1.0
 
 科技树 UI 专题（来自一次 2900 科技/多国科技页大型 Mod 的真实排障，全部结论经游戏内对照实验验证）：
