@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2
+
+- 发布通道切换为 **npm Trusted Publishing (OIDC)**：`release.yml` 去掉 `NPM_TOKEN` 依赖，改用 OIDC 发布并生成 provenance；
+  README 的中英「Publishing」小节同步更新。技能内容与 1.1.1 相同（纯发布/文档变更）。
+
 ## 1.1.1
 
 - 文档同步补丁：README 增加「Publishing」小节（2026 年可用 granular token 直发；**2027-01 起该方式移除**，

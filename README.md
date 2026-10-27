@@ -62,11 +62,16 @@ All commands are visible in the conversation before they run.
 
 ## Publishing
 
-- **Now – December 2026**: a granular access token with **Read and write (publish and stage)** and
-  **Bypass 2FA** enabled can publish directly with `npm publish --access public`.
-  npm deprecates this path in **January 2027**.
-- **From January 2027**: use a **stage only** token plus `npm stage publish`, or GitHub Actions
-  **Trusted Publishing** (the bundled `release.yml` already runs on `v*` tags).
+Releases are published by GitHub Actions using npm **Trusted Publishing (OIDC)** — no `NPM_TOKEN`
+secret and no bypass-2FA token are required:
+
+1. npmjs.com → package `dsh-hoi4-modding` → Settings → **Trusted Publisher** → GitHub Actions
+   (repository `a1249070611/dsh-hoi4-modding`, workflow file `release.yml`, "Allow npm publish").
+2. Release: `npm version patch -m "release %s" && git push origin master --tags`.
+   The `release.yml` workflow runs the tests and publishes with provenance.
+
+The old granular-token flow (bypass-2FA token + `npm publish`) is deprecated by npm and stops working
+in **January 2027**.
 
 ## Changelog
 
@@ -105,10 +110,10 @@ dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
   `item_sprite_check.py`（模板尺寸 vs 背景精灵像素，专治"小框显示成大框"）、`errorlog_triage.py`（error.log 分诊）
 
 ### 发布方式（npm）
-- 2026 年内：Granular token 选 **Read and write (publish and stage)** 并勾选 **Bypass 2FA**，可 `npm publish --access public` 直发；
-  npm 已在页面上提示该方式将于 **2027 年 1 月**移除。
-- 2027 年起：改用 **stage only** token + `npm stage publish`，或 GitHub Actions **Trusted Publishing**
-  （仓库里的 `release.yml` 已在 `v*` 标签触发）。
+- 默认走 **GitHub Actions + Trusted Publishing (OIDC)**，不需要 `NPM_TOKEN`、也不需要 bypass-2FA token。
+  在 npmjs.com 的包设置里把仓库 `a1249070611/dsh-hoi4-modding` 与 workflow `release.yml` 注册为 Trusted Publisher；
+  发版只需 `npm version patch -m "release %s"`，然后 `git push origin master --tags`，CI 会自动测试并带 provenance 发布。
+- 旧的 granular token 直发方式（勾选 Bypass 2FA 后 `npm publish`）已被 npm 弃用，**2027 年 1 月起失效**。
 
 ### 依赖
 
