@@ -19,6 +19,7 @@
 - **SKILL.md**：铁律新增 2 条（科技页可用性、大小框三件套）；排错表新增 3 行症状；验收清单新增 2 条；
   工具与配方索引补充新内容。
 - README：脚本清单、更新记录（中英）。
+- README：补充 npm 发布方式说明（2027-01 起 granular token 直发被移除，改用 stage only / Trusted Publishing）。
 
 ## 1.0.0
 

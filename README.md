@@ -60,6 +60,14 @@ All commands are visible in the conversation before they run.
 
 ## License
 
+## Publishing
+
+- **Now – December 2026**: a granular access token with **Read and write (publish and stage)** and
+  **Bypass 2FA** enabled can publish directly with `npm publish --access public`.
+  npm deprecates this path in **January 2027**.
+- **From January 2027**: use a **stage only** token plus `npm stage publish`, or GitHub Actions
+  **Trusted Publishing** (the bundled `release.yml` already runs on `v*` tags).
+
 ## Changelog
 
 - **1.1.0** — Tech tree UI knowledge from a real large-mod debugging session: `technology_folders.available`
@@ -95,6 +103,12 @@ dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 - `references/tech-tree-ui.md`：科技树页面可用性 / 连线 / 大小框混排 / 拆页合并 / 三种调试手法（留痕法、对半分、对照探针）
 - 4 个新脚本：`tech_tree_audit.py`（科技页完整性审计）、`tech_folder_available.py`（旗帜判定→国家标签，批量修复整页无连线）、
   `item_sprite_check.py`（模板尺寸 vs 背景精灵像素，专治"小框显示成大框"）、`errorlog_triage.py`（error.log 分诊）
+
+### 发布方式（npm）
+- 2026 年内：Granular token 选 **Read and write (publish and stage)** 并勾选 **Bypass 2FA**，可 `npm publish --access public` 直发；
+  npm 已在页面上提示该方式将于 **2027 年 1 月**移除。
+- 2027 年起：改用 **stage only** token + `npm stage publish`，或 GitHub Actions **Trusted Publishing**
+  （仓库里的 `release.yml` 已在 `v*` 标签触发）。
 
 ### 依赖
 
