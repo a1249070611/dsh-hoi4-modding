@@ -15,7 +15,8 @@
     "skills/**/*",
     "README.md",
     "LICENSE",
-    "icon.svg"
+    "icon.svg",
+    "CHANGELOG.md"
   ],
   "dsh": {
     "bundle": {
