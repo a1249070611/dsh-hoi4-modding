@@ -33,6 +33,10 @@ whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚�
 10. **不要依赖 DLC**：需要 DLC 内容时用 `has_dlc = "..."` 分支并标注；特殊项目依赖 `Gotterdammerung`。
 11. **错误看 `logs/error.log`**（`[时间][游戏日期][文件:行]: 消息`），只 grep 自己的文件名/ID；原版噪声占 95%+。
 12. **脚本改动必须重启游戏**，没有完整热重载；静态校验不能替代进游戏。
+13. **科技页（`technology_folders`）的 `available` 只用 `original_tag`，不要用 `has_country_flag`**：
+    引擎建页画线时会对该触发器做二次运行时求值，旗帜判定失败时**整页连线被静默丢弃**（方框还在、日志干净、旧存档可能正常而新开档必现）。见 `references/tech-tree-ui.md` §3。
+14. **大框/小框混排是三件套**：科技加 `force_use_small_tech_layout = yes` + 页面有 `techtree_<folder>_small_item` 模板 +
+    `GFX_technology_<folder>_small_*_item_bg` 精灵**指向真正的小图**。模板 size 只管排版，背景贴图按自身像素绘制——精灵还指着 203×84 大图时，画面就是"小框模板 + 大框外观 + 整体偏位"。
 
 ## 2. 标准工作流
 
@@ -61,6 +65,7 @@ whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚�
 | 决议（category / decision / targeted / 任务型） | §6 |
 | 角色（领袖/顾问/将领/科学家） | §7 |
 | 科技（folder / dependencies / on_research_complete） | §8 |
+| **科技树 UI：页面可用性 / 连线 / 大小框 / 拆页合并 / 调试手法** | `references/tech-tree-ui.md` |
 | 州、资源、建筑 | §9 |
 | 动态变量 + 动态修正 | §10 |
 | scripted GUI 面板（4 文件挂载） | §11 |
@@ -100,6 +105,19 @@ $GAME = "E:\Steam\steamapps\common\Hearts of Iron IV"
 # DDS 图标：生成/检查（Pillow）
 & python "$S\dds_helper.py" make icon.png out.dds --width 60 --height 68
 & python "$S\dds_helper.py" check out.dds
+
+# 科技页完整性审计（注册表 <-> 页面/页签/item 模板/网格/科技/本地化）
+& python "$S/tech_tree_audit.py" "D:/mods/MyMod"
+
+# 科技页可用性：has_country_flag -> original_tag（--check 先看，--apply 写入并备份，--revert 回滚）
+& python "$S/tech_folder_available.py" "D:/mods/MyMod" --check
+& python "$S/tech_folder_available.py" "D:/mods/MyMod" --apply
+
+# item 模板尺寸 vs 背景精灵像素（专治"小框显示成大框"）
+& python "$S/item_sprite_check.py" "D:/mods/MyMod" --folder my_folder
+
+# error.log 分诊（科技树 / 贴图 / scope / 未知字段 / 本地化）
+& python "$S/errorlog_triage.py"
 ```
 
 > Git Bash 中把 `$S\x.py` 写成 `"$S/x.py"`、`$GAME` 写成 `/e/Steam/...` 即可。
@@ -122,6 +140,9 @@ $GAME = "E:\Steam\steamapps\common\Hearts of Iron IV"
 | 图标空白/黑块 | GFX 未注册、texturefile 不存在、DDS 头不对 | `dds_helper.py check`；确认 sprite 在 `interface/*.gfx` |
 | 中文方框 | GUI 用了没有中文 `bitmapfont_override` 的字体名 | 换有中文覆盖的字体（见知识库 `05_presentation/chinese_fonts.md`） |
 | 国策树不显示 | 原版树分数更高；或树 id/坐标错误 | 按 §4 规则选「无专属树国家」或覆盖原树 |
+| 科技页**方框全在、连线一条没有**、日志干净 | `technology_folders.available` 用了 `has_country_flag`，建页画线阶段判定失败 → 整页 path 静默丢弃 | 改成 `original_tag = <TAG>`（`tech_folder_available.py`），**新开档**验证 |
+| 小框科技显示成大框且整体偏位 | 小框模板生效了，但 `GFX_technology_<folder>_small_*_item_bg` 指向 203×84 大图 | `item_sprite_check.py` 定位后把 textureFile 换成 72×72 小图 |
+| 某页永远不显示 | `available = { always = no  NOT = {...} }`（AND 关系恒 false） | 去掉 `always = no`，只留 `NOT = {...}` 或 `original_tag` |
 
 游戏内调试：`-debug_mode` 启动，控制台（`~`/`^`）常用 `event hho.1`、`focus.autocomplete`、`debug_events`、`tag SWE`、`pp 500`；完整命令见 `reference/CHEATSHEET_console.md`（若已生成）。
 
@@ -132,6 +153,8 @@ $GAME = "E:\Steam\steamapps\common\Hearts of Iron IV"
 - [ ] 所有 `GFX_` 引用真实存在；自绘 DDS 尺寸/格式正确。
 - [ ] 没有覆盖原版整文件（除非有意）；`.mod` path 为 ASCII。
 - [ ] 干净 playset 进游戏：新开档、触发全部内容、`error.log` 无自己文件的报错。
+- [ ] **新开档**逐个相关国家打开科技页确认连线（旧存档会掩盖 available 触发器的时机问题）。
+- [ ] `tech_tree_audit.py` 报告 0 问题；大小框混排页跑 `item_sprite_check.py` 无可疑项。
 - [ ] 发布信息（name/supported_version/tags/picture/README/依赖 DLC）齐全；联机 checksum 一致。
 
 ## 7. 深度资料

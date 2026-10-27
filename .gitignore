@@ -2,3 +2,6 @@ node_modules/
 tests/_install/
 *.tgz
 .DS_Store
+
+__pycache__/
+*.pyc

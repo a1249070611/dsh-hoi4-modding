@@ -36,6 +36,11 @@ npm: https://www.npmjs.com/package/dsh-hoi4-modding
 | `skills/hoi4-modding/scripts/build_reference.py` | Generate effects/triggers/modifiers/console references from the game's `documentation/*.md` |
 | `skills/hoi4-modding/scripts/dds_helper.py` | Generate / inspect HOI4 DDS icons (needs Pillow) |
 | `skills/hoi4-modding/scripts/pdx_parser.py` | Tolerant PDX script parser used by the linter |
+| `skills/hoi4-modding/references/tech-tree-ui.md` | Tech tree UI: folder availability, connection lines, big/small item layouts, split/merge recipes, debugging recipes |
+| `skills/hoi4-modding/scripts/tech_tree_audit.py` | Audit a mod's tech pages: registry vs page/tab/item templates/gridboxes/techs/localisation |
+| `skills/hoi4-modding/scripts/tech_folder_available.py` | Migrate `technology_folders.available` from `has_country_flag` to `original_tag` (check/apply/revert) |
+| `skills/hoi4-modding/scripts/item_sprite_check.py` | Compare item template sizes with the actual item background sprite pixels ("small item looks big") |
+| `skills/hoi4-modding/scripts/errorlog_triage.py` | Triage `error.log`: tech tree / textures / scopes / unknown fields / localisation |
 
 ## Requirements
 
@@ -52,6 +57,16 @@ The plugin registers skill metadata only. The bundled Python scripts are run by 
 user asks**; they read the HOI4 install and, for `install_mod.py`, write into the player
 `Documents/Paradox Interactive/Hearts of Iron IV/mod/` directory (never the game install itself).
 All commands are visible in the conversation before they run.
+
+## License
+
+## Changelog
+
+- **1.1.0** — Tech tree UI knowledge from a real large-mod debugging session: `technology_folders.available`
+  must use `original_tag` (flag-based conditions silently drop every connection line on a page in new games),
+  big/small item mixing requires the small item background **sprites** to point at real small textures,
+  plus three debugging recipes (marker rename, half-split experiment, control probe) and four new scripts.
+- 1.0.0 — Initial release.
 
 ## License
 
@@ -75,6 +90,11 @@ dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 
 刷新/重启后，技能出现在技能目录；直接说「做个 HOI4 mod」「加个国策树」「mod 报错了」即可触发，
 也可以显式说「加载 hoi4-modding 技能」。
+
+### 本次新增（1.1.0）
+- `references/tech-tree-ui.md`：科技树页面可用性 / 连线 / 大小框混排 / 拆页合并 / 三种调试手法（留痕法、对半分、对照探针）
+- 4 个新脚本：`tech_tree_audit.py`（科技页完整性审计）、`tech_folder_available.py`（旗帜判定→国家标签，批量修复整页无连线）、
+  `item_sprite_check.py`（模板尺寸 vs 背景精灵像素，专治"小框显示成大框"）、`errorlog_triage.py`（error.log 分诊）
 
 ### 依赖
 

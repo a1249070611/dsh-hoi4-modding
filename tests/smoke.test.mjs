@@ -45,3 +45,19 @@ test('package declares a dsh bundle patch that inserts the plugin', () => {
   assert.match(patch, /id: hoi4-modding/)
   assert.match(patch, /name: dsh-hoi4-modding/)
 })
+
+test('tech tree UI reference and scripts are bundled', () => {
+  const skill = loadSkill()
+  const base = skill.resourceBase.path
+  assert.ok(existsSync(join(base, 'references', 'tech-tree-ui.md')))
+  for (const f of [
+    'tech_tree_audit.py',
+    'tech_folder_available.py',
+    'item_sprite_check.py',
+    'errorlog_triage.py',
+  ]) {
+    assert.ok(existsSync(join(base, 'scripts', f)), f + ' missing')
+  }
+  assert.match(skill.content, /original_tag/)
+  assert.match(skill.content, /force_use_small_tech_layout/)
+})
