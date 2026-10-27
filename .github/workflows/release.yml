@@ -18,6 +18,7 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - run: npm test
+      # npm Trusted Publishing (OIDC): no NODE_AUTH_TOKEN / repository secret needed.
+      # Requires this repo + workflow to be registered as a trusted publisher on
+      # npmjs.com -> package "dsh-hoi4-modding" -> Settings -> Trusted Publisher.
       - run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
