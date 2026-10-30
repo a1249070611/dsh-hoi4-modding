@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.2.0
+
+坦克设计器 + 3D 模型 + 图标流水线专题（来自一次 30 科技德国坦克树 / 16 槽设计器改造的真实工程，
+全部结论经游戏内对照验证）：
+
+- **新增** `references/tank-designer.md`
+  - 设计器文件地图：`interface/tank_designer_view.gui`（窗口 1091×542、`equipment_modules` 13/146 512×350、
+    9 个 `pos_custom_module_slot_window_*`）、`equipmentdesignerview.gui`（槽位按钮模板 **76×47**）、
+    每底盘蓝图 GUI（`equipment_designer_<底盘>` → archetype 回退）。
+  - 数据侧：槽位 = `module_slots` 书写顺序；模块类别由 `category =` 隐式创建；装备可自定义 `module_slots`。
+  - 16 槽布局（上 7 + 第二排 2 + 下 7，窗口不加高 542）完整坐标与取舍。
+  - **窗口背景固定尺寸坑**：`GFX_tank_designer_popup_bg` 是 1092×553 贴图，只改窗口 size 会让内容溢出；
+    给出“顶部原样 + 中间平铺 + 底部原样”生成加高 DDS 的配方。
+  - 隐藏升级区/自动按钮的安全做法（position 移出屏幕；`auto_upgrade_button` 可能被代码自动摆放）。
+- **新增** `references/tank-models-3d.md`
+  - 四层链路 `graphic_db` → `entity`（`.asset`）→ `pdxmesh`（`.gfx`）→ `.mesh/.anim/.dds`；
+  - 原版德国实体清单（`GER_iw/light/medium/heavy/super_heavy_armor_entity`）、特效节点
+    `barrel`/`left_tracks`/`right_tracks`/`left_exhaust`/`right_exhaust`；
+  - 复用原版 / 换贴图 / 自制 mesh 三条路线，导出器（Maya 官方、Blender 社区）与排错表。
+- **新增** `references/icon-dds-pipeline.md`
+  - 科技卡几何：183×84 卡、`Icon` 中心 x=74 → 内容右移 8px（左 20 / 右 4 / 上下 2，最大 149×73）；
+  - 去背（透明/白底/8px 棋盘格）、白色涂装保护规则（亮度≥235 且 relY<0.8）、批量别名表、卡片预览自检、踩坑表。
+- **新增脚本**
+  - `tank_designer_probe.py`：设计器体检（窗口/槽位位置/槽位模板/背景 DDS 尺寸/模块类别/底盘 archetype 槽数/隐藏元素）
+  - `tank_designer_layout.py`：从原版 GUI 生成自定义槽位布局（默认 16 槽紧凑版，支持 16-tall、背景 sprite 替换、dry-run）
+  - `tech_icon_import.py`：照片/矢量图 → 173×77 DDS（去背 + 安全区 + 183×84 卡片预览，可调尺寸/边距）
+- **文档补充**
+  - `references/tech-tree-ui.md` 新增：多根分支 gridbox（一个页面多个 `_tree`）、生成文件被外部改写导致
+    `Found no grid box` 的排查顺序；
+  - `references/cheatsheet.md` 新增 §16：坦克设计器 / 3D 模型 / 173×77 图标速查；
+  - SKILL.md 铁律 +2 条、配方索引 +3 行、排错表 +3 行、验收清单 +2 条。
+
 ## 1.1.2
 
 - 发布通道切换为 **npm Trusted Publishing (OIDC)**：`release.yml` 去掉 `NPM_TOKEN` 依赖，改用 OIDC 发布并生成 provenance；

@@ -41,6 +41,12 @@ npm: https://www.npmjs.com/package/dsh-hoi4-modding
 | `skills/hoi4-modding/scripts/tech_folder_available.py` | Migrate `technology_folders.available` from `has_country_flag` to `original_tag` (check/apply/revert) |
 | `skills/hoi4-modding/scripts/item_sprite_check.py` | Compare item template sizes with the actual item background sprite pixels ("small item looks big") |
 | `skills/hoi4-modding/scripts/errorlog_triage.py` | Triage `error.log`: tech tree / textures / scopes / unknown fields / localisation |
+| `skills/hoi4-modding/references/tank-designer.md` | Tank designer: window/slot position table, 16-slot layouts, module-slot data, taller-window background trap |
+| `skills/hoi4-modding/references/tank-models-3d.md` | Tank 3D models: `entity`/`pdxmesh`/`.mesh`/`.anim`/`.dds` chain, effect nodes, reuse/repaint/custom-mesh routes |
+| `skills/hoi4-modding/references/icon-dds-pipeline.md` | Tech icon pipeline: photo → 173×77 DDS, de-background, white-paint protection, safe margins, card preview |
+| `skills/hoi4-modding/scripts/tank_designer_probe.py` | Probe designer window, slot table, slot-entry size, module categories, chassis slot counts, background DDS size |
+| `skills/hoi4-modding/scripts/tank_designer_layout.py` | Generate a custom tank-designer slot layout (16-compact preset) into a mod |
+| `skills/hoi4-modding/scripts/tech_icon_import.py` | Photo/vector → 173×77 DDS: de-background, safe-area placement, 183×84 card preview |
 
 ## Requirements
 
@@ -104,7 +110,14 @@ dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 刷新/重启后，技能出现在技能目录；直接说「做个 HOI4 mod」「加个国策树」「mod 报错了」即可触发，
 也可以显式说「加载 hoi4-modding 技能」。
 
-### 本次新增（1.1.0）
+### 本次新增（1.2.0）
+- `references/tank-designer.md`：坦克设计器（窗口 / `pos_custom_module_slot_window_N` 槽位位置表 / 底盘 `module_slots` / 模块类别 / 16 槽布局 / 加高窗口背景贴图坑 / 隐藏升级区与自动按钮）
+- `references/tank-models-3d.md`：坦克 3D 模型链路（`entity`→`pdxmesh`→`.mesh/.anim/.dds`、特效节点 `barrel`/`tracks`/`exhaust`、复用原版 / 换贴图 / 自制 mesh 三条路线）
+- `references/icon-dds-pipeline.md`：科技卡 173×77 图标流水线（去白底/棋盘格、白色涂装保护、安全区 20/4、183×84 卡片自检）
+- 新增 3 个脚本：`tank_designer_probe.py`（设计器体检）、`tank_designer_layout.py`（生成 16 槽布局）、`tech_icon_import.py`（照片→图标 DDS）
+- 科技树文档补充：多根分支 gridbox（一个页面多个 `_tree`）、生成文件被外部改写导致 `Found no grid box` 的排查
+
+### 1.1.0 新增（历史）
 - `references/tech-tree-ui.md`：科技树页面可用性 / 连线 / 大小框混排 / 拆页合并 / 三种调试手法（留痕法、对半分、对照探针）
 - 4 个新脚本：`tech_tree_audit.py`（科技页完整性审计）、`tech_folder_available.py`（旗帜判定→国家标签，批量修复整页无连线）、
   `item_sprite_check.py`（模板尺寸 vs 背景精灵像素，专治"小框显示成大框"）、`errorlog_triage.py`（error.log 分诊）

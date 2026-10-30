@@ -1,7 +1,7 @@
 {
   "name": "dsh-hoi4-modding",
-  "version": "1.1.2",
-  "description": "HOI4 1.19.3 modding skill bundle for DeepSeek Harness: create, edit, validate, install and debug Hearts of Iron IV mods (focus trees, events, decisions, ideas, characters, technologies, MIO, special projects, GUI, localisation, DDS) with bundled verifier/installer scripts; plus tech tree UI diagnostics (page availability, connection lines, big/small item layouts).",
+  "version": "1.2.0",
+  "description": "HOI4 1.19.3 modding skill bundle for DeepSeek Harness: create, edit, validate, install and debug Hearts of Iron IV mods (focus trees, events, decisions, ideas, characters, technologies, MIO, special projects, GUI, localisation, DDS) with bundled verifier/installer scripts; plus tech tree UI diagnostics and tank designer (module slots, 16-slot layouts, 3D models, tech icon pipeline).",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -52,7 +52,10 @@
     "hoi4",
     "hoi4-modding",
     "paradox",
-    "modding"
+    "modding",
+    "tank-designer",
+    "3d-models",
+    "icon-pipeline"
   ],
   "icon": "./icon.svg",
   "license": "MIT",

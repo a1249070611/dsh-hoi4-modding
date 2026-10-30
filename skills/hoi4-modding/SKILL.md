@@ -1,6 +1,6 @@
 ---
 name: hoi4-modding
-description: 《钢铁雄心4》(Hearts of Iron IV, HOI4) 1.19.3 Mod 开发全流程技能：读游戏文件、新建 Mod、写国策/事件/决议/理念/角色/科技/州/MIO/特殊项目/scripted GUI、本地化与 DDS 图标、静态校验、安装启用、按 error.log 排错、发布创意工坊。Use whenever the user asks to create, edit, fix, validate, install, publish, or debug an HOI4 mod or asks about HOI4 scripting (scopes, effects, triggers, variables, focus trees, events, decisions, ideas, characters, MIO, special projects, GUI, localisation, DDS), even if they only say "做个国策树"/"加个事件"/"mod 报错了".
+description: 《钢铁雄心4》(Hearts of Iron IV, HOI4) 1.19.3 Mod 开发全流程技能：读游戏文件、新建 Mod、写国策/事件/决议/理念/角色/科技/州/MIO/特殊项目/scripted GUI、本地化与 DDS 图标、静态校验、安装启用、按 error.log 排错、发布创意工坊。Use whenever the user asks to create, edit, fix, validate, install, publish, or debug an HOI4 mod or asks about HOI4 scripting (scopes, effects, triggers, variables, focus trees, events, decisions, ideas, characters, MIO, special projects, GUI, localisation, DDS, tank designer/module slots/2D icons/3D models), even if they only say "做个国策树"/"加个事件"/"mod 报错了".
 whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚本写法（scope/effect/trigger/变量/国策/事件/决议/理念/角色/MIO/特殊项目/GUI/本地化/DDS）时。
 ---
 
@@ -37,6 +37,8 @@ whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚�
     引擎建页画线时会对该触发器做二次运行时求值，旗帜判定失败时**整页连线被静默丢弃**（方框还在、日志干净、旧存档可能正常而新开档必现）。见 `references/tech-tree-ui.md` §3。
 14. **大框/小框混排是三件套**：科技加 `force_use_small_tech_layout = yes` + 页面有 `techtree_<folder>_small_item` 模板 +
     `GFX_technology_<folder>_small_*_item_bg` 精灵**指向真正的小图**。模板 size 只管排版，背景贴图按自身像素绘制——精灵还指着 203×84 大图时，画面就是"小框模板 + 大框外观 + 整体偏位"。
+15. **坦克设计器是全局 GUI**：改 `interface/tank_designer_view.gui` 会影响所有国家/底盘；窗口背景 `GFX_tank_designer_popup_bg` 是**固定 1092×553 贴图**，只加高窗口而不换背景 → 内容溢出到窗口外/地图上（见 `references/tank-designer.md` §4.3）。
+16. **槽位按钮位置 ≠ 槽位数据**：`pos_custom_module_slot_window_N` 决定按钮在界面上的位置，底盘 `module_slots` 的**书写顺序**决定第 N 个位置是哪一类槽；模块类别由模块的 `category =` 隐式创建（`references/tank-designer.md`）。
 
 ## 2. 标准工作流
 
@@ -71,6 +73,9 @@ whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚�
 | scripted GUI 面板（4 文件挂载） | §11 |
 | MIO / 特殊项目 | §12 |
 | 贴图、DDS、GFX 注册 | §13 |
+| **坦克设计器：16 槽布局 / 加高窗口 / 隐藏升级区 / 模块类别** | `references/tank-designer.md` |
+| **坦克 3D 模型：复用原版实体 / 换贴图 / 自制 mesh** | `references/tank-models-3d.md` |
+| **科技/装备图标：照片→173×77 DDS、去背、安全区** | `references/icon-dds-pipeline.md` |
 | 调试命令与 error.log 对照表 | §14 |
 | 1.19 与旧教程差异清单 | §15 |
 
@@ -106,6 +111,16 @@ $GAME = "E:\Steam\steamapps\common\Hearts of Iron IV"
 & python "$S\dds_helper.py" make icon.png out.dds --width 60 --height 68
 & python "$S\dds_helper.py" check out.dds
 
+# 坦克设计器体检（窗口/槽位位置/槽位模板/模块类别/底盘槽数/背景尺寸）
+& python "$S	ank_designer_probe.py" --game $GAME
+
+# 生成坦克设计器槽位布局（默认 16 槽紧凑版，写 mod/interface/tank_designer_view.gui；不修改游戏目录）
+& python "$S	ank_designer_layout.py" --mod "D:\mods\MyMod" --dry-run
+& python "$S	ank_designer_layout.py" --mod "D:\mods\MyMod"
+
+# 科技卡图标：照片/矢量图 → 173×77 DDS（去背 + 安全区 + 183×84 卡片预览）
+& python "$S	ech_icon_import.py" "虎式E型.png" out/GER_tiger_e.dds --card-preview preview.png
+
 # 科技页完整性审计（注册表 <-> 页面/页签/item 模板/网格/科技/本地化）
 & python "$S/tech_tree_audit.py" "D:/mods/MyMod"
 
@@ -138,6 +153,9 @@ $GAME = "E:\Steam\steamapps\common\Hearts of Iron IV"
 | `Unexpected token` | 括号/引号不平衡；`.mod` 字段拼错（如 `thumbnail`） | 跑 lint；检查 `picture=`/`path=` |
 | `Tried to get dynamic token` / `dynamic token ... OOS` | 本地化/脚本拼接 key 未注册 | 改用普通 loc key 或 `synchronized_dynamic_tokens` |
 | 图标空白/黑块 | GFX 未注册、texturefile 不存在、DDS 头不对 | `dds_helper.py check`；确认 sprite 在 `interface/*.gfx` |
+| 坦克设计器内容溢出窗口/跑到地图上 | 窗口加高但背景贴图固定 1092×553 | 用 `tank_designer_layout.py` 生成紧凑布局，或按 `references/tank-designer.md` §4.3 做加高背景 sprite |
+| 坦克设计器槽位数/位置不对 | 界面位置数 与 底盘 `module_slots` 数量/顺序不一致 | `tank_designer_probe.py` 打印两者后对比 |
+| 设计器槽位互相叠压/挤出容器 | 槽位模板宽 76px > 列距/容器宽 | 列距 ≥76 或加宽 `equipment_modules`（原版 73 列距本身叠 3px） |
 | 中文方框 | GUI 用了没有中文 `bitmapfont_override` 的字体名 | 换有中文覆盖的字体（见知识库 `05_presentation/chinese_fonts.md`） |
 | 国策树不显示 | 原版树分数更高；或树 id/坐标错误 | 按 §4 规则选「无专属树国家」或覆盖原树 |
 | 科技页**方框全在、连线一条没有**、日志干净 | `technology_folders.available` 用了 `has_country_flag`，建页画线阶段判定失败 → 整页 path 静默丢弃 | 改成 `original_tag = <TAG>`（`tech_folder_available.py`），**新开档**验证 |
@@ -155,6 +173,8 @@ $GAME = "E:\Steam\steamapps\common\Hearts of Iron IV"
 - [ ] 干净 playset 进游戏：新开档、触发全部内容、`error.log` 无自己文件的报错。
 - [ ] **新开档**逐个相关国家打开科技页确认连线（旧存档会掩盖 available 触发器的时机问题）。
 - [ ] `tech_tree_audit.py` 报告 0 问题；大小框混排页跑 `item_sprite_check.py` 无可疑项。
+- [ ] 坦克设计器：窗口背景覆盖整个窗口；槽位位置数 = 底盘 `module_slots` 数；槽位不叠压、能选模块并保存设计。
+- [ ] 坦克 3D：`graphic_db` 的 `models` 实体存在，`.asset` 至少 `idle/move/attack` 三个 state，贴图齐全。
 - [ ] 发布信息（name/supported_version/tags/picture/README/依赖 DLC）齐全；联机 checksum 一致。
 
 ## 7. 深度资料

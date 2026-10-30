@@ -555,3 +555,60 @@ spriteTypes = {
 - **理念**：支持 `on_add`/`on_remove`（旧教程说没有是错的）。
 - **文档滞后**：官方 `documentation/*.md` 不是全集（`unit_modifiers`、`is_fighting_in_strategic_region`、`is_deployed` 等未收录），冲突以游戏文件为准。
 - **路径**：`.mod` 的 `path` 建议纯 ASCII；`-debug_mode` 不是 `-debug`。
+
+
+## 16. 坦克设计器 / 3D 模型 / 图标（速查）
+
+### 16.1 坦克设计器文件
+
+| 文件 | 作用 |
+|---|---|
+| `interface/tank_designer_view.gui` | 窗口、`equipment_modules`（槽位容器）、`pos_custom_module_slot_window_N`（每个槽的坐标） |
+| `interface/equipmentdesignerview.gui` | 通用控件；`equipment_designer_module_slot_entry` 槽位按钮模板 = **76×47** |
+| `interface/equipmentdesigner/tanks/*.gui` | 每类底盘蓝图（`equipment_designer_<底盘>` / archetype 回退） |
+| `common/units/equipment/tank_chassis.txt` | archetype 的 `module_slots`；普通底盘 `module_slots = inherit` |
+| `common/units/equipment/modules/*.txt` | 模块；`category =` 隐式建类别 |
+| `gfx/interface/equipmentdesigner/graphic_db/*.txt` | `graphic_db = { GFX_2d_icon models = { ENTITY } }` |
+
+原版 9 槽顺序（= 数据 `module_slots` 顺序）：炮塔/主武器/悬挂/装甲/引擎/特殊1–4；
+界面位置 `pos_0..8` 由原版 GUI 决定，改槽数 = 加 `pos_custom_module_slot_window_N` + 底盘多写槽。
+
+### 16.2 16 槽紧凑布局（不加高窗口）
+
+```pdx
+@fixed_btn_mod_col_0 = 0
+...
+@fixed_btn_mod_col_6 = 432
+@fixed_btn_mod_row_0 = 0     # 上排 7
+@fixed_btn_mod_row_1 = 50    # 第二排 2（通信左 / 工程右）
+@fixed_btn_mod_row_2 = 300   # 下排 7
+```
+
+- 窗口高 542 不用加高；蓝图保持 `position {x=3 y=50} size 508×248`；
+- 隐藏 `equipment_upgrade_0/1`、auto 按钮：把 position 改成 `-4000/-4000`；
+- 槽位宽 76、列距 72（原版就是 73）→ 相邻叠 4px，视觉连成一排；要严格不叠压需加宽容器。
+
+### 16.3 3D 模型四层
+
+```
+graphic_db models = { ENTITY }
+  → gfx/entities/*.asset  entity = { name pdxmesh = ... state = {idle/move/attack} }
+  → gfx/entities/*.gfx    pdxmesh = { name file = "gfx/models/units/tanks/x.mesh" }
+  → gfx/models/units/tanks/*.mesh + *.anim + *_diffuse/_normal/_specular.dds
+```
+
+复用原版：`GER_iw_armor_entity` / `GER_light_armor_entity` / `GER_medium_armor_entity` /
+`GER_heavy_armor_entity` / `GER_super_heavy_armor_entity`。
+
+### 16.4 科技卡图标 173×77
+
+```
+Icon 控件中心 x=74（卡宽 183）→ 内容右移 8px：左留 20 / 右留 4 / 上下 2，最大内容 149×73
+```
+
+- 透明 PNG 最好；白底/棋盘格需要去背；**白色涂装保护**：区域亮度≥235 且 relY<0.8 → 保留；
+- 输出 raw32 DDS 173×77，sprite 名 `GFX_<tech>_medium`；
+- 批量导入必须有别名表（文件名≠科技 id 时）。
+
+对应脚本：`tank_designer_probe.py` / `tank_designer_layout.py` / `tech_icon_import.py`，
+专题文档 `references/tank-designer.md`、`references/tank-models-3d.md`、`references/icon-dds-pipeline.md`。

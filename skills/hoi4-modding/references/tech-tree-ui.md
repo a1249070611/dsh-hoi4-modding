@@ -255,3 +255,48 @@ python scripts/item_sprite_check.py "<Mod目录>" --folder my_folder
 - [ ] `tech_tree_audit.py` 报告 0 问题；
 - [ ] error.log 里没有 `Found no grid box`、`Trying to draw a path in Folder`；
 - [ ] 跨页 path 是否可接受（不能接受就合并页面）。
+
+
+## 9. 多根分支（独立分支根）
+
+一个科技页可以有多个 `<root>_tree` 网格框（多个 root），用于表达“互不相连的几条研发线”，
+例如：一号坦克线（`GER_pz1_a` 根）+ 捷克 35(t) 线（`GER_pz35t` 根）。
+
+```pdx
+# interface/countrytechtreeview.gui（同一页里两个 gridbox）
+gridboxtype = {
+	name = "GER_armor_tree"
+	position = { x = 180 y = 70 }
+	slotsize = { width = 96 height = 82 }
+	# ...
+}
+gridboxtype = {
+	name = "GER_pz35t_tree"      # 第二个根网格，可不同原点
+	position = { x = 180 y = 610 }
+	slotsize = { width = 96 height = 82 }
+}
+```
+
+数据侧：根技术 `path = { ... }` 的第一项决定了它画在哪个网格——
+**`path` 里出现哪个 root 网格的 id，就连到哪个网格**，与 `dependencies` 无关。
+
+- 每个 root 的 `position` 独立，两个网格可以上下/左右排；
+- 同一页多个 root 时，**所有 root 都必须有对应 gridbox**，少一个 → 该根下所有科技报
+  `Found no grid box for tech ...`（该科技方框+线被跳过，日志有这条）；
+- 年份行号/列号在整个页内是**每个 root 各自独立**的，不要混用坐标。
+- 生成器/手工都适用：只要 `folder` 注册了页面，页面里挂几个 `_tree` 都行。
+
+## 10. 生成文件被外部改写的坑（科技树 + 生成式 Mod）
+
+用脚本生成 `_data/*.json` → GUI/科技/装备文件的项目，常见事故：
+**生成好的 `common/technologies/<tree>.txt` 被手工/其它工具改写，丢了 `path`/`dependencies`/`folder` 等字段**，
+游戏加载时该科技找不到网格 → 报 `Found no grid box for tech X`（X 可能几十条），但文件本身语法合法。
+
+排查顺序：
+1. `common/technology_tags/00_technology.txt` 里 `folder` 是否注册、`available` 是否 `original_tag`；
+2. 页面 GUI 里是否有该科技所属 `root` 的 gridbox；
+3. 科技条目是否仍有 `path = { ... }`（每段第一个元素是 root 网格 id）与 `folder = <folder>`；
+4. 对比 `_data` 源与生成文件：生成文件被改写后，重新生成并比对哈希即可定位。
+
+**规矩：生成文件只由生成器写；要改先改数据源。** 生成器里给所有生成文件加统一前缀（如 `zz_`）
+还能顺带解决“加载顺序早于原版定义”导致的 `Malformed token`（例如自定义底盘要晚于原版 `tank_chassis.txt` 解析）。

@@ -8,7 +8,8 @@
 ```
 hoi4-modding/
 ├─ SKILL.md          # 必需：frontmatter 含 name、description
-├─ references/       # 可选：参考资料（本技能为 cheatsheet.md、deep-dive.md）
+├─ references/       # 可选：参考资料（本技能为 cheatsheet.md、deep-dive.md、tech-tree-ui.md、
+│                    #       tank-designer.md、tank-models-3d.md、icon-dds-pipeline.md）
 ├─ scripts/          # 可选：可执行工具（Python 3.10+，标准库；DDS 需 Pillow）
 └─ INSTALL.md        # 本文件
 ```

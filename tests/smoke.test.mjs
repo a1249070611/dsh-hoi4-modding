@@ -61,3 +61,21 @@ test('tech tree UI reference and scripts are bundled', () => {
   assert.match(skill.content, /original_tag/)
   assert.match(skill.content, /force_use_small_tech_layout/)
 })
+
+
+test('tank designer references and scripts are bundled', () => {
+  const skill = loadSkill()
+  const base = skill.resourceBase.path
+  for (const f of [
+    'references/tank-designer.md',
+    'references/tank-models-3d.md',
+    'references/icon-dds-pipeline.md',
+  ]) {
+    assert.ok(existsSync(join(base, f)), f + ' missing')
+  }
+  for (const f of ['tank_designer_probe.py', 'tank_designer_layout.py', 'tech_icon_import.py']) {
+    assert.ok(existsSync(join(base, 'scripts', f)), f + ' missing')
+  }
+  assert.match(skill.content, /tank_designer_layout\.py/)
+  assert.match(skill.content, /173×77|173x77/)
+})
