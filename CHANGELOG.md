@@ -1,5 +1,43 @@
 # Changelog
 
+## 1.4.0
+
+23 个工坊 Mod（约 44 GB，只读）实测后的知识回灌：**推翻「中文乱码 = 字体 mod 冲突」的旧结论**，
+补齐 scripted GUI 全字段/合法 token 表，并落地一个可进 CI 的字体体检脚本。
+
+- **新增** `references/fonts-and-cjk.md` + `scripts/font_audit.py`
+  - 根因：汉字只存在于 `interface/core_chinese.gfx` 的 `bitmapfont_override` 挂载的
+    `gfx/fonts/chinese/<name>_Nof4` 分片；游戏全部 57 个 `.fnt` 自身 CJK 字形数为 0。
+  - 因此**名字不在 override 名单里就必然 `????`**（`hoi_14mbs` 是典型），与装不装字体 mod 无关；
+    两个字体 mod 同时启用时 `core_chinese.gfx` 整体替换，只有一个生效。
+  - 给出 37 个安全字体名、场景选型表、自建 `bitmapfont_override` 的写法、排查顺序。
+  - `font_audit.py`：读游戏 `core_chinese.gfx` 取真实名单，扫 Mod 的 `interface/**` 与 `gfx/**` 下
+    所有 `font = "..."`，列出无中文分片的名字 + 行号；`--list-supported` / `--json`；退出码可进 CI。
+  - **修正** `scripted-gui-and-topbar.md` §7 的旧表述（原写“字体 mod 下没有中文字形”，不准确）。
+- **新增** `references/vanilla-mod-survey.md`
+  - 23 个工坊 Mod 的规模表与技法矩阵，全部带 `文件:行号`：
+    gridbox 当“画不画”过滤器（BI 2,480 科技只画 816）、`@` 宏排坐标、
+    `duplicate_archetypes` 克隆底盘、0 字节文件抹原版、`gui_category` 分选择器、
+    每底盘设计器美术三件套、`module_count_limit` 互斥、原生外壳 + 脚本 tab、
+    顶栏三种挂法、每日钩子 `has_country_flag = player` 门控。
+- **新增** `references/agent-teams-playbook.md`
+  - 按“文件所有权”而非“功能”分工：survey（只读）/ build（写源码）/ audit（只写报告）；
+    生成器单点写者、写域表、交接契约（必须有 `文件:行号` 与“不确定”一节）、并发读串行写、
+    四种常见失败模式、两组最小提示词模板。
+- **更新** `references/scripted-gui-and-topbar.md`
+  - 新增 §9 字段全表 + **合法 `parent_window_token` 全表**（含 10 个 `tech_*_folder`）；
+    新增 §10 `dynamic_lists` 三种用法；§11 开合与刷新三条硬事实（`should_be_open` 不存在、
+    脚本窗口无自动互斥、`dirty` 不写就每 tick 重绘）；§12 原生外壳 + 脚本 tab（唯一能自动关闭的路）；
+    §13 顶栏三种挂法。
+- **更新** `references/tech-tree-ui.md` §11
+  - gridbox 是“画不画”的开关；`@` 宏重排整代；多 root 必须各自声明 gridbox。
+- **更新** `references/tank-designer.md` §10
+  - `duplicate_archetypes`（BI）与 0 字节抹除（MD）两条克隆路线；
+    `gui_category`（细 category 给槽位、粗 category 给选择器）；
+    每底盘美术三件套缺一即无热区（TFR 实例）；`module_count_limit` 做同类唯一。
+- **修复** `SKILL.md` 工具段中 4 处历史遗留的 `	`/`` 被写成真实制表符/换页符的路径。
+- **测试**：smoke 增加字体参考/脚本、工坊总览、团队分工三组断言；`font_audit.py` 对示例 Mod 实测退出码 0。
+
 ## 1.3.0
 
 scripted GUI / 顶栏按钮专题，以及 18 槽坦克设计器落档（来自一次“军官团右侧新增军械部门”的完整实战）：

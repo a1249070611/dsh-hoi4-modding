@@ -229,3 +229,63 @@ def hide(text, name):
   底盘 archetype 槽数、背景贴图尺寸（排错第一步）。
 - `scripts/tank_designer_layout.py`：从原版 GUI 生成自定义槽位布局（`16-compact` / `16-tall` / `18-compact`），
   可隐藏升级区/自动按钮，输出到 mod；支持 `--dry-run` 只打印将要改的坐标。
+
+## 10. 跨 mod 实测：克隆底盘、`gui_category`、每底盘美术
+
+### 10.1 `duplicate_archetypes`：不覆盖原版也能克隆整个底盘家族
+
+BI 不覆盖 `common/units/equipment/tank_chassis.txt`，而是用
+`trm_tank_variants.txt` + 10 个 `trm_tank_chassis_*.txt`：
+
+```pdx
+duplicate_archetypes = {
+    trm_medium_tank_chassis = {
+        variant_name = { find_and_replace = { "chassis" "equipment" } }
+    }
+}
+```
+
+- 复制出的 `trm_medium_tank_equipment` 直接继承原版全部字段（含 `module_slots`）；
+- **必须在被复制的 archetype 定义之后求值**（加载顺序敏感）；
+- 好处：原版更新时不用同步整份 `tank_chassis.txt`。
+
+对照：MD 走另一条极端——在 mod 里放一个 **0 字节的 `tank_chassis.txt`** 抹掉原版，
+再在 `MD_tank_chassis.txt` 里从零重建。两种做法都比「整份复制再手改」好维护。
+
+### 10.2 `gui_category`：细 category 给槽位，粗 category 给选择器
+
+```pdx
+hist_module_x = {
+    category = hist_suspension_christie   # 细：槽位白名单用
+    gui_category = hist_suspension        # 粗：设计器选择器分组用
+    ...
+}
+```
+
+BI 有 889 个细 category，汇总成 142 个 `gui_category`。原版模块文件里没有这个字段，
+但引擎接受。不加 `gui_category` 时，选择器会把 889 个类别平铺，用户根本翻不完。
+
+### 10.3 每底盘槽位美术：脚本加了槽，GUI 必须同步
+
+`interface/equipmentdesigner/tanks/<chassis>.gui`：
+
+- 容器名必须是 **`equipment_designer_<equipment_id>`**；
+- 每个槽是**三件套**：`<slot>` 容器 → 同名子容器 → `<slot>@highlight`；
+- 缺任何一件，该槽**没有热区**（能看见、点不了）。
+
+TFR 踩过：`tank_chassis.txt:95-99` 新增第 6 个特殊槽 `tank_sights_module`，
+但没加对应的设计器美术 → 新槽在界面上点不动。本项目的 18 槽同样要靠 253 个
+蓝图 GUI 桩来补热区（见 §6）。
+
+### 10.4 槽位互斥：用计数器，不要用 XOR 思路
+
+```pdx
+special_slot_1 = {
+    allowed_module_categories = { hist_addon hist_smoke hist_endurance }
+    module_count_limit = { category = hist_addon count < 2 }
+}
+```
+
+`module_count_limit` 是**每 archetype 每 category** 的数量上限；
+多个特殊槽共用白名单 + 各自计数器，就能做到「同类只能装一个」，
+不需要为每个组合建一个「互斥类别」。

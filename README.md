@@ -44,6 +44,10 @@ npm: https://www.npmjs.com/package/dsh-hoi4-modding
 | `skills/hoi4-modding/references/tank-designer.md` | Tank designer: window/slot position table, 16/18-slot layouts, module-slot data, taller-window background trap |
 | `skills/hoi4-modding/references/scripted-gui-and-topbar.md` | Scripted GUI and topbar buttons: containerWindowType, `<button>_click` binding, topbar plate extension, font pitfalls, native auto-close limits |
 | `skills/hoi4-modding/references/tank-models-3d.md` | Tank 3D models: `entity`/`pdxmesh`/`.mesh`/`.anim`/`.dds` chain, effect nodes, reuse/repaint/custom-mesh routes |
+| `skills/hoi4-modding/references/fonts-and-cjk.md` | CJK fonts: why `????` happens (`core_chinese.gfx` overrides), 37 safe font names, custom font slices |
+| `skills/hoi4-modding/scripts/font_audit.py` | Scan `interface/` + `gfx/` for `font =` names that have no Chinese glyph slices |
+| `skills/hoi4-modding/references/vanilla-mod-survey.md` | 23 workshop mods surveyed: gridbox-as-filter, `@` macros, `duplicate_archetypes`, `gui_category`, native-shell tabs, topbar mountings |
+| `skills/hoi4-modding/references/agent-teams-playbook.md` | Splitting HOI4 mod work across agents: write-domain table, handoff contract, audit separation |
 | `skills/hoi4-modding/references/icon-dds-pipeline.md` | Tech icon pipeline: photo → 173×77 DDS, de-background, white-paint protection, safe margins, card preview |
 | `skills/hoi4-modding/scripts/tank_designer_probe.py` | Probe designer window, slot table, slot-entry size, module categories, chassis slot counts, background DDS size |
 | `skills/hoi4-modding/scripts/tank_designer_layout.py` | Generate a custom tank-designer slot layout (16-compact / 16-tall / 18-compact presets) into a mod |

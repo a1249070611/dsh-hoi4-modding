@@ -94,3 +94,41 @@ test('scripted GUI/topbar reference and 18-slot preset are bundled', () => {
   assert.match(script, /18-compact/)
   assert.match(script, /row_slots=\(7, 4, 7\)/)
 })
+
+test('CJK font reference and font_audit script are bundled', () => {
+  const skill = loadSkill()
+  const base = skill.resourceBase.path
+  const ref = join(base, 'references', 'fonts-and-cjk.md')
+  assert.ok(existsSync(ref), 'fonts-and-cjk.md missing')
+  const text = readFileSync(ref, 'utf8')
+  assert.match(text, /core_chinese\.gfx/)
+  assert.match(text, /bitmapfont_override/)
+  assert.match(text, /hoi_16mbs/)
+  assert.match(text, /hoi_14mbs/)
+  const script = join(base, 'scripts', 'font_audit.py')
+  assert.ok(existsSync(script), 'font_audit.py missing')
+  const py = readFileSync(script, 'utf8')
+  assert.match(py, /FALLBACK_SUPPORTED/)
+  assert.match(py, /FONT_RE = re\.compile/)
+  assert.match(skill.content, /font_audit\.py/)
+  assert.match(skill.content, /fonts-and-cjk\.md/)
+})
+
+test('workshop mod survey and agent team playbook are bundled', () => {
+  const skill = loadSkill()
+  const base = skill.resourceBase.path
+  const survey = join(base, 'references', 'vanilla-mod-survey.md')
+  const teams = join(base, 'references', 'agent-teams-playbook.md')
+  assert.ok(existsSync(survey), 'vanilla-mod-survey.md missing')
+  assert.ok(existsSync(teams), 'agent-teams-playbook.md missing')
+  const s = readFileSync(survey, 'utf8')
+  for (const needle of ['Black ICE', 'Millennium Dawn', 'TNO', 'duplicate_archetypes', 'gui_category', 'parent_window_token']) {
+    assert.ok(s.includes(needle), needle + ' missing in survey')
+  }
+  const t = readFileSync(teams, 'utf8')
+  assert.match(t, /survey/)
+  assert.match(t, /build/)
+  assert.match(t, /audit/)
+  assert.match(t, /写域|文件所有权/)
+  assert.match(skill.content, /vanilla-mod-survey\.md|agent-teams-playbook\.md/)
+})

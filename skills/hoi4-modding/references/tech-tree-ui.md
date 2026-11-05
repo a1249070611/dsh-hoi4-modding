@@ -300,3 +300,63 @@ gridboxtype = {
 
 **规矩：生成文件只由生成器写；要改先改数据源。** 生成器里给所有生成文件加统一前缀（如 `zz_`）
 还能顺带解决“加载顺序早于原版定义”导致的 `Malformed token`（例如自定义底盘要晚于原版 `tank_chassis.txt` 解析）。
+
+## 11. 跨 mod 实测：gridbox 是「画不画」的开关（BI 用法）
+
+23 个工坊 mod 实测后补三条，能解释很多「数据写了但页面没有」的情况。
+
+### 11.1 没有 gridbox 的科技根本不会画
+
+Black ICE 的 `common/technologies/` 里共 **2,480 个科技**，但
+`interface/countrytechtreeview.gui` 里只有 **894 个 `<techid>_tree` gridbox**
+——剩下 **1,657 个科技一个像素都不画**。
+
+这不是 bug，是用法：BI 把同一份科技数据复用到多套页面/多个国家，
+「这一页显示哪些」完全由 gridbox 决定。
+
+推论：
+- 科技在 `common/technologies` 里注册成功 ≠ 它会出现在页面上；
+- 想隐藏一个科技，**删掉它的 gridbox** 比加 `available` 干净（后者还可能连累整页连线，见 §3）；
+- 排查「科技没出现」时，先 `grep "<techid>_tree"`，再看 gridbox 的父容器名是否等于 folder 名。
+
+### 11.2 坐标用 `@` 宏，别写死 300 个数字
+
+BI / Rt56 都在 `00_technology.txt` 顶部定义年份与列宏：
+
+```pdx
+@1932 = 0
+@1934 = 2
+@1936 = 4
+@CHASSIS_LIGHT1 = 14
+
+technology_folders = {
+    my_folder = {
+        name = "my_folder"
+        position = { x = @COL_A y = @1936 }
+    }
+}
+```
+
+改一行重排整代。项目里如果已经用 JSON 数据驱动生成器，可以让生成器输出这组宏，
+而不是把 `y = 420` 之类的魔法数字散落在 300 个科技上。
+
+### 11.3 一个 folder 的多个 root 要各自声明 gridbox
+
+即使 folder 只有一个容器，**每个无父科技的根仍然需要自己的 `<root>_tree` gridbox**；
+只声明其中一个，另一条分支整条不画（本项目踩过：`GER_pz1_a` + `GER_pz35t` 双根）。
+
+```pdx
+containerWindowType = {          # 名字必须等于 folder 名
+    name = "my_folder"
+    gridBoxType = { name = "root_a_tree" position = { x = 0 y = 0 } size = { width = 2000 height = 4000 } }
+    gridBoxType = { name = "root_b_tree" position = { x = 300 y = 0 } size = { width = 2000 height = 4000 } }
+}
+```
+
+### 11.4 复核入口
+
+| 主题 | 文件 |
+|---|---|
+| folder 注册 + 宏 | `<BI>/common/technology_tags/00_technology.txt` |
+| gridbox 全集 | `<BI>/interface/countrytechtreeview.gui` |
+| 多 root 示例 | 本项目 `hist_tech_trees/interface/countrytechtreeview.gui` |

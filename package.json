@@ -1,7 +1,7 @@
 {
   "name": "dsh-hoi4-modding",
-  "version": "1.3.0",
-  "description": "HOI4 1.19.3 modding skill bundle for DeepSeek Harness: create, edit, validate, install and debug Hearts of Iron IV mods (focus trees, events, decisions, ideas, characters, technologies, MIO, special projects, GUI, localisation, DDS) with bundled verifier/installer scripts; plus tech tree UI diagnostics, 18-slot tank designer layouts, 3D models, tech icon pipeline, and scripted GUI / topbar button patterns.",
+  "version": "1.4.0",
+  "description": "HOI4 1.19.3 modding skill bundle for DeepSeek Harness: create, edit, validate, install and debug Hearts of Iron IV mods (focus trees, events, decisions, ideas, characters, technologies, MIO, special projects, GUI, localisation, DDS) with bundled verifier/installer scripts; plus tech tree UI diagnostics, 18-slot tank designer layouts, 3D models, tech icon pipeline, scripted GUI / topbar patterns, CJK font auditing (core_chinese.gfx overrides), a 23-workshop-mod technique survey, and a multi-agent division-of-labour playbook.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
