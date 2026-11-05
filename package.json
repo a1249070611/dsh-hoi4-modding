@@ -1,7 +1,7 @@
 {
   "name": "dsh-hoi4-modding",
-  "version": "1.4.0",
-  "description": "HOI4 1.19.3 modding skill bundle for DeepSeek Harness: create, edit, validate, install and debug Hearts of Iron IV mods (focus trees, events, decisions, ideas, characters, technologies, MIO, special projects, GUI, localisation, DDS) with bundled verifier/installer scripts; plus tech tree UI diagnostics, 18-slot tank designer layouts, 3D models, tech icon pipeline, scripted GUI / topbar patterns, CJK font auditing (core_chinese.gfx overrides), a 23-workshop-mod technique survey, and a multi-agent division-of-labour playbook.",
+  "version": "1.4.1",
+  "description": "Hearts of Iron IV 1.19.3 modding skill bundle for DeepSeek Harness: one hoi4-modding skill plus 14 Python tools to scaffold, statically verify, install and debug HOI4 mods — focus trees, events, decisions, ideas, characters, technologies, MIO, special projects, scripted GUI/topbar, localisation, DDS icons, 18-slot tank designer, 3D tank models, CJK font auditing — with a 23-workshop-mod technique survey and a multi-agent playbook. No game assets shipped.",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
@@ -12,7 +12,10 @@
   "files": [
     "lib/index.js",
     "cordis.patch.yml",
-    "skills/**/*",
+    "skills/hoi4-modding/SKILL.md",
+    "skills/hoi4-modding/INSTALL.md",
+    "skills/hoi4-modding/references/*.md",
+    "skills/hoi4-modding/scripts/*.py",
     "README.md",
     "LICENSE",
     "icon.svg",
@@ -53,11 +56,17 @@
     "hoi4-modding",
     "paradox",
     "modding",
+    "focus-trees",
+    "tech-tree",
     "tank-designer",
     "scripted-gui",
     "topbar",
     "3d-models",
-    "icon-pipeline"
+    "icon-pipeline",
+    "localisation",
+    "dds",
+    "cjk-fonts",
+    "agent-teams"
   ],
   "icon": "./icon.svg",
   "license": "MIT",

@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.4.1
+
+打包与描述刷新（技能内容与 1.4.0 一致，没有新增/修改 references、scripts、SKILL.md）：
+
+- **修复** npm 包体过大：`files` 白名单 `skills/**/*` 把 `.gitignore` 忽略的
+  `scripts/__pycache__/`（6 个 .pyc）和 `scripts/.cache/vanilla_index.json`（6.9 MB）一起打进
+  tarball —— 1.4.0 的包是 **1.4 MB / 41 个文件**（解包 7.3 MB）。
+  改为显式白名单（`skills/hoi4-modding/SKILL.md`、`INSTALL.md`、`references/*.md`、
+  `scripts/*.py`）后，1.4.1 是 **116 KB / 34 个文件**（解包约 325 KB），本机缓存与字节码不再分发。
+- **更新** `README.md`：中英双版重写——能力面按 8 个领域重排、新增 14 个脚本与 10 篇
+  references 的索引表、补全 1.2.0 / 1.3.0 / 1.4.0 变更、删掉重复且为空的 `## License` 标题，
+  并写明市场条目、权限、依赖与发布方式。
+- **更新** `package.json`：`description` 改为可核对的能力描述（一个技能 + 14 个 Python 工具 +
+  23 个工坊 Mod 总览 + 多 agent 规范，不含游戏素材），`keywords` 补 `focus-trees`、`tech-tree`、
+  `localisation`、`dds`、`cjk-fonts`、`agent-teams`。
+- **更新** 对外简介文案：GitHub 仓库描述与主页、dsh-market 条目
+  （`awesome-dsh-plugin` 的 `data/plugins/a1249070611__dsh-hoi4-modding.yml`）的中英文描述，
+  与 1.4.x 实际能力一致；不夸大、不写营销词。
+- **更新** `market/SUBMISSION.md`：上架流程已从「PR 改 README 加一行」变为「改自己的
+  `data/plugins/<owner>__<repo>.yml`」，记录当前上架状态（条目已由维护者落到 main）与本次更新方式。
+- **测试**：`npm test` 9 项全过；`npm pack --dry-run` 34 个文件，无 `__pycache__`/`.cache`。
+
 ## 1.4.0
 
 23 个工坊 Mod（约 44 GB，只读）实测后的知识回灌：**推翻「中文乱码 = 字体 mod 冲突」的旧结论**，
