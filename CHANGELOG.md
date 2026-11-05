@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.3.0
+
+scripted GUI / 顶栏按钮专题，以及 18 槽坦克设计器落档（来自一次“军官团右侧新增军械部门”的完整实战）：
+
+- **新增** `references/scripted-gui-and-topbar.md`
+  - 最小 4 文件结构、`containerWindowType` 限制（`windowType` 会报 `Failed to create containerWindowType`）；
+  - 按钮 effect 必须为 `<按钮名>_click`，否则点击静默失败；
+  - 顶栏新增按钮：`x=680 y=36`、底图补块用原版底板+右端斜角、信息栏右移、alerts 起始位右移；
+  - 原生窗口自动关闭限制：无 `is_window_open` / 窗口 on_action，scripted GUI 不能自动互斥关闭；
+  - 中文字体坑：`hoi_14mbs`/`hoi_24mbs` 在字体 mod 下显示 `????`，改 `hoi_16mbs`/`hoi_24header`；
+  - 多行本地化必须 `loc_escape` 成 `
+`，否则整份 yml 失效。
+- **更新** `references/tank-designer.md`
+  - 新增 **18 槽紧凑布局（7+4+7，窗口 542）**：第二排 col0/1/5/6，数据 `module_slots` 顺序 0..17。
+- **更新** `scripts/tank_designer_layout.py`
+  - 新增 `18-compact` 预设；位置生成函数支持 7/4/7。
+- **测试**：smoke 增加 scripted GUI 参考与 18 槽预设检查。
+
 ## 1.2.0
 
 坦克设计器 + 3D 模型 + 图标流水线专题（来自一次 30 科技德国坦克树 / 16 槽设计器改造的真实工程，

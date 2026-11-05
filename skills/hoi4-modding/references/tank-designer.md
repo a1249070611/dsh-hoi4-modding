@@ -1,7 +1,7 @@
-# 坦克设计器（Tank Designer）内部结构与 16 槽自定义布局（HOI4 1.19.3/1.19.4 实战）
+# 坦克设计器（Tank Designer）内部结构与 16/18 槽自定义布局（HOI4 1.19.3/1.19.4 实战）
 
 > 适用：想改坦克设计器界面、增减模块槽、做"装备设计器"玩法、或排查"槽位不显示 / 重叠 / 窗口溢出"。
-> 全部结论来自 1.19.3 + Arms Against Tyranny、`gui_scale` 1.5@4K 实机对照（Black ICE Tech Tree 与本项目 16 槽改造）。
+> 全部结论来自 1.19.3 + Arms Against Tyranny、`gui_scale` 1.5@4K 实机对照（Black ICE Tech Tree 与本项目 16/18 槽改造）。
 
 ## 0. 一句话
 
@@ -71,7 +71,7 @@ containerWindowType = { name = "tank_designer_view" size = { width = 1091 height
 - 行宏扩到 5 行（`row_0=0,row_1=48,row_2=204,row_3=252,row_4=300`），按钮压着蓝图放。
   → 结论：**位置名可自定义、数量可扩展**，代价是窗口变挤/蓝图被压。
 
-### 4.2 本项目采用的 16 槽紧凑布局（窗口高度不变 542）
+### 4.2 本项目采用的 16 槽紧凑布局（窗口高度不变 542；18 槽见 4.2.1）
 
 在 `equipment_modules`（512×350）内：
 
@@ -99,8 +99,24 @@ positionType = { name = "pos_custom_module_slot_window_8" position = { x=@fixed_
 positionType = { name = "pos_custom_module_slot_window_15" position = { x=@fixed_btn_mod_col_6 y=@fixed_btn_mod_row_2 } }
 ```
 
+### 4.2.1 本项目最终采用的 18 槽紧凑布局（窗口高度不变 542）
+
+在同样的 `equipment_modules`（512×350）里：
+
+| 排 | 位置 | 槽位 |
+|---|---|---|
+| 上排（y=0） | `pos_*_0..6`，col0..col6 | 炮塔 / 主武器 / 弹药 / 副武器 / 发动机 / 传动 / 车体防护 |
+| 第二排（y=50） | `pos_*_7..10`，col0/1/5/6 | 通信（左 2）/ 工程（右 2） |
+| 下排（y=300） | `pos_*_11..17`，col0..col6 | 炮塔防护 / 内部安全 / 瞄准 / 观察 / 附加防护 / 烟幕 / 续航 |
+
+数据侧（`tank_chassis.txt` 的 `module_slots`）必须按 **位置 0..17 的同一顺序**写 18 个槽；多出的位置不显示，
+少的位置不会被占位。18 个槽位按钮仍会因 76px 槽宽 > 72px 列距而相邻叠 4px，这是原版模板尺寸决定的；
+要消除需加宽容器或缩小槽位模板。
+
+`scripts/tank_designer_layout.py --preset 18-compact` 可直接生成这套 18 槽 GUI。
+
 要点：
-- 蓝图容器保持原版 `position {x=3 y=50} size 508×248` 不动；第二排两个槽会叠在蓝图顶部两角（原版那一带只有标题文字，视觉可接受）。
+- 蓝图容器保持原版 `position {x=3 y=50} size 508×248` 不动；16 槽时第二排 2 个槽叠在蓝图顶部两角；18 槽时第二排 4 个槽占 col0/1/5/6，同样只压标题两侧（原版那一带只有标题文字）。
 - 下排 y=300 正好落在原“悬挂/装甲/引擎 3 槽 + 空位 + 引擎/装甲等级区”，把 `equipment_upgrade_0/1` 移走即可整排利用。
 - 7 个槽 × 76px = 532px > 容器 512px：所以列距只能 72（相邻叠 4px，视觉连成一排）；要严格不叠压需把窗口/容器加宽，或缩小槽位模板。
 
@@ -211,5 +227,5 @@ def hide(text, name):
 
 - `scripts/tank_designer_probe.py`：读游戏文件，打印窗口尺寸、槽位位置表、槽位模板尺寸、模块类别、
   底盘 archetype 槽数、背景贴图尺寸（排错第一步）。
-- `scripts/tank_designer_layout.py`：从原版 GUI 生成自定义槽位布局（默认本项目 16 槽紧凑版），
+- `scripts/tank_designer_layout.py`：从原版 GUI 生成自定义槽位布局（`16-compact` / `16-tall` / `18-compact`），
   可隐藏升级区/自动按钮，输出到 mod；支持 `--dry-run` 只打印将要改的坐标。

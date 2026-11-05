@@ -6,10 +6,14 @@
 默认预设 = 16 槽紧凑布局（窗口高度不变 542）：
   上排 7 槽（y=0） + 第二排 2 槽（通信/工程，y=50，蓝图两角） + 下排 7 槽（y=300）
 
+18 槽紧凑布局（本项目最终版）：
+  上排 7 槽 + 第二排 4 槽（左右各 2，y=50）+ 下排 7 槽
+
 用法:
   python tank_designer_layout.py --mod "C:/.../my_mod"                 # 写入 mod/interface/tank_designer_view.gui
   python tank_designer_layout.py --out ./tmp.gui --dry-run             # 只看将生成什么
   python tank_designer_layout.py --mod ... --preset 16-tall --background-sprite GFX_NS_bg
+  python tank_designer_layout.py --out ./tmp18.gui --game "E:/Steam/.../Hearts of Iron IV" --preset 18-compact
 """
 from __future__ import annotations
 
@@ -39,13 +43,23 @@ PRESETS = {
         modules_size=(512, 350),
         preview=(3, 50),
         rows=(0, 50, 300),
+        row_slots=(7, 2, 7),
         note="16 槽紧凑版：不加高窗口，第二排两个槽压在蓝图顶部左右角",
+    ),
+    "18-compact": dict(
+        window_h=542,
+        modules_size=(512, 350),
+        preview=(3, 50),
+        rows=(0, 50, 300),
+        row_slots=(7, 4, 7),
+        note="18 槽紧凑版：上 7 + 第二排 4（左右各 2）+ 下 7，窗口高度不变",
     ),
     "16-tall": dict(
         window_h=760,
         modules_size=(512, 570),
         preview=(2, 182),
         rows=(22, 100, 486),
+        row_slots=(7, 2, 7),
         note="16 槽加高版：需要自己提供加高后的窗口背景 sprite（否则内容溢出）",
     ),
 }
@@ -89,54 +103,40 @@ def shift(text: str, name: str, dy: int) -> str:
     return text[:m.start()] + f"position = {{ x = {x} y = {y + dy} }}" + text[m.end():]
 
 
-def build_slot_section(rows: tuple[int, int, int]) -> str:
+def build_slot_section(rows: tuple[int, int, int], row_slots: tuple[int, int, int] = (7, 2, 7)) -> str:
     r0, r1, r2 = rows
-    lines = ["\t\t\t@fixed_btn_mod_col_0 = 0"]
+    rows_count = row_slots
+    cols_by_row = [
+        [0, 1, 2, 3, 4, 5, 6],
+        [0, 1, 5, 6],
+        [0, 1, 2, 3, 4, 5, 6],
+    ]
+    lines = ["			@fixed_btn_mod_col_0 = 0"]
     for i in range(1, 7):
-        lines.append(f"\t\t\t@fixed_btn_mod_col_{i} = {72 * i}")
+        lines.append(f"			@fixed_btn_mod_col_{i} = {72 * i}")
     lines += [
         "",
-        f"\t\t\t@fixed_btn_mod_row_0 = {r0}",
-        f"\t\t\t@fixed_btn_mod_row_1 = {r1}",
-        f"\t\t\t@fixed_btn_mod_row_2 = {r2}",
+        f"			@fixed_btn_mod_row_0 = {r0}",
+        f"			@fixed_btn_mod_row_1 = {r1}",
+        f"			@fixed_btn_mod_row_2 = {r2}",
         "",
-        "\t\t\tpositionType = {",
-        '\t\t\t\tname = "ypos_module_row_0"',
-        "\t\t\t\tposition = { x=0 y=@fixed_btn_mod_row_0 }",
-        "\t\t\t}",
-        "",
-        "\t\t\t# 上排 7 槽（0-6）",
+        "			positionType = {",
+        '				name = "ypos_module_row_0"',
+        "				position = { x=0 y=@fixed_btn_mod_row_0 }",
+        "			}",
     ]
-    for i in range(7):
-        lines += [
-            "\t\t\tpositionType = {",
-            f'\t\t\t\tname = "pos_custom_module_slot_window_{i}"',
-            f"\t\t\t\tposition = {{ x=@fixed_btn_mod_col_{i} y=@fixed_btn_mod_row_0 }}",
-            "\t\t\t}",
-        ]
-    lines += [
-        "",
-        "\t\t\t# 第二排 2 槽（7=通信/左角，8=工程/右角）",
-        "\t\t\tpositionType = {",
-        '\t\t\t\tname = "pos_custom_module_slot_window_7"',
-        "\t\t\t\tposition = { x=@fixed_btn_mod_col_0 y=@fixed_btn_mod_row_1 }",
-        "\t\t\t}",
-        "\t\t\tpositionType = {",
-        '\t\t\t\tname = "pos_custom_module_slot_window_8"',
-        "\t\t\t\tposition = { x=@fixed_btn_mod_col_6 y=@fixed_btn_mod_row_1 }",
-        "\t\t\t}",
-        "",
-        "\t\t\t# 下排 7 槽（9-15）",
-    ]
-    for i in range(7):
-        lines += [
-            "\t\t\tpositionType = {",
-            f'\t\t\t\tname = "pos_custom_module_slot_window_{9 + i}"',
-            f"\t\t\t\tposition = {{ x=@fixed_btn_mod_col_{i} y=@fixed_btn_mod_row_2 }}",
-            "\t\t\t}",
-        ]
-    return "\n".join(lines) + "\n\n\t\t\t######################################################################\n\t\t\t"
-
+    idx = 0
+    for row_i, (count, cols) in enumerate(zip(rows_count, cols_by_row)):
+        lines += ["", f"			# 第{row_i + 1}排 {count} 槽（{idx}-{idx + count - 1}）"]
+        for col in cols[:count]:
+            lines += [
+                "			positionType = {",
+                f'				name = "pos_custom_module_slot_window_{idx}"',
+                f"				position = {{ x=@fixed_btn_mod_col_{col} y=@fixed_btn_mod_row_{row_i} }}",
+                "			}",
+            ]
+            idx += 1
+    return chr(10).join(lines) + chr(10)*2 + "			######################################################################" + chr(10)*2 + "			"
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="生成自定义坦克设计器布局（不修改游戏目录）")
@@ -159,6 +159,7 @@ def main() -> int:
     mod_w, mod_h = cfg["modules_size"]
     px, py = cfg["preview"]
     rows = cfg["rows"]
+    row_slots = cfg.get("row_slots", (7, 2, 7))
 
     out = Path(args.out) if args.out else None
     if not out and args.mod:
@@ -191,7 +192,7 @@ def main() -> int:
     if start < 0 or end < 0:
         print("[!] 原版 GUI 结构变化：找不到槽位段/升级区标记")
         return 2
-    text = text[:start] + build_slot_section(rows) + text[end:]
+    text = text[:start] + build_slot_section(rows, row_slots) + text[end:]
     # 4) 背景
     if args.background_sprite:
         text = text.replace('spriteType ="GFX_tank_designer_popup_bg"',
@@ -213,7 +214,7 @@ def main() -> int:
 
     # 报告
     print(f"[布局] {args.preset}: 窗口 1091x{window_h}; 容器 {mod_w}x{mod_h}; 蓝图 ({px},{py}); 行 {rows}")
-    print("  上排 7 槽 (y=%d) | 第二排 2 槽 (y=%d, 左角/右角) | 下排 7 槽 (y=%d)" % rows)
+    print("  上排 %d 槽 (y=%d) | 第二排 %d 槽 (y=%d) | 下排 %d 槽 (y=%d)" % (row_slots[0], rows[0], row_slots[1], rows[1], row_slots[2], rows[2]))
     if SLOT_W > 72:
         print(f"  [!] 槽位宽 {SLOT_W}px > 列距 72px：相邻槽有 {SLOT_W - 72}px 叠压（原版同样如此；要消除需加宽容器）")
     if window_h != 542 and not args.background_sprite:

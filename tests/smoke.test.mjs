@@ -79,3 +79,18 @@ test('tank designer references and scripts are bundled', () => {
   assert.match(skill.content, /tank_designer_layout\.py/)
   assert.match(skill.content, /173×77|173x77/)
 })
+
+test('scripted GUI/topbar reference and 18-slot preset are bundled', () => {
+  const skill = loadSkill()
+  const base = skill.resourceBase.path
+  const ref = join(base, 'references', 'scripted-gui-and-topbar.md')
+  assert.ok(existsSync(ref), 'scripted GUI reference missing')
+  const refText = readFileSync(ref, 'utf8')
+  assert.match(refText, /containerWindowType/)
+  assert.match(refText, /<button名>_click|<button名>_click|_click/)
+  assert.match(refText, /top_bar|production_tab/)
+  assert.match(skill.content, /scripted-gui-and-topbar\.md/)
+  const script = readFileSync(join(base, 'scripts', 'tank_designer_layout.py'), 'utf8')
+  assert.match(script, /18-compact/)
+  assert.match(script, /row_slots=\(7, 4, 7\)/)
+})

@@ -41,11 +41,12 @@ npm: https://www.npmjs.com/package/dsh-hoi4-modding
 | `skills/hoi4-modding/scripts/tech_folder_available.py` | Migrate `technology_folders.available` from `has_country_flag` to `original_tag` (check/apply/revert) |
 | `skills/hoi4-modding/scripts/item_sprite_check.py` | Compare item template sizes with the actual item background sprite pixels ("small item looks big") |
 | `skills/hoi4-modding/scripts/errorlog_triage.py` | Triage `error.log`: tech tree / textures / scopes / unknown fields / localisation |
-| `skills/hoi4-modding/references/tank-designer.md` | Tank designer: window/slot position table, 16-slot layouts, module-slot data, taller-window background trap |
+| `skills/hoi4-modding/references/tank-designer.md` | Tank designer: window/slot position table, 16/18-slot layouts, module-slot data, taller-window background trap |
+| `skills/hoi4-modding/references/scripted-gui-and-topbar.md` | Scripted GUI and topbar buttons: containerWindowType, `<button>_click` binding, topbar plate extension, font pitfalls, native auto-close limits |
 | `skills/hoi4-modding/references/tank-models-3d.md` | Tank 3D models: `entity`/`pdxmesh`/`.mesh`/`.anim`/`.dds` chain, effect nodes, reuse/repaint/custom-mesh routes |
 | `skills/hoi4-modding/references/icon-dds-pipeline.md` | Tech icon pipeline: photo → 173×77 DDS, de-background, white-paint protection, safe margins, card preview |
 | `skills/hoi4-modding/scripts/tank_designer_probe.py` | Probe designer window, slot table, slot-entry size, module categories, chassis slot counts, background DDS size |
-| `skills/hoi4-modding/scripts/tank_designer_layout.py` | Generate a custom tank-designer slot layout (16-compact preset) into a mod |
+| `skills/hoi4-modding/scripts/tank_designer_layout.py` | Generate a custom tank-designer slot layout (16-compact / 16-tall / 18-compact presets) into a mod |
 | `skills/hoi4-modding/scripts/tech_icon_import.py` | Photo/vector → 173×77 DDS: de-background, safe-area placement, 183×84 card preview |
 
 ## Requirements
@@ -81,6 +82,7 @@ in **January 2027**.
 
 ## Changelog
 
+- **1.3.0** — Scripted GUI / topbar button guide (`containerWindowType`, `<button>_click`, topbar plate extension, native auto-close limits, CJK font pitfalls) and the 18-slot tank designer layout (`18-compact` preset).
 - **1.1.0** — Tech tree UI knowledge from a real large-mod debugging session: `technology_folders.available`
   must use `original_tag` (flag-based conditions silently drop every connection line on a page in new games),
   big/small item mixing requires the small item background **sprites** to point at real small textures,
@@ -109,6 +111,12 @@ dsh plugin --profile web add github:a1249070611/dsh-hoi4-modding
 
 刷新/重启后，技能出现在技能目录；直接说「做个 HOI4 mod」「加个国策树」「mod 报错了」即可触发，
 也可以显式说「加载 hoi4-modding 技能」。
+
+### 本次新增（1.3.0）
+- `references/scripted-gui-and-topbar.md`：scripted GUI 只能 `containerWindowType`、按钮 `<名>_click` 绑定、顶栏按钮底图补块（原版斜角）、警报/信息栏避让、原生窗口自动关闭限制、`hoi_14mbs`/`hoi_24mbs` 中文字体坑。
+- `references/tank-designer.md`：新增本项目最终 **18 槽（7+4+7）** 布局与数据顺序说明。
+- `scripts/tank_designer_layout.py`：新增 `18-compact` 预设；生成 18 个槽位位置。
+- README/CHANGELOG 同步 1.3.0。
 
 ### 本次新增（1.2.0）
 - `references/tank-designer.md`：坦克设计器（窗口 / `pos_custom_module_slot_window_N` 槽位位置表 / 底盘 `module_slots` / 模块类别 / 16 槽布局 / 加高窗口背景贴图坑 / 隐藏升级区与自动按钮）

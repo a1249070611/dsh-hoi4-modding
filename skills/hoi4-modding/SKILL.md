@@ -1,6 +1,6 @@
 ---
 name: hoi4-modding
-description: 《钢铁雄心4》(Hearts of Iron IV, HOI4) 1.19.3 Mod 开发全流程技能：读游戏文件、新建 Mod、写国策/事件/决议/理念/角色/科技/州/MIO/特殊项目/scripted GUI、本地化与 DDS 图标、静态校验、安装启用、按 error.log 排错、发布创意工坊。Use whenever the user asks to create, edit, fix, validate, install, publish, or debug an HOI4 mod or asks about HOI4 scripting (scopes, effects, triggers, variables, focus trees, events, decisions, ideas, characters, MIO, special projects, GUI, localisation, DDS, tank designer/module slots/2D icons/3D models), even if they only say "做个国策树"/"加个事件"/"mod 报错了".
+description: 《钢铁雄心4》(Hearts of Iron IV, HOI4) 1.19.3 Mod 开发全流程技能：读游戏文件、新建 Mod、写国策/事件/决议/理念/角色/科技/州/MIO/特殊项目/scripted GUI 与顶栏按钮、18 槽坦克设计器、本地化与 DDS 图标、静态校验、安装启用、按 error.log 排错、发布创意工坊。Use whenever the user asks to create, edit, fix, validate, install, publish, or debug an HOI4 mod or asks about HOI4 scripting (scopes, effects, triggers, variables, focus trees, events, decisions, ideas, characters, MIO, special projects, GUI, localisation, DDS, tank designer/module slots/2D icons/3D models), even if they only say "做个国策树"/"加个事件"/"mod 报错了".
 whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚本写法（scope/effect/trigger/变量/国策/事件/决议/理念/角色/MIO/特殊项目/GUI/本地化/DDS）时。
 ---
 
@@ -38,7 +38,8 @@ whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚�
 14. **大框/小框混排是三件套**：科技加 `force_use_small_tech_layout = yes` + 页面有 `techtree_<folder>_small_item` 模板 +
     `GFX_technology_<folder>_small_*_item_bg` 精灵**指向真正的小图**。模板 size 只管排版，背景贴图按自身像素绘制——精灵还指着 203×84 大图时，画面就是"小框模板 + 大框外观 + 整体偏位"。
 15. **坦克设计器是全局 GUI**：改 `interface/tank_designer_view.gui` 会影响所有国家/底盘；窗口背景 `GFX_tank_designer_popup_bg` 是**固定 1092×553 贴图**，只加高窗口而不换背景 → 内容溢出到窗口外/地图上（见 `references/tank-designer.md` §4.3）。
-16. **槽位按钮位置 ≠ 槽位数据**：`pos_custom_module_slot_window_N` 决定按钮在界面上的位置，底盘 `module_slots` 的**书写顺序**决定第 N 个位置是哪一类槽；模块类别由模块的 `category =` 隐式创建（`references/tank-designer.md`）。
+16. **槽位按钮位置 ≠ 槽位数据**：`pos_custom_module_slot_window_N` 决定按钮在界面上的位置，底盘 `module_slots` 的**书写顺序**决定第 N 个位置是哪一类槽；模块类别由模块的 `category =` 隐式创建（`references/tank-designer.md`）。当前项目最终为 **18 槽**（7+4+7），见同文档 §4.2.1。
+17. **scripted GUI 只能用 `containerWindowType`**；`windowType` 会 `Failed to create containerWindowType`。按钮点击 effect 必须叫 **`<按钮名>_click`**；写错不报错、点击无反应。scripted GUI 也无法像原生窗口那样被其他窗口自动关闭（无 `is_window_open`/窗口 on_action）。见 `references/scripted-gui-and-topbar.md`。
 
 ## 2. 标准工作流
 
@@ -68,12 +69,13 @@ whenToUse: 用户要做/改/修/校验/安装/发布 HOI4 Mod，或问 HOI4 脚�
 | 角色（领袖/顾问/将领/科学家） | §7 |
 | 科技（folder / dependencies / on_research_complete） | §8 |
 | **科技树 UI：页面可用性 / 连线 / 大小框 / 拆页合并 / 调试手法** | `references/tech-tree-ui.md` |
+| **scripted GUI：windowType 陷阱 / 按钮 effect 命名 / 顶栏按钮与底图 / 原生窗口自动关闭限制** | `references/scripted-gui-and-topbar.md` |
 | 州、资源、建筑 | §9 |
 | 动态变量 + 动态修正 | §10 |
 | scripted GUI 面板（4 文件挂载） | §11 |
 | MIO / 特殊项目 | §12 |
 | 贴图、DDS、GFX 注册 | §13 |
-| **坦克设计器：16 槽布局 / 加高窗口 / 隐藏升级区 / 模块类别** | `references/tank-designer.md` |
+| **坦克设计器：16/18 槽布局 / 加高窗口 / 隐藏升级区 / 模块类别** | `references/tank-designer.md` |
 | **坦克 3D 模型：复用原版实体 / 换贴图 / 自制 mesh** | `references/tank-models-3d.md` |
 | **科技/装备图标：照片→173×77 DDS、去背、安全区** | `references/icon-dds-pipeline.md` |
 | 调试命令与 error.log 对照表 | §14 |
