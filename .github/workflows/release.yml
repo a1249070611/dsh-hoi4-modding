@@ -1,0 +1,32 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Verify package
+        run: |
+          python -m py_compile mcp-server/*.py
+          node -e "const p=require('./package.json');const t=process.env.GITHUB_REF_NAME.replace(/^v/,'');if(p.version!==t){console.error('tag='+t+' package='+p.version);process.exit(1)}"
+          npm pack --dry-run
+      # npm Trusted Publishing (OIDC): no NODE_AUTH_TOKEN / repository secret needed.
+      # Requires this repo + workflow to be registered as a trusted publisher on
+      # npmjs.com -> package "dsh-hoi4-modding" -> Settings -> Trusted Publisher.
+      - name: Publish to npm
+        run: npm publish --provenance --access public

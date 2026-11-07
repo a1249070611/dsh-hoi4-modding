@@ -20,7 +20,6 @@ knowledge/survey.local.json
 
 # 临时测试产物
 _selftest/
-_selftest_out.txt
 _bench.py
 _real.json
 _rt56.json

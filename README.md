@@ -1,30 +1,10 @@
 # dsh-hoi4-modding
 
-**《钢铁雄心4》模组开发工具包**：一个模组工程师 agent、15 个技能、20 个工具，配一套以原版游戏为参照的知识库。
+钢铁雄心4 的模组开发工具包。一个模组工程师 agent、15 个技能、20 个 MCP 工具，外加一套拿原版游戏当参照物的知识库。
 
-面向 HOI4 1.19.x（Operation Postern）｜纯 Python 标准库｜零依赖｜MIT
+面向 HOI4 1.19.x（Operation Postern）。纯 Python 标准库，零依赖。
 
-> 当前版本 **3.0.1**（2026-11-07 发布）。仓库：<https://github.com/Kiant98/dsh-hoi4-modding>
->
-> 3.0 是一次结构性重写：参考库扩到 153 篇，校验器扩到十类，知识库支持平台/本地两级资料库，自检 311 项。
-
-## 特性一览
-
-| 能力 | 说明 |
-|---|---|
-| 静态校验 | 十类检查，error / warn / info 三级，每条带文件、行号和修法 |
-| 知识库 | 索引原版游戏与随包参考库，SQLite + FTS5 全文检索，支持两级资料库 |
-| 脚手架 | 12 类内容骨架，自动生成带 BOM 的本地化文件 |
-| 离线预览 | 国策树自包含 HTML，自动解算坐标与前置连线 |
-| 排障 | error.log 聚类、覆盖比对、重复 ID、错题本 24 条实证 |
-| 规划 | 八阶段 ROADMAP，每阶段带验收标准 |
-| 自检 | 311 项自检 + 17 个变异测试，文档数字与实际值双向核对 |
-
-## 适合谁
-
-- **第一次做 mod 的人**：按 [GETTING-STARTED.md](GETTING-STARTED.md) 走一遍，半小时拿到一个能进游戏的国策树。
-- **正在维护大模组的人**：用 `kiant_hoi4_validate_mod` 把静默失败变成带行号的报告，用知识库查原版真实写法。
-- **给 AI 客户端接工具的人**：这是一个完整的 MCP server + agent + 技能包，可接入 Claude Code、Cursor、Codex、WorkBuddy 等。
+> 当前版本 **3.1.0**（2026-11-07）。GitHub：[Kiant98/dsh-hoi4-modding](https://github.com/Kiant98/dsh-hoi4-modding) ｜ npm：[dsh-hoi4-modding](https://www.npmjs.com/package/dsh-hoi4-modding)
 
 ## 为什么做这个
 
@@ -60,20 +40,20 @@ Paradox 引擎的失败方式很讨厌：它不崩溃。
 
 ## 里面有什么
 
-### 1. 参考库：153 篇（136 正文 + 17 索引）
+### 1. 参考库：163 篇（146 正文 + 17 索引）
 
-`references/` 下 153 篇文档，136 篇是正文，17 篇是各域索引。按来源分六块：
+`references/` 下 163 篇文档，146 篇是正文，17 篇是各域索引。按来源分六块：
 
 | 来源 | 篇数 | 构成 |
 |---|---|---|
 | 上游知识域 | 63 | `00_start` 到 `06_workflow`，56 正文 + 7 域索引，一字未改 |
-| 后加的知识域 | 29 | `07_tools` / `08` / `09` / `10` / `93_ecosystem`，24 正文 + 5 索引 |
+| 后加的知识域 | 38 | `07_tools` / `08` / `09` / `10` / `93_ecosystem`，33 正文 + 5 索引 |
 | 案例区 | 6 | `90_case-studies`，5 正文 + 1 索引 |
 | 错题本 | 25 | 24 条正文 + 1 索引 |
 | 方案库 | 11 | 10 条正文 + 1 索引 |
 | 根文件 | 5 | `_index`、`cheatsheet`、`README`、`ATTRIBUTION`、`AUTHORITY` |
 
-上面六块加起来是 139 篇。另有 `99_plugin-devlog/` 14 篇，记的是开发这个插件本身踩的坑，
+上面六块加起来是 149 篇。另有 `99_plugin-devlog/` 14 篇，记的是开发这个插件本身踩的坑，
 **不属于**给 modder 用的参考库。它用 `DEVB-` / `DEVN-` 前缀，和 `EB-` / `SOL-` 不共用序列，
 检索时不会混进 mod 相关的条目里。
 
@@ -128,7 +108,7 @@ kiant_hoi4_kb_symbol name=add_stabiltiy
 
 实测索引原版 1.19.4.2：6167 个脚本文件、6.2 万符号、26 万词条、16 秒。
 
-### 3. 校验：十类检查，可插拔
+### 3. 校验：十二类检查，可插拔
 
 ```
 kiant_hoi4_validate_mod deep=true
@@ -146,6 +126,8 @@ kiant_hoi4_validate_mod deep=true
 | 界面 | `.gui` 语法、窗口重名、sprite 引用 |
 | 框架 | `on_actions` 引用的事件、`oob` 文件、`add_ideas`、`defines` 前缀 |
 | 音乐 | `play_song`/电台选曲引用的歌曲是否已进 `.asset` 定义层、音频文件是否存在、非 ogg 混入（EB-022） |
+| 国策树语义 | 前置断链/成环、互斥缺失或自引、同树坐标重叠、`relative_position_id` 断链（吸收 hoi4modutils fork + MD 工具规则码） |
+| 本地化命令 | `[Root.GetXxx]` 命令存在性三级分诊：精确命中静默、疑似拼错 warn 给最近建议、未知名 info（CWTools curated 表 + scripted_localisation 豁免） |
 
 结果带 `file`、`line`、`hint`。`hint` 说的是「为什么会这样」和「怎么改」，不是「请检查语法」。
 
@@ -184,35 +166,41 @@ kiant_hoi4_plan action=status   → 进度、下一步、依赖是否满足
 
 ## 快速开始
 
-**第一步：获取代码**（两种方式，内容一致）
+### 安装
+
+三种方式，拿到的是同一份内容：
 
 ```bash
-# 方式一：克隆仓库
+# 方式一：git clone
 git clone https://github.com/Kiant98/dsh-hoi4-modding.git dsh-hoi4-modding
 cd dsh-hoi4-modding
 
-# 方式二：从 Releases 下载 dsh-hoi4-modding-3.0.1.zip，解压后进入目录
+# 方式二：下载 Release 附件 dsh-hoi4-modding-3.1.0.zip
+unzip dsh-hoi4-modding-3.1.0.zip -d dsh-hoi4-modding
+cd dsh-hoi4-modding
+
+# 方式三：从 npm 安装（3.1.0 起）
+npm install dsh-hoi4-modding        # 装进当前目录的 node_modules
+npm pack dsh-hoi4-modding           # 或者只取 tarball 自己解压
 ```
 
-**第二步：确认工具与知识库状态**
+npm 全局安装（npm i -g dsh-hoi4-modding）后，工具包在 npm 全局 node_modules/dsh-hoi4-modding/（Windows 通常是 %APPDATA%\npm\node_modules），下文出现的 mcp-server/server.py 都指这个目录下的路径。
+
+装好后先确认能跑：
 
 ```bash
-python mcp-server/server.py --list                              # 列出 20 个工具
-python mcp-server/server.py --call kiant_hoi4_kb_stats '{}'     # 看知识库是否已建
+python mcp-server/server.py --list                      # 看 20 个工具
+python mcp-server/server.py --call kiant_hoi4_kb_stats '{}'   # 看知识库状态
 ```
 
-**第三步：建立索引**（首次约 30 秒，之后走增量）
+建索引（首次约 30 秒，之后走增量）：
 
 ```bash
-python mcp-server/server.py --call kiant_hoi4_kb_build '{"action":"discover"}'   # 先看能索引什么
+python mcp-server/server.py --call kiant_hoi4_kb_build '{"action":"discover"}'   # 看能索引什么
 python mcp-server/server.py --call kiant_hoi4_kb_build '{"action":"build"}'      # 建库
 ```
 
-**第四步：接入你的客户端**
-
-本工具包刻意不预置会自动加载的 MCP 配置。复制 [platform/README.md](platform/README.md) 里的配置片段，粘到你信任的位置即可；Claude Code、Cursor、Codex、WorkBuddy 和任何支持 stdio 的 MCP 客户端都适用。
-
-零经验用户请接着读 [GETTING-STARTED.md](GETTING-STARTED.md)：从空目录到第一个可进游戏的国策，全程有命令和预期输出。
+接入各客户端见 [platform/README.md](platform/README.md)。
 
 ## 资料库：平台优先，本地兜底
 
@@ -259,7 +247,7 @@ kiant_hoi4_kb_build action=build local_dirs=["D:/我的笔记","D:/旧mod文档"
 
 ```
 kiant_hoi4_kb_sync action=status   → 本地 2026.11.06 / 远端 2026.11.06-2 / 过期 true
-kiant_hoi4_kb_sync action=pull     → 下载约 1 MB，缓存到 ~/.dsh-hoi4-modding/remote/
+kiant_hoi4_kb_sync action=pull     → 下载约 1 MB，缓存到 ~/.kiant-hoi4-modkit/remote/
 kiant_hoi4_kb_build action=build   → 多出一个 remote 源，检索即可命中
 ```
 
@@ -306,7 +294,7 @@ python mcp-server/server.py --call kiant_hoi4_kb_build '{"action":"build"}'
 
 ```
 vanilla   原版游戏 6167 个文件      ← 一手事实，所有校验的参照物
-refs      参考库 153 篇（63 篇上游 + 6 篇案例 + 5 篇根文件 + 79 篇自建），随插件走，开箱就有
+refs      参考库 148 个文件（63 篇上游 + 6 篇案例 + 5 篇根文件 + 72 篇自建）  ← 随插件走，开箱就有
 notes     本机笔记
 ```
 
@@ -324,7 +312,7 @@ notes     本机笔记
 改过核心模块就跑一遍，比手点工具可靠：
 
 ```bash
-python mcp-server/selftest.py                 # 311 项断言，十七组：解析/校验/规划/预览/脚手架/知识库/协议/远端/两级/错题本/状态/文档一致性/独立工具/本地化真实写法/条件块/原版宽容度
+python mcp-server/selftest.py                 # 330 项断言，十七组：解析/校验/规划/预览/脚手架/知识库/协议/远端/两级/错题本/状态/文档一致性/独立工具/本地化真实写法/条件块/原版宽容度
 python mcp-server/bench.py <模组路径>          # 在真实模组上量耗时，顺便看假阳性
 ```
 
@@ -356,15 +344,12 @@ agent → kiant_hoi4_kb_lookup kind=focus           看原版国策树结构
 | `kiant_hoi4_find_duplicate_ids` | 查重复定义 |
 | `kiant_hoi4_parse_script` | Clausewitz → JSON，支持下钻 |
 | `kiant_hoi4_analyze_error_log` | 日志聚类分类 |
-| `kiant_hoi4_error_book` | 按现象查错题本（24 条实证踩坑，带根因与修法） |
-| `kiant_hoi4_solutions` | 查方案库（10 条带 status 的未验证思路） |
 | `kiant_hoi4_list_overrides` | 覆盖范围比对 |
 | `kiant_hoi4_kb_build` | 建/更新索引 |
 | `kiant_hoi4_kb_search` | 全文检索 |
 | `kiant_hoi4_kb_lookup` | 取真实范例 |
 | `kiant_hoi4_kb_symbol` | 追符号定义 |
 | `kiant_hoi4_kb_note` | 补充本地笔记 |
-| `kiant_hoi4_kb_sync` | 平台资料库同步（status / pull，默认离线） |
 | `kiant_hoi4_kb_stats` | 索引现状 |
 | `kiant_hoi4_preview` | 生成离线 HTML |
 | `kiant_hoi4_plan` | 分阶段跟踪 |
@@ -395,15 +380,15 @@ dsh-hoi4-modding/
 │   ├── checks.py            结构校验
 │   ├── kb.py                知识库索引与两级检索
 │   ├── cw.py                Clausewitz 解析器（地基）
-│   ├── validators.py        8 个可插拔类型校验器
+│   ├── validators.py        10 个可插拔类型校验器
 │   ├── playbook.py          错题本与方案库检索
 │   ├── preview.py           离线预览渲染
 │   ├── scaffolder.py        12 类骨架生成
 │   ├── remote.py            远端知识库同步
 │   ├── planner.py           分阶段规划
-│   ├── selftest.py          311 项自检
+│   ├── selftest.py          330 项自检
 │   └── bench.py             真实模组压力测试
-├── references/              153 篇，16 个目录（上游 MIT + 自撰 + 自建）
+├── references/              163 篇，16 个目录（上游 MIT + 自撰 + 自建）
 │   ├── _index.md            总路由：「我要做 X → 读哪一篇」
 │   ├── 00_start … 07_tools      七个知识域 + 工具，63 篇上游
 │   ├── 07_tools             上游 CLI 用法 ⚠ 本插件无此命令，见 EB-018
@@ -439,8 +424,8 @@ dsh-hoi4-modding/
 | `kiant_hoi4_list_overrides` | — | 只读 |
 | `kiant_hoi4_kb_search` / `lookup` / `symbol` / `stats` | — | 只读 |
 | `kiant_hoi4_error_book` / `solutions` | — | 只读，每次现读 md 文件，不依赖已建索引 |
-| `kiant_hoi4_kb_build` | ✅ | `~/.dsh-hoi4-modding/kb.sqlite`（不在游戏目录，也不在 mod 目录）。`action=discover` 时纯只读 |
-| `kiant_hoi4_kb_sync` | ✅ | `~/.dsh-hoi4-modding/remote/`（远端知识的缓存）。`action=status` 时纯只读；只有 pull 会联网 |
+| `kiant_hoi4_kb_build` | ✅ | `~/.kiant-hoi4-modkit/kb.sqlite`（不在游戏目录，也不在 mod 目录）。`action=discover` 时纯只读 |
+| `kiant_hoi4_kb_sync` | ✅ | `~/.kiant-hoi4-modkit/remote/`（远端知识的缓存）。`action=status` 时纯只读；只有 pull 会联网 |
 | `kiant_hoi4_kb_note` | ✅ | 同上，只往数据库加笔记 |
 | `kiant_hoi4_preview` | ✅ | 默认 `<mod>/.modkit/preview.html`。不想让 mod 目录多东西就传 `out_path` 指到别处 |
 | `kiant_hoi4_plan` | ✅ | `<mod>/.modkit/plan.json` + `<mod>/ROADMAP.md` |
@@ -477,7 +462,7 @@ effect/trigger 名能查但不自动报。名字表从游戏 `documentation/` �
 | `examples/broken_mod` | 12 文件 | — | 0.1 s | 18 处注入缺陷，14 处断言全命中 |
 | 原版 vanilla 1.19.4.2 | 6167 文件 / 26 万词条 / 50 篇官方文档 | 16 s | — | 553 effect + 596 trigger 可查 |
 
-311 项自检全绿，覆盖解析器、示例模组、错误夹具（12 处缺陷断言全命中）、规划器、预览（含国策坐标解算）、脚手架、知识库、MCP 协议握手、远端同步、两级资料库、错题本与方案库检索、平台状态提示、组织架构文档与实际一致、独立工具（DDS 头部与块数取整、lint 三类错误与误报边界）、条件块采集、原版真实写法的宽容度。
+330 项自检全绿，覆盖解析器、示例模组、错误夹具（12 处缺陷断言全命中）、规划器、预览（含国策坐标解算）、脚手架、知识库、MCP 协议握手、远端同步、两级资料库、错题本与方案库检索、平台状态提示、组织架构文档与实际一致、独立工具（DDS 头部与块数取整、lint 三类错误与误报边界）、条件块采集、原版真实写法的宽容度。
 
 ## 校验器可信到什么程度
 

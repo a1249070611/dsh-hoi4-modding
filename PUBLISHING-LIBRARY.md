@@ -12,7 +12,7 @@
 顺序固定三步：
 
 ```
-1. 改本地  →  2. 跑自检 311 项全绿  →  3. 同步到平台
+1. 改本地  →  2. 跑自检 330 项全绿  →  3. 同步到平台
 ```
 
 跳过第 2 步直接同步，等于把没验证的内容发布出去。
@@ -28,20 +28,20 @@
 
 ## 三、目录结构镜像：不做手工挑选
 
-平台上的目录树与本地逐层对应，185 个 md 一个不少：
+平台上的目录树与本地逐层对应，176 个 md 一个不少：
 
 ```
-dsh-hoi4-modding/           = 资料库「hoi4-moding」文件夹
+kiant-hoi4-modkit/           = 资料库「hoi4-moding」文件夹
 ├── README / ARCHITECTURE / GETTING-STARTED / PUBLISHING-KB / PUBLISHING-LIBRARY
 ├── agents/
 ├── mcp-server/              （只同步 .md，.py 不同步）
 ├── platform/ + platform/workbuddy/
 ├── knowledge/ + knowledge/notes/
-├── references/  ← 153 篇：5 根文件 + 63 上游 + 6 案例 + 25 错题本 + 11 方案库 + 29 后加域 + 14 devlog
+├── references/  ← 148 篇：5 根文件 + 63 上游 + 6 案例 + 21 错题本 + 11 方案库 + 42 后加域
 │   ├── 00_start … 06_workflow（7 个上游知识域）
 │   ├── 07_tools / 08_fileformats / 09_assets / 10_internals / 93_ecosystem
 │   ├── 90_case-studies
-│   ├── 91_error-book   ← 24 条正文 + 索引
+│   ├── 91_error-book   ← 20 条正文 + 索引
 │   ├── 92_solutions    ← 10 条正文 + 索引
 │   └── _index / cheatsheet
 ├── skills/  ← 15 个技能各一个文件夹
@@ -154,9 +154,6 @@ space.workspace.rename-node --node-id <旧节点> --title "xxx (2.3.0 旧版)"
 2026-11-07 实测（3.0.0）：平台 176 节点 / 176 唯一路径 / 0 重复，本地 176 篇 md，
 双向差集均为 0。
 
-3.0.1 交付时本地 md 为 185 篇（references 153 篇 + 其余根文档、skills、knowledge、platform 等）；
-平台上的 176 节点是 3.0.0 上一次完整同步的结果，3.0.1 同步后需重测并更新本节数字。
-
 核对要读回真实树，不要信本地的记录文件。上传接口返回字段取错时，记录文件会是空的，
 但文件其实都在。以读回的树为准。
 
@@ -167,7 +164,7 @@ space.workspace.rename-node --node-id <旧节点> --title "xxx (2.3.0 旧版)"
 
 ```bash
 # 1. 本地改完，跑自检
-python mcp-server/selftest.py          # 必须全绿，当前 311 项
+python mcp-server/selftest.py          # 必须全绿，当前 330 项
 
 # 2. 确认本地 md 清单（数量应与平台一致）
 find . -name "*.md" -not -path "*/__pycache__/*" | wc -l

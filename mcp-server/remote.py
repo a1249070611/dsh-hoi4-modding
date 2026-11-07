@@ -32,9 +32,9 @@ import urllib.request
 from typing import Any
 
 CONFIG_REL = os.path.join("knowledge", "remote.json")
-CACHE_ROOT = os.path.join(os.path.expanduser("~"), ".dsh-hoi4-modding", "remote")
+CACHE_ROOT = os.path.join(os.path.expanduser("~"), ".kiant-hoi4-modkit", "remote")
 TIMEOUT = 20
-UA = {"User-Agent": "dsh-hoi4-modding/3.0 (+local tool)"}
+UA = {"User-Agent": "kiant-hoi4-modkit/3.1 (+local tool)"}
 
 
 def config_path() -> str:

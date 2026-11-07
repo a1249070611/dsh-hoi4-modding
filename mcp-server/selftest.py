@@ -77,6 +77,23 @@ def test_parser() -> None:
     _, e1 = cw.parse("a = {\n b = 1\n")
     ok("未闭合块被报告", any("unclosed" in i["message"] for i in e1), str(e1[:1]))
 
+    # ---- 跨游戏写法兼容（依据 pdx.tools 的 Clausewitz 语法陷阱清单）----
+    # 无等号块 `key{...}`：EU4/CK3 常见，HOI4 原版全量扫描零命中，但跨游戏
+    # 来的 mod 作者会带进来。此前 key 解析成裸 Scalar、块变兄弟节点，
+    # get_one(key) 拿不到（静默丢关联）。
+    root_ne, e_ne = cw.parse("foo{bar=qux}")
+    ok("无等号块归一为 key = {...}", cw.get_one(root_ne, "foo") is not None and not e_ne, str(e_ne[:1]))
+    root_mix, e_mix = cw.parse("tree = { id = t }\nfoo{bar=qux}\nbaz = 1\n")
+    ok("无等号块不破坏前后文解析",
+       cw.get_one(root_mix, "tree") is not None and cw.get_one(root_mix, "foo") is not None
+       and cw.get_one(root_mix, "baz") is not None and not e_mix, str(e_mix[:1]))
+    root_q, e_q = cw.parse("c:RUS ?= this")
+    q_stmt = cw.get_one(root_q, "c:RUS")
+    ok("?= 运算符被识别（不再是裸字符）", q_stmt is not None and q_stmt.op == "?=", str(e_q[:1]))
+    root_s, e_s = cw.parse('textureFile = "x.dds";')
+    ok("行尾分号被忽略（不污染列表块）",
+       [type(x).__name__ for x in root_s.items] == ["Stmt"] and not e_s, str(e_s[:1]))
+
     _, e2 = cw.parse("names = { Alhx'es Ch'ischiqwe L'imaxwe }\n")
     ok("人名里的单引号不误报", not any("single quote" in i["message"] for i in e2), str(e2[:2]))
 
@@ -260,6 +277,80 @@ def test_broken() -> None:
     ok("裸赋值 defines 仍报缺前缀（原有行为不回退）",
        bool(d_bare) and d_bare[0]["level"] == "warn", str(d_bare[:1]))
     shutil.rmtree(dmod, ignore_errors=True)
+
+    # check_focus_tree：国策树语义五连（吸收自 hoi4modutils fork validation.ts
+    # + MD 工具规则码）。夹具一棵树同时埋五类缺陷 + 一个合法 relative 例外。
+    fmod = tempfile.mkdtemp(prefix="modkit-focus-")
+    Path(fmod, "common", "national_focus").mkdir(parents=True)
+    Path(fmod, "common", "national_focus", "t.txt").write_text(
+        'focus_tree = {\n'
+        '    id = test_tree\n'
+        '    country = { factor = 0 }\n'
+        '    focus = {\n'
+        '        id = F1\n'
+        '        x = 1 y = 1\n'
+        '        prerequisite = { focus = GHOST }\n'
+        '        mutually_exclusive = { focus = F1 }\n'
+        '    }\n'
+        '    focus = {\n'
+        '        id = F2\n'
+        '        x = 1 y = 1\n'
+        '        relative_position_id = NOWHERE\n'
+        '        prerequisite = { focus = F2 }\n'
+        '        completion_reward = { add_stability = 5 }\n'
+        '    }\n'
+        '    focus = {\n'
+        '        id = F3\n'
+        '        relative_position_id = F1\n'
+        '        x = 0 y = 1\n'
+        '        prerequisite = { focus = F1 }\n'
+        '    }\n'
+        '}\n',
+        encoding="utf-8",
+    )
+    ctx_ft = validators.Ctx(fmod, {}, set(), vanilla_root="")
+    ft_issues = validators.check_focus_tree(ctx_ft)
+    ft_msgs = [i["message"] for i in ft_issues]
+    ok("focus 前置断链被抓", any("GHOST 不存在" in m for m in ft_msgs), str(ft_msgs))
+    ok("focus 自互斥被抓", any("与自身互斥" in m for m in ft_msgs), str(ft_msgs))
+    ok("focus 前置成环被抓", any("成环" in m for m in ft_msgs), str(ft_msgs))
+    ok("focus 坐标重叠被抓（断链 relative 不豁免）",
+       any("坐标重叠" in m and "F2" in m for m in ft_msgs), str(ft_msgs))
+    ok("focus 相对定位断链被抓", any("relative_position_id NOWHERE" in m for m in ft_msgs), str(ft_msgs))
+    ok("有效 relative（F3）不误报坐标重叠",
+       not any("F3" in m and "坐标重叠" in m for m in ft_msgs), str(ft_msgs))
+    shutil.rmtree(fmod, ignore_errors=True)
+
+    # check_loc_commands：三级分诊（curated 表借自 CWTools localisation.cwt，
+    # MIT）。精确命中/大小写变体静默，近匹配 warn，未知名 info。
+    lmod = tempfile.mkdtemp(prefix="modkit-loccmd-")
+    Path(lmod, "localisation", "english").mkdir(parents=True)
+    Path(lmod, "common", "scripted_localisation").mkdir(parents=True)
+    Path(lmod, "common", "scripted_localisation", "s.txt").write_text(
+        'defined_text = { name = GetMyCustom text = { localization_key = k } }',
+        encoding="utf-8",
+    )
+    Path(lmod, "localisation", "english", "t_l_english.yml").write_text(
+        '﻿l_english:\n'
+        ' A:0 "[Root.GetName] ok"\n'
+        ' B:0 "[Root.GetNam] 疑似拼错"\n'
+        ' C:0 "[GetMyCustom] 自定义豁免"\n'
+        ' D:0 "[Root.GetWhateverZz] 未知"\n'
+        ' E:0 "[Root.GETNAME] 大小写变体静默"\n',
+        encoding="utf-8",
+    )
+    ctx_lc = validators.Ctx(lmod, {}, set(), vanilla_root="")
+    lc_issues = validators.check_loc_commands(ctx_lc)
+    lc_msgs = [i["message"] for i in lc_issues]
+    ok("loc 命令精确命中静默", not any("GetName]" in m for m in lc_msgs), str(lc_msgs))
+    ok("loc 自定义 scripted_loc 豁免", not any("GetMyCustom" in m for m in lc_msgs), str(lc_msgs))
+    ok("loc 大小写变体静默（引擎不区分大小写）", not any("GETNAME" in m for m in lc_msgs), str(lc_msgs))
+    ok("loc 命令疑似拼错给最近建议",
+       any("GetNam 疑似拼错" in m and "GetName" in m for m in lc_msgs), str(lc_msgs))
+    ok("loc 未知名降为 info",
+       any("GetWhateverZz" in m for i, m in zip(lc_issues, lc_msgs)
+           if i.get("level") == "info"), str(lc_msgs))
+    shutil.rmtree(lmod, ignore_errors=True)
 
     # check_music：音乐两层结构完整性（EB-022）。
     # play_song 引用未定义歌名会静默失效；.asset 指向缺失音频；
@@ -660,6 +751,28 @@ def test_kb() -> None:
                     if h.get("type") == "loc"]
         ok("LIKE 转义后下划线不再当通配符", esc_keys == ["ZZesc_a_b"], str(esc_keys))
 
+        # ---- 官方文档全家桶提取（对齐 CWTools script_documentation.json 覆盖面）----
+        # 此前只收 effects/triggers/modifiers 三个文件名，原版 documentation/ 里
+        # 其余五类文档静默零符号。strict/loose/token 三种口径各测一条。
+        doc_samples = {
+            "effects_documentation.md": "## add_ideas\n\n* Supported Scopes: country\n",
+            "script_math_functions.md": "## pow\n\nSome text.\n",
+            "loc_objects_documentation.md": "## Ace\n\n* Supported Scopes: any\n",
+            "loc_formatter_documentation.md": "## advisor_desc\n",
+        }
+        doc_kinds = {}
+        for name, body in doc_samples.items():
+            syms = kb.extract_symbols(f"documentation/{name}", body)["symbols"]
+            doc_kinds[name] = [(s[0], s[1]) for s in syms]
+        ok("effect 条目 strict 行为不变", ("add_ideas", "effect") in doc_kinds["effects_documentation.md"],
+           str(doc_kinds))
+        ok("数学函数 token 模式入符号表", ("pow", "math_function") in doc_kinds["script_math_functions.md"],
+           str(doc_kinds))
+        ok("loc_object 大写条目 loose 模式入符号表",
+           ("Ace", "loc_object") in doc_kinds["loc_objects_documentation.md"], str(doc_kinds))
+        ok("TOC 等带空格标题不误收",
+           all(n != "Table" for n, _ in doc_kinds["script_math_functions.md"]), str(doc_kinds))
+
         # ---- sources.json 的路径解析 ----
         # 这一组防的是「把本机绝对路径写进配置就发出去」。插件自带的 notes/refs
         # 对所有安装者处在同一个相对位置，写绝对路径必错，写相对路径才是对的。
@@ -766,7 +879,7 @@ def test_mcp() -> None:
         # Count is asserted against plugin.json rather than hardcoded: the
         # manifest is the single source of truth other platforms may read.
         manifest = json.load(open(os.path.join(ROOT, "plugin.json"), encoding="utf-8"))
-        declared = manifest["capabilities"]["mcpServers"]["dsh-hoi4-modding"]["tools"]
+        declared = manifest["capabilities"]["mcpServers"]["kiant-hoi4-modkit"]["tools"]
         ok("工具数量与 plugin.json 一致", len(tools) == len(declared),
            f"MCP {len(tools)} / manifest {len(declared)}: {[t['name'] for t in tools]}")
         names = {t["name"] for t in tools}

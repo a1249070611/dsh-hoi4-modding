@@ -11,7 +11,7 @@ verified_on: 2026-11-06
 和 `90_case-studies/` 的分工：那边是"某个 mod 怎么做的"（内容层面），
 这边是"某个**工具**怎么做的"（工程层面）。
 
-## 本域 5 条最重要结论
+## 本域 7 条最重要结论
 
 1. **hagane-studio 有 1291 个 Go 文件，其中 529 个是测试（41%）。**
    `toolapi` 层代码 16485 行配测试 13818 行。**对外接口测得最狠**——
@@ -33,6 +33,15 @@ verified_on: 2026-11-06
 5. **它自己手写了 839 行 DDS 编解码**（解码未压缩 32bpp + BCn，还能编码回 DXT5），
    因为 Pillow 对 DDS 支持太差。本库的 `kiant-hoi4-dds.py` 只解头部，不解像素。
 
+6. **CWTools 的 script_documentation 与本库 kb 逐条对账：effects 553 完全一致**；
+   它独有 loc 命令表（~80 个 Get*）与数据链（links）知识，我们有 6 万+ 实例符号
+   它没有。`kb.py` 已扩 `DOC_KINDS` 补齐五类官方文档（+433 符号，
+   console_command 一项 375:2 反超）。见 `cwtools-analysis.md`。
+
+7. **AI 辅助 modding 在 2026 年已是显学**（RHoiScribe 的 MCP 服务器、UC 扩展的
+   200+ MCP 工具、一批 skill pack），但没有一个项目同时做「机器校验 +
+   原版实证知识库 + 错题本」。见 `github-ecosystem.md`。
+
 ## 篇目
 
 | 篇 | 讲什么 |
@@ -43,6 +52,16 @@ verified_on: 2026-11-06
 | `hagane-studio-mutation-receipt.md` | 写操作回执：防 AI 谎报的完整机制与判定表 |
 | `hagane-studio-guirender.md` | 界面重建：全量索引、DDS 编解码、gridbox 几何、170 模块组织 |
 | `hagane-studio-toolapi.md` | 149 个工具的组织、五个横切中间件、id/key 分离、安全设计 |
+| `cwtools-analysis.md` | **CWTools 工程解剖**（2026-11-07）：F# LSP + `.cwt` 规则 DSL、script_documentation 逐维对账、loc 命令表/数据链知识、引擎校验四段式 |
+| `github-ecosystem.md` | **GitHub hoi4 生态图谱**（2026-11-07）：2788 仓库按 IDE 插件/AI agent 工具/解析库/独立工具分类，fork 关系图与行动结论 |
+| `hearts-of-modding-analysis.md` | **hearts-of-modding 解剖**（Rust LSP）：57 诊断码全表、LayeredValue 分层 VFS、实证校准法、地图交叉七连、scope 校验三件套 |
+| `uc-hoi4-modding-tools-analysis.md` | **UC HOI4 Modding Tools 解剖**：仓库无源码只发二进制、236 个 MCP 工具核实、单表生成工具/一键接入 UX 可抄、广度路线的天花板 |
+| `hoi4modutils-analysis.md` | **hoi4modutilities + fork 对比**：零容错解析器（反例教材）、fork 的 focus tree 语义校验（前置/互斥/环/坐标/可达）、地图安全措施（事务回滚/ID 上限）、`#!event:` 依赖协议 |
+| `parser-libraries.md` | **解析库调研**（2026-11-07）：jomini 双子星（同一作者 Rust+WASM）、官方语法陷阱清单对 cw.py 反向测验（三处跨游戏写法缺口当日修复）、陈旧项处置 |
+| `ai-agent-tools.md` | **AI agent 工具调研**（2026-11-07）：RHoiScribe 深读（37 工具/45 条约束/66 TOML）、Fostanico 置信分级与 baseline 去重、低星快评、三个最高优先差距 |
+| `standalone-tools-analysis.md` | **独立工具调研**（2026-11-07）：收录/借鉴/舍弃三档处置——MD focus 工具规则码、khoeos 标记保护、Irony 对象级冲突算法、hoi4treesnap 预览升级路线、舍弃清单理由在案 |
+| `md-repo-analysis.md` | **MD 官方仓解剖**（2026-11-07）：.gui 编写层专题——字段级统计（极简字段集/定位三轨/100%% 混用）、同名覆盖 1101 窗口的「保名三改」模式、legacy_lazy_load 性能惯例、5 条可吸收校验规则 |
+| `kr-repo-analysis.md` | **KR 官方仓解剖**（2026-11-07）：与工坊 md5 级一致（工坊深读即权威）、57 条 replace_path 清单、portraits 三层池、64 个 0 字节 .gfx 空文件清除技法、GFX 尺寸规格实测、素材包与发版工作流处置 |
 
 ## 对本库的直接价值
 

@@ -11,6 +11,7 @@ knowledge, it says so explicitly instead of guessing.
 
 from __future__ import annotations
 
+import difflib
 import os
 import re
 from typing import Any, Callable
@@ -861,4 +862,331 @@ def check_music(ctx: Ctx) -> list[dict]:
                             "没进库就静默跳过（不报错）。",
                         }
                     )
+    return issues
+
+
+# --------------------------------------------------------------------------- #
+# 9. focus_tree
+# --------------------------------------------------------------------------- #
+
+_MAX_FOCUS_ISSUES = 300  # 参照 MD focus 工具的截断上限，防巨树刷屏
+
+
+def _collect_focus_data(ctx: Ctx) -> dict[str, Any]:
+    """收集 mod 内全部 focus 定义与文件级 shared_focus，供跨树解析。
+
+    返回 {trees: [{id, focuses: {fid: {...}}, order: [fid]}], shared: set}
+    """
+    trees: list[dict] = []
+    shared_global: set[str] = set()
+    for path in ctx.script_files("/national_focus/"):
+        try:
+            block, _errs = cw.parse_file(path)
+        except OSError:
+            continue
+        relpath = ctx.rel(path)
+
+        def _grab(st, tree_id: str) -> None:
+            if not isinstance(st.value, cw.Block):
+                return
+            fid = cw.as_text(cw.get_one(st.value, "id").value) if cw.get_one(st.value, "id") else ""
+            if not fid:
+                return
+            # 坐标两种写法都收：原版主流是直接 x=/y=（generic.txt 56 处），
+            # 少数文件用 position = { x y }（australia.txt 等）
+            xy = cw.get_one(st.value, "x")
+            yy = cw.get_one(st.value, "y")
+            if xy is None or yy is None:
+                pos = cw.get_one(st.value, "position")
+                if pos is not None and isinstance(pos.value, cw.Block):
+                    if xy is None:
+                        xy = cw.get_one(pos.value, "x")
+                    if yy is None:
+                        yy = cw.get_one(pos.value, "y")
+            x = cw.as_text(xy.value) if xy is not None and isinstance(xy.value, cw.Scalar) else ""
+            y = cw.as_text(yy.value) if yy is not None and isinstance(yy.value, cw.Scalar) else ""
+            prereqs = []
+            pr = cw.get_one(st.value, "prerequisite")
+            if pr and isinstance(pr.value, cw.Block):
+                for cell in cw.stmts(pr.value):
+                    opts = [cw.as_text(c.value) for c in getattr(cell.value, "items", []) if isinstance(c, cw.Scalar)] if isinstance(cell.value, cw.Block) else [cw.as_text(cell.value)]
+                    prereqs.append(opts)
+            mux = []
+            mx = cw.get_one(st.value, "mutually_exclusive")
+            if mx is not None:
+                if isinstance(mx.value, cw.Scalar):
+                    mux = [cw.as_text(mx.value)]
+                elif isinstance(mx.value, cw.Block):
+                    # 两种写法都收：mutually_exclusive = F1 与
+                    # mutually_exclusive = { focus = F1 }（块内是 Stmt）
+                    for c in mx.value.items:
+                        if isinstance(c, cw.Scalar):
+                            mux.append(cw.as_text(c))
+                        elif isinstance(c, cw.Stmt):
+                            if isinstance(c.value, cw.Scalar):
+                                mux.append(cw.as_text(c.value))
+                            else:
+                                mux += [cw.as_text(g) for g in c.value.items
+                                        if isinstance(g, cw.Scalar)]
+            rel = cw.get_one(st.value, "relative_position_id")
+            rel_id = cw.as_text(rel.value) if rel else ""
+            trees[-1]["focuses"][fid] = {
+                "x": x, "y": y, "prereqs": prereqs, "mux": mux,
+                "relative": rel_id, "line": st.line, "file": relpath,
+                "tree": tree_id,
+            }
+            trees[-1]["order"].append(fid)
+
+        for st in cw.stmts(block):
+            if st.key != "focus_tree" or not isinstance(st.value, cw.Block):
+                continue
+            tree_id = ""
+            id_stmt = cw.get_one(st.value, "id")
+            if id_stmt is not None:
+                tree_id = cw.as_text(id_stmt.value)
+            trees.append({"id": tree_id, "focuses": {}, "order": [], "file": relpath})
+            for inner in cw.stmts(st.value):
+                if inner.key in {"focus", "shared_focus"}:
+                    _grab(inner, tree_id)
+        for st in cw.stmts(block):
+            if st.key == "shared_focus" and isinstance(st.value, cw.Block):
+                fid = cw.as_text(cw.get_one(st.value, "id").value) if cw.get_one(st.value, "id") else ""
+                if fid:
+                    shared_global.add(fid)
+    return {"trees": trees, "shared": shared_global}
+
+
+@validator("focus_tree", "国策树语义")
+def check_focus_tree(ctx: Ctx) -> list[dict]:
+    """国策树语义校验（吸收自 hoi4modutils fork 的 validation.ts + MD 工具规则码）。
+
+    五类结构问题，全部纯图算法：前置引用不存在、前置成环、互斥引用缺失/自引、
+    同树同坐标重叠、relative_position_id 断链。前置/互斥目标允许落在
+    本树、文件级 shared_focus、其他树或原版索引（known("focus")）。
+    """
+    issues: list[dict] = []
+    data = ctx.cached("focus_data", lambda: _collect_focus_data(ctx))
+    known_focus = ctx.known("focus")
+    all_local: set[str] = set()
+    for t in data["trees"]:
+        all_local |= set(t["focuses"])
+    resolvable = all_local | data["shared"] | known_focus
+
+    def _loc(fid: str, info: dict) -> dict:
+        return {"file": info["file"], "line": info["line"], "kind": "focus_tree",
+                "focus": fid, "tree": info["tree"]}
+
+    n_issues = 0
+    for tree in data["trees"]:
+        focuses = tree["focuses"]
+
+        # 1. 前置引用不存在 + 2. 环检测 + 3. 互斥
+        for fid, info in focuses.items():
+            for group in info["prereqs"]:
+                for target in group:
+                    if target and target not in resolvable:
+                        issues.append({**_loc(fid, info), "level": "warn",
+                            "message": f"国策 {fid} 的前置 {target} 不存在",
+                            "hint": "前置 id 拼错或目标在本树/共享段/原版里都找不到；"
+                            "前置断链会让该国策永远无法解锁。"})
+                        n_issues += 1
+            for target in info["mux"]:
+                if target == fid:
+                    issues.append({**_loc(fid, info), "level": "error",
+                        "message": f"国策 {fid} 与自身互斥",
+                        "hint": "mutually_exclusive 指向自己，引擎会忽略或产生未定义行为。"})
+                    n_issues += 1
+                elif target and target not in resolvable:
+                    issues.append({**_loc(fid, info), "level": "warn",
+                        "message": f"国策 {fid} 的互斥对象 {target} 不存在",
+                        "hint": "互斥 id 拼错或目标缺失；互斥断链会让「二选一」失效。"})
+                    n_issues += 1
+            rel = info["relative"]
+            if rel and rel not in resolvable and rel != fid:
+                issues.append({**_loc(fid, info), "level": "warn",
+                    "message": f"国策 {fid} 的 relative_position_id {rel} 不存在",
+                    "hint": "相对定位断链时坐标回退为绝对值，节点会重叠或错位"
+                    "（见 EB-021）。"})
+                n_issues += 1
+            if n_issues >= _MAX_FOCUS_ISSUES:
+                break
+        if n_issues >= _MAX_FOCUS_ISSUES:
+            break
+
+        # 4. 环检测（本树内 DFS；跨树/跨 mod 环无法静态判定，不报）
+        color: dict[str, int] = {}
+
+        def _cycle(fid: str, stack: list[str]) -> None:
+            nonlocal n_issues
+            if n_issues >= _MAX_FOCUS_ISSUES or color.get(fid) == 2:
+                return
+            if color.get(fid) == 1:
+                cycle = stack[stack.index(fid):] + [fid]
+                anchor = focuses.get(fid, {"file": tree["file"], "line": 0, "tree": tree["id"]})
+                issues.append({**_loc(fid, anchor), "level": "error",
+                    "message": f"国策前置成环: {' -> '.join(cycle)}",
+                    "hint": "环上的国策互相等待，全部永远无法解锁。"})
+                n_issues += 1
+                return
+            color[fid] = 1
+            for group in focuses[fid]["prereqs"]:
+                for target in group:
+                    if target in focuses:
+                        _cycle(target, stack + [fid])
+            color[fid] = 2
+
+        for fid in focuses:
+            _cycle(fid, [])
+            if n_issues >= _MAX_FOCUS_ISSUES:
+                break
+
+        # 5. 同树坐标重叠（相对定位已解算的目标不豁免；断链的 relative 视为
+        #    实际落在原始坐标上，照样参与重叠判定）
+        seen_pos: dict[tuple[str, str], str] = {}
+        for fid in tree["order"]:
+            info = focuses[fid]
+            if not info["x"] or not info["y"]:
+                continue
+            exempt = info["relative"] != "" and info["relative"] in resolvable
+            key = (info["x"], info["y"])
+            if key in seen_pos and not exempt:
+                issues.append({**_loc(fid, info), "level": "warn",
+                    "message": f"国策 {fid} 与 {seen_pos[key]} 坐标重叠（x={info['x']} y={info['y']}）",
+                    "hint": "同树同坐标会叠卡；若其中一方使用了有效的 relative_position_id "
+                    "偏移则可合法共享基准坐标，此报错可忽略。"})
+                n_issues += 1
+                if n_issues >= _MAX_FOCUS_ISSUES:
+                    break
+            elif key not in seen_pos:
+                seen_pos[key] = fid
+
+    return issues
+
+
+# --------------------------------------------------------------------------- #
+# 10. loc_commands
+# --------------------------------------------------------------------------- #
+
+# 本地化 Get* 命令表。借用自 CWTools hoi4-config（Config/localisation.cwt，
+# MIT © 2018 tboby），按其「命令 = 适用 scope」的 curated 清单收 Name/Date/
+# Politics/State/Character/Air/Token/BOP 八组。scripted_localisation 里
+# 自定义的 Get* 会单独收集，不计为未知。
+LOC_COMMANDS = frozenset({
+    "GetDateText", "GetDate", "GetMonth", "GetYear",
+    "GetName", "GetNameWithFlag", "GetNameDef", "GetNameDefCap", "GetTag",
+    "GetAdjective", "GetAdjectiveCap", "GetOldName", "GetOldNameDef",
+    "GetOldNameDefCap", "GetOldAdjective", "GetOldAdjectiveCap",
+    "GetNonIdeologyName", "GetNonIdeologyNameDef", "GetNonIdeologyNameDefCap",
+    "GetNonIdeologyAdjective", "GetNonIdeologyAdjectiveCap",
+    "GetLeader", "GetManpower", "GetFactionName", "GetAgency", "GetFlag",
+    "GetPartySupport", "GetLastElection", "GetRulingParty",
+    "GetRulingPartyLong", "GetRulingIdeology", "GetRulingIdeologyNoun",
+    "GetCommunistParty", "GetDemocraticParty", "GetFascistParty",
+    "GetNeutralParty", "GetCommunistLeader", "GetDemocraticLeader",
+    "GetFascistLeader", "GetNeutralLeader",
+    "GetID", "GetCapitalVictoryPointName", "GetSurname", "GetFullName",
+    "GetSheHe", "GetSheHeCap", "GetHerHim", "GetHerHimCap", "GetHerHis",
+    "GetHerHisCap", "GetHersHis", "GetHersHisCap", "GetHerselfHimself",
+    "GetHerselfHimselfCap", "GetIdeology", "GetIdeologyGroup",
+    "GetRank", "GetCodeName", "GetCallsign", "GetWing", "GetWingShort",
+    "GetAceType", "GetMissionRegion",
+    "GetTokenKey", "GetTokenLocalizedKey", "GetDateString",
+    "GetDateStringShortMonth", "GetDateStringNoHour", "GetDateStringNoHourLong",
+    "GetActiveSideName", "GetTrendingSideName", "GetRightSideName",
+    "GetLeftSideName", "GetChangeRateDesc", "GetPowerBalanceName",
+    "GetPowerBalanceModDesc", "GetActiveRangeName", "GetActiveRangeModDesc",
+    "GetActiveRangeRuleDesc", "GetBopTrendTexticon",
+})
+
+_LOC_CMD_RE = re.compile(r"\[([^\[\]]*)\]")
+_LOC_GET_RE = re.compile(r"(?:^|\.)((?:[A-Za-z0-9_]+\.)?Get[A-Za-z0-9_]*)\s*$")
+
+
+def _collect_scripted_loc_names(root_dir: str) -> set[str]:
+    """收集 scripted_localisation 里自定义的 Get* 函数名（defined_text 的 name）。"""
+    names: set[str] = set()
+    sdir = os.path.join(root_dir, "common", "scripted_localisation")
+    if not os.path.isdir(sdir):
+        return names
+    for base, _dirs, files in os.walk(sdir):
+        for fn in files:
+            if not fn.lower().endswith(".txt"):
+                continue
+            try:
+                block, _errs = cw.parse_file(os.path.join(base, fn))
+            except OSError:
+                continue
+            for path, st in cw.walk(block):
+                if st.key == "name" and isinstance(st.value, cw.Scalar):
+                    v = cw.as_text(st.value)
+                    if v.startswith("Get"):
+                        names.add(v)
+    return names
+
+
+@validator("loc_commands", "本地化命令")
+def check_loc_commands(ctx: Ctx) -> list[dict]:
+    """本地化值里 [Root.GetXxx] 命令存在性（吸收自 CWTools localisation.cwt）。
+
+    「loc 里写错命令名 → 界面显示原样文字」一类问题的机器判定（见 EB-001）。
+    三级分诊（RT56 全量语料校准：209 条原始命中里 154 条是大小写变体、
+    5 条真拼错、其余为查无定义的悬空引用）：
+
+    1. 精确命中已知清单（CWTools curated 表 + mod/原版 scripted_localisation）
+       → 静默；
+    2. 大小写变体（引擎不区分大小写，见 AUTHORITY）→ 静默；
+    3. 编辑距离 ≤2 的近匹配 → **warn「疑似拼错」**并给出最接近的命令；
+    4. 其余 → info「不在已知清单」（可能是未安装 DLC / 未索引来源的命令）。
+    """
+    issues: list[dict] = []
+    custom = _collect_scripted_loc_names(ctx.mod_root)
+    if ctx.vanilla_root:
+        custom |= _collect_scripted_loc_names(ctx.vanilla_root)
+    known_cmd = LOC_COMMANDS | custom
+    known_lower = {k.lower(): k for k in known_cmd}
+    known_list = sorted(known_cmd)
+
+    for path in ctx.script_files("/localisation/", exts=(".yml",)):
+        relpath = ctx.rel(path)
+        try:
+            text = open(path, "r", encoding="utf-8-sig", errors="replace").read()
+        except OSError:
+            continue
+        for lineno, line in enumerate(text.splitlines(), 1):
+            if ":" not in line:
+                continue
+            value = line.split(":", 1)[1]
+            for bracket in _LOC_CMD_RE.findall(value):
+                for part in bracket.split("."):
+                    m = _LOC_GET_RE.match(part.strip())
+                    if not m:
+                        continue
+                    cmd = m.group(1).rsplit(".", 1)[-1]
+                    if cmd in known_cmd or cmd.lower() in known_lower:
+                        continue
+                    near = difflib.get_close_matches(cmd, known_list, n=1, cutoff=0.8)
+                    if near:
+                        issues.append(
+                            {
+                                "level": "warn",
+                                "kind": "loc_commands",
+                                "file": relpath,
+                                "line": lineno,
+                                "message": f"本地化命令 {cmd} 疑似拼错，最接近的是 {near[0]}",
+                                "hint": "引擎对命令名不区分大小写，但拼写错误不在容差内："
+                                "写错的命令显示为原样文字（EB-001）。",
+                            }
+                        )
+                    else:
+                        issues.append(
+                            {
+                                "level": "info",
+                                "kind": "loc_commands",
+                                "file": relpath,
+                                "line": lineno,
+                                "message": f"本地化命令 {cmd} 不在已知清单中",
+                                "hint": "可能是未安装 DLC / 未索引来源的 scripted_localisation "
+                                "命令；若确认存在可忽略本条。",
+                            }
+                        )
     return issues

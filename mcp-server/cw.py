@@ -18,9 +18,10 @@ TOKEN_RE = re.compile(
     r"""
       (?P<ws>[ \t\r\n]+)
     | (?P<comment>\#[^\n]*)
-    | (?P<op>==|!=|>=|<=|[=<>])
+    | (?P<op>\?=|==|!=|>=|<=|[=<>])
     | (?P<lbrace>\{)
     | (?P<rbrace>\})
+    | (?P<semi>;)
     | (?P<string>"(?:[^"\\]|\\.)*")
     | (?P<word>[^\s{}=<>#"]+)
     | (?P<bad>.)
@@ -98,6 +99,11 @@ def tokenize(text: str, errors: list[dict] | None = None) -> list[Token]:
         if kind == "ws":
             line += raw.count("\n")
         elif kind == "comment":
+            pass
+        elif kind == "semi":
+            # 行尾分号：游戏文件里真实存在（textureFile = "x.dds";），引擎忽略
+            # 之。此前 `;` 落进 word 类会变成裸 scalar 污染列表块。参照
+            # pdx.tools 的 Clausewitz 语法陷阱清单（rakaly/jomini 作者）。
             pass
         elif kind == "bad":
             if raw.strip():
@@ -181,6 +187,15 @@ def _parse_block(
         # A key, or a bare scalar inside a list block.
         key = tok.value
         nxt = tokens[idx + 1] if idx + 1 < n else None
+
+        # 无等号块 `key{...}`：语法合法（引擎视为 key = {...}），EU4/CK3 文件
+        # 常见而 HOI4 原版全量扫描（common/events/history/interface）零命中——
+        # 但跨游戏来的 mod 作者会带进来。此前把 key 解析成裸 Scalar、块变成
+        # 兄弟节点，get_one(key) 拿不到，静默丢失关联。现在归一成 Stmt。
+        if nxt is not None and nxt.kind == "lbrace":
+            inner, idx = _parse_block(tokens, idx + 2, errors, depth + 1, nxt.line)
+            block.items.append(Stmt(key, "=", inner, tok.line))
+            continue
 
         if nxt is not None and nxt.kind == "op":
             op = nxt.value

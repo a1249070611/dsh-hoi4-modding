@@ -18,7 +18,7 @@
         │                          │                          │
    ┌────▼─────┐            ┌───────▼───────┐          ┌───────▼──────┐
    │  技能层   │            │   工具层       │          │   参考层      │
-   │ 15 个技能 │            │ 20 个 MCP 工具 │          │ 153 篇文档    │
+   │ 15 个技能 │            │ 20 个 MCP 工具 │          │ 163 篇文档    │
    │ 「怎么做」│            │ 「机器来干」   │          │ 「为什么」    │
    └──────────┘            └───────┬───────┘          └──────────────┘
                                    │
@@ -38,7 +38,7 @@
 | 参考 | 「细节到底怎么写」 | agent 按索引路由读，按篇进上下文 |
 | 数据 | 「真实文件长什么样」 | 工具内部读，原样返回 |
 
-参考层刻意不进上下文。153 篇全塞进去，光读就撑爆整个窗口。所以 `_index.md` 只做路由，读到哪篇算哪篇。
+参考层刻意不进上下文。163 篇全塞进去，光读就撑爆整个窗口。所以 `_index.md` 只做路由，读到哪篇算哪篇。
 
 > 这里的「四层」按**谁读**分，跟 [ARCHITECTURE.md](ARCHITECTURE.md) 里的「五层」是两个切法，不冲突。
 > 那边按代码依赖分，L0 数据到 L4 编排，关心「改代码时继承什么」；这边关心「什么时候读什么」。
@@ -105,18 +105,18 @@
 |---|---|---|
 | `server.py` | MCP 协议循环（stdio JSON-RPC）+ 20 个工具的注册与参数 schema | 1097 |
 | `checks.py` | 结构校验：descriptor、本地化 BOM/键、括号、重复 id、事件 namespace、日志分析、覆盖比对 | 1582 |
-| `kb.py` | 知识库：索引构建、FTS5 双索引检索、范例查找、符号溯源、两级资料库 | 1445 |
-| `validators.py` | 可插拔的按类型校验器（8 个：technology/assets/sprites/ui/on_actions/history/defines/music） | 864 |
-| `selftest.py` | 311 项自检（含文档一致性检查 + 独立工具的单测 + 原版真实写法的回归），改完核心模块就跑 | 1992 |
+| `kb.py` | 知识库：索引构建、FTS5 双索引检索、范例查找、符号溯源、两级资料库 | 1472 |
+| `validators.py` | 可插拔的按类型校验器（10 个：technology/assets/sprites/ui/on_actions/history/defines/music/focus_tree/loc_commands） | 1192 |
+| `selftest.py` | 330 项自检（含文档一致性检查 + 独立工具的单测 + 原版真实写法的回归），改完核心模块就跑 | 2105 |
 | `playbook.py` | 错题本与方案库检索：按症状加权匹配、条目完整性检查 | 533 |
 | `scaffolder.py` | 12 类内容骨架生成，自动带 BOM 本地化 | 555 |
 | `preview.py` | 自包含 HTML 预览：国策树按真实坐标渲染并画连线 | 448 |
-| `cw.py` | Clausewitz 解析器：词法/语法 → 带行号的 AST。所有下游模块的地基 | 341 |
+| `cw.py` | Clausewitz 解析器：词法/语法 → 带行号的 AST。所有下游模块的地基 | 356 |
 | `remote.py` | 远端知识库同步（tarball + manifest + 缓存回退） | 290 |
 | `planner.py` | 八阶段计划跟踪，写 `plan.json` + `ROADMAP.md` | 210 |
 | `bench.py` | 真实模组上量耗时与假阳性 | 89 |
 
-合计 9446 行，零第三方依赖。
+合计 9929 行，零第三方依赖。
 
 依赖方向严格单向：
 
@@ -131,7 +131,7 @@ server  →  checks / validators / kb / playbook / preview / planner / scaffolde
 
 ---
 
-## 六、`references/`：153 篇，16 个目录 + 5 个根文件
+## 六、`references/`：163 篇，16 个目录 + 5 个根文件
 
 ### 根文件
 
@@ -183,7 +183,7 @@ server  →  checks / validators / kb / playbook / preview / planner / scaffolde
 
 | 目录 | 篇数 | 管什么 | 什么时候看 |
 |---|---|---|---|
-| `93_ecosystem/` | 8 | 同类开源工具的工程解剖（hagane-studio，Go + React） | 想知道「别人家的工具怎么做的」 |
+| `93_ecosystem/` | 18 | 同类开源工具的工程解剖（hagane-studio / CWTools / GitHub 生态图谱 / 四个 VS Code 插件 / AI agent 工具 / 解析库 / 独立工具） | 想知道「别人家的工具怎么做的」 |
 
 `93_ecosystem/` 研究的不是 HOI4 本身，是同类工具的实现，用来照出本库的盲区。
 已经实证出来的结论：本库缺「注释保留」「DDS 解码」「`.gui` 布局几何」三项能力，

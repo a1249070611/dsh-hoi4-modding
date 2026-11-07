@@ -32,7 +32,7 @@ cp -r skills/* ~/.workbuddy/skills/
 ```json
 {
   "mcpServers": {
-    "dsh-hoi4-modding": {
+    "kiant-hoi4-modkit": {
       "command": "python",
       "args": ["C:/绝对路径/dsh-hoi4-modding/mcp-server/server.py"]
     }

@@ -76,7 +76,7 @@ focus_tree = {
 		y = 3
 		prerequisite = { focus = GER_heavy_industry }
 		prerequisite = { focus = GER_motorways }
-		mutually_exclusive = { focus = GER_autarky }
+		mutually_exclusive = { focus = GER_autarky_efforts }
 		completion_reward = {
 			GER_economic_boom = yes
 		}

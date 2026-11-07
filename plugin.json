@@ -1,7 +1,7 @@
 {
   "name": "dsh-hoi4-modding",
-  "version": "3.0.1",
-  "description": "kiant 出品的 Hearts of Iron IV 全方位模组开发平台：模组工程师 agent、15 个技能、20 个工具、153 篇分级参考库（含 24 条错题本与 10 条方案库正文，以及对原版 1.19.4.2 的实证解析：文件格式、资源管线、引擎底层，另有同类开源工具 hagane-studio 的工程解剖）、以原版游戏文档为基准的两级资料库（平台优先、本地兜底）。每条结论可溯源（游戏文件行号 / 官方文档 / 外部链接），按可信度分三级，案例区不当规范。零经验可按 GETTING-STARTED 走通第一个国策。面向 1.19.x。",
+  "version": "3.1.0",
+  "description": "kiant 出品的 Hearts of Iron IV 全方位模组开发平台：模组工程师 agent、15 个技能、20 个工具、163 篇分级参考库（含 24 条错题本与 10 条方案库，以及对原版 1.19.4.2 的实证解析：文件格式、资源管线、引擎底层，另有同类开源工具（hagane-studio、CWTools、四个 VS Code 插件、AI agent 工具）的工程解剖）、以原版游戏文档为基准的两级资料库（平台优先、本地兜底）。每条结论可溯源（游戏文件行号 / 官方文档 / 外部链接），按可信度分三级，案例区不当规范。零经验可按 GETTING-STARTED 走通第一个国策。面向 1.19.x。",
   "license": "MIT",
   "author": "kiant",
   "keywords": [
@@ -107,7 +107,7 @@
       }
     ],
     "mcpServers": {
-      "dsh-hoi4-modding": {
+      "kiant-hoi4-modkit": {
         "transport": "stdio",
         "command": "python",
         "args": [

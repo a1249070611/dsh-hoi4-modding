@@ -1,24 +1,24 @@
 # 交接文件（HANDOVER）
 
 > 写给接手本项目的人（或未来的自己）。读完这一篇 + `STRUCTURE.md` + `ARCHITECTURE.md`，你就能安全地开始改代码。
-> 交接日期：2026-11-07 ｜ 当前版本：3.0.1 ｜ 自检 311/311 全绿 ｜ 变异 17/17
+> 交接日期：2026-11-07 ｜ 当前版本：3.1.0 ｜ 自检 330/330 全绿 ｜ 变异 17/17 ｜ 发布：GitHub tag v3.1.0 + npm dsh-hoi4-modding@3.1.0
 
 ---
 
 ## 一、项目一句话
 
-**dsh-hoi4-modding**：HOI4 mod 开发的 MCP 工具。20 个工具（校验/知识库/脚手架/预览/排障），纯 Python 标准库零依赖，12 个 mcp-server 模块 9446 行 + 153 篇参考库（全库 185 篇 Markdown）。校验器全部对照原版 1.19.4.2 全量实证。
+**dsh-hoi4-modding**：HOI4 mod 开发的 MCP 工具。20 个工具（校验/知识库/脚手架/预览/排障），纯 Python 标准库零依赖，16 个模块 9929 行 + 194 篇文档。校验器全部对照原版 1.19.4.2 全量实证。
 
 ## 二、代码地图（改哪去哪）
 
 | 模块 | 行数 | 职责 | 改动风险 |
 |---|---|---|---|
-| `cw.py` | 341 | Clausewitz 解析器。**所有模块的地基**。宽容设计：坏输入不抛异常、累积诊断 | 高——改动影响一切，跑全量自检 |
+| `cw.py` | 356 | Clausewitz 解析器。**所有模块的地基**。宽容设计：坏输入不抛异常、累积诊断 | 高——改动影响一切，跑全量自检 |
 | `checks.py` | 1582 | 结构校验主体。`resolve_mod_root` 的相对 path 双基准逻辑要特别小心 | 高 |
-| `kb.py` | 1445 | SQLite+FTS5 知识库。增量构建的 stale 清理、中文 2 字滑窗都是修复过的雷区 | 高 |
-| `validators.py` | 864 | 8 个按类型校验器。**遍历列表块一律用 `cw.entries()`**，不要用 `stmts()`（裸 token 会整块静默跳过） | 中 |
+| `kb.py` | 1472 | SQLite+FTS5 知识库。增量构建的 stale 清理、中文 2 字滑窗都是修复过的雷区 | 高 |
+| `validators.py` | 1192 | 10 个按类型校验器。**遍历列表块一律用 `cw.entries()`**，不要用 `stmts()`（裸 token 会整块静默跳过） | 中 |
 | `server.py` | 1097 | MCP 协议 + 20 个工具注册。工具 schema 与文档数字受自检盯防 | 中 |
-| `selftest.py` | 1992 | 311 项断言。**文档数字一致性也在里面**（篇数/行数/条数漂移会被抓） | 低 |
+| `selftest.py` | 2105 | 330 项断言。**文档数字一致性也在里面**（篇数/行数/条数漂移会被抓） | 低 |
 | `scaffolder/preview/planner/remote/playbook` | ~2000 | 生成/预览/计划/远端同步/错题本检索 | 低-中 |
 | `tools/` 4 个脚本 | — | dds 体积校验（块数必须 `(w+3)//4` 向上取整）/ lint / survey / mutate | 低 |
 
@@ -38,7 +38,7 @@ python mcp-server/selftest.py
 python tools/kiant-hoi4-mutate.py
 
 # 3. 打包（220+ 文件；FORBIDDEN 清单自动从当前环境生成，出现本机信息会整体失败）
-python ../_pack.py 3.0.1
+python ../_pack.py 3.1.0
 
 # 4. 资料库同步（WorkBuddy 资料库，只同步 .md）
 python ../_resync.py <改过的路径...>      # 旧节点自动归档后重传
@@ -65,11 +65,11 @@ python ../_verify_library.py              # 双向核对：必须「完全一致
 
 ## 五、当前状态与遗留清单
 
-**已完成**：3.0.1 已交付（3.0.0 之上的 bug 修复 + 23 个工坊 mod 学习轮：music 校验器、EB-022~025、`93_ecosystem/mod-maintenance-engineering.md` 与五处域文档扩写；详见交付说明）；3.0.0 已交付（`交付-kiant-hoi4-modkit-3.0.0/`，含交付说明）；官方 wiki 10 页已学习并分发进 7 篇域文档。
+**已完成**：3.1.0 已完成开发（生态学习五轮：CWTools/GitHub 图谱/四大 VS Code 插件/AI agent 工具/解析库/独立工具/大型 mod 官方仓，新增 focus_tree 与 loc_commands 校验器共 10 个、93_ecosystem 8 篇解剖、cw.py 跨游戏写法三修；待打包）；3.0.1 已交付（3.0.0 之上的 bug 修复 + 23 个工坊 mod 学习轮：music 校验器、EB-022~025、`93_ecosystem/mod-maintenance-engineering.md` 与五处域文档扩写；详见交付说明）；3.0.0 已交付（`交付-kiant-hoi4-modkit-3.0.0/`，含交付说明）；官方 wiki 10 页已学习并分发进 7 篇域文档。
 
 **待办（按优先级）**：
 
-1. **GitHub 仓库（已完成，2026-11-07）**：https://github.com/Kiant98/dsh-hoi4-modding 已建立并推送 v3.0.1（大版本重写：旧 1.x 内容全部删除，README/文档同步更新，clone 地址已填入 README；`.gitignore` 与根 manifest.json 已就位）
+1. **GitHub 仓库**：已建 https://github.com/Kiant98/dsh-hoi4-modding（`master` 为 3.1.0 源码，`v3.1.0` tag + Release 附件）。发版步骤：改 `package.json` 版本号 → `git tag vX.Y.Z && git push origin vX.Y.Z` → `.github/workflows/release.yml` 用 npm Trusted Publishing（OIDC）自动发 npm，无需 token。
 2. **未修 bug 六条**（见交付说明 §六，最值得先修的两个）：
    - `kb.py` `errors="replace"` 把 GBK 文件变 U+FFFD 且增量永不重试 → 建议回退解码链（utf-8-sig → cp1252 → gbk）并统计替换字符数
    - `remote.py` pull 先删旧缓存后校验 → 改 stage-then-switch
@@ -78,7 +78,7 @@ python ../_verify_library.py              # 双向核对：必须「完全一致
 ## 六、30 秒上手检查
 
 ```bash
-python mcp-server/selftest.py                       # 应 311/311
+python mcp-server/selftest.py                       # 应 330/330
 python mcp-server/server.py --call kiant_hoi4_kb_stats '{}'   # 应 69102 symbols（需已建索引）
 python ../_verify_library.py                        # 应「完全一致且无重复」
 ```

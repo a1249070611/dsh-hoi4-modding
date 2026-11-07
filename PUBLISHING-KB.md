@@ -12,7 +12,7 @@
 你的仓库/
 ├── manifest.json          ← 必需，版本号与文件数
 ├── knowledge/notes/       ← 你的笔记（.md）
-├── references/            ← 参考库 153 篇（63 上游 + 6 案例 + 5 根文件 + 79 自建）
+├── references/            ← 参考库 163 篇（63 上游 + 6 案例 + 5 根文件 + 89 自建）
 ├── mcp-server/            ← 插件本体，远端同步不取
 ├── agents/                ← 同上
 └── ...
@@ -21,7 +21,7 @@
 远端同步只复制 `knowledge/notes/` 和 `references/` 下的 `.md`、`.txt`、`.json`、`.csv`。
 代码、游戏索引、`sources.json` 一律不搬，那些东西每台机器都不一样。
 
-按当前仓库实测，这两个目录下可取的文件共 156 个（153 篇参考库 + 3 个笔记文件）。
+按当前仓库实测，这两个目录下可取的文件共 166 个（163 篇参考库 + 3 个笔记文件）。
 
 ## manifest.json
 
@@ -29,9 +29,9 @@
 
 ```json
 {
-  "version": "2026.11.07",
-  "file_count": 156,
-  "built_at": "2026-11-07"
+  "version": "2026.11.06",
+  "file_count": 148,
+  "built_at": "2026-11-06"
 }
 ```
 
@@ -86,9 +86,9 @@ kiant_hoi4_kb_build action=build    → 多出一个 remote 源
 
 ## 为什么用 tarball 而不是逐个文件下载
 
-| 方式 | 156 个文件 | 后果 |
+| 方式 | 148 个文件 | 后果 |
 |---|---|---|
-| 逐个 HTTP GET | 156 次请求 | 慢、容易触发限流、中途失败没法定点续 |
+| 逐个 HTTP GET | 148 次请求 | 慢、容易触发限流、中途失败没法定点续 |
 | git clone | 1 次 | 要求用户装 git，且要处理整个历史 |
 | tarball | 1 次请求 1 MB | 只依赖标准库 |
 
@@ -118,4 +118,4 @@ tarball 里要有一层顶层目录（GitHub 会自动加 `用户名-仓库名-s
 - [ ] `file_count` 和实际文件数一致（不一致只是提示不准，不影响功能）
 - [ ] 新增的 `.md` 放在 `paths` 列出的目录里，别放仓库根
 - [ ] 笔记里有可复核的坐标（`common/xxx.txt:123` 或官方文档行号），否则它只是 B 级线索
-- [ ] 没把 `~/.dsh-hoi4-modding/kb.sqlite` 或 `sources.json` 提交上去
+- [ ] 没把 `~/.kiant-hoi4-modkit/kb.sqlite` 或 `sources.json` 提交上去

@@ -28,7 +28,7 @@ import cw
 # 这样升级、换版本、重新解压都不会丢索引，也不会有任何本机路径被写进代码。
 # 需要换位置（多环境、CI、把库放到共享盘）时设 HOI4_KB_DB。
 DEFAULT_DB = os.environ.get("HOI4_KB_DB", "").strip() or os.path.join(
-    os.path.expanduser("~"), ".dsh-hoi4-modding", "kb.sqlite"
+    os.path.expanduser("~"), ".kiant-hoi4-modkit", "kb.sqlite"
 )
 
 CODE_EXT = {".txt", ".gui", ".gfx", ".asset", ".lua"}
@@ -465,31 +465,58 @@ def _char_probe(block: cw.Node) -> tuple[bool, str]:
 
 DOC_SCOPE_RE = re.compile(r"^\*\s*Supported Scopes?:\s*(.+)$", re.IGNORECASE)
 DOC_HEAD_RE = re.compile(r"^##\s+([a-z_][a-z0-9_]*)\s*$")
+# 宽松模式：loc_objects 的条目是大写开头（## Ace）；token 模式：数学函数里有
+# 运算符条目（## <）。对 effect/trigger/modifier 三类保持 strict——553/596/722
+# 三个数字是与 CWTools script_documentation.json 对账后的基准，不能漂。
+DOC_HEAD_LOOSE_RE = re.compile(r"^##\s+([A-Za-z_][A-Za-z0-9_]*)\s*$")
+DOC_HEAD_TOKEN_RE = re.compile(r"^##\s+(\S+)\s*$")
+
+# 游戏 documentation/ 全部可提取文档（与 CWTools 的 script_documentation.json
+# 覆盖面对齐：cwtools-hoi4-config 仓库同源对账，effects/triggers/modifiers
+# 三类条目数完全一致，其余五类此前被本索引器静默漏收）。
+DOC_KINDS = {
+    "effects_documentation.md": ("effect", "strict"),
+    "triggers_documentation.md": ("trigger", "strict"),
+    "modifiers_documentation.md": ("modifier", "strict"),
+    "script_math_functions.md": ("math_function", "token"),
+    "loc_objects_documentation.md": ("loc_object", "loose"),
+    "loc_formatter_documentation.md": ("loc_formatter", "loose"),
+    "script_collection_input.md": ("collection_input", "loose"),
+    "script_collection_operator.md": ("collection_operator", "loose"),
+    "script_concept_documentation.md": ("script_concept", "loose"),
+    "console_commands_documentation.md": ("console_command", "loose"),
+}
 
 
 def _extract_engine_docs(relpath: str, text: str) -> list[tuple[str, str, int, str]]:
-    """从游戏自带 documentation/*.md 抽出 effect / trigger / modifier 名与作用域。
+    """从游戏自带 documentation/*.md 抽出符号名与作用域（覆盖全部可提取文档）。
 
     这是本机能回答「这个 effect 真的存在吗、支持哪些 scope」的唯一权威来源，
     比任何教程都准。每个 `## name` 是一个词条，作用域写在正文里：
         * Supported Scopes: COUNTRY
     顶部的 `## Effects for scope X` 只是分组标题，不能用来推每条的作用域。
+
+    effect / trigger / modifier 之外，math_function / loc_object / loc_formatter /
+    collection_* / script_concept / console_command 也进符号表（此前只收前三类，
+    与 CWTools 的 script_documentation.json 对账后补齐；dynamic_variables 文档
+    只有按 scope 分组的标题、没有可提取条目，故不收）。
     """
     lower = relpath.lower()
-    if lower.endswith("effects_documentation.md"):
-        kind = "effect"
-    elif lower.endswith("triggers_documentation.md"):
-        kind = "trigger"
-    elif lower.endswith("modifiers_documentation.md"):
-        kind = "modifier"
-    else:
+    base = lower.rsplit("/", 1)[-1]
+    spec = DOC_KINDS.get(base)
+    if spec is None:
         return []
+    kind, mode = spec
 
     lines = text.splitlines()
     total = len(lines)
     out: list[tuple[str, str, int, str]] = []
     for i, line in enumerate(lines):
         m = DOC_HEAD_RE.match(line)
+        if not m and mode == "loose":
+            m = DOC_HEAD_LOOSE_RE.match(line)
+        elif not m and mode == "token":
+            m = DOC_HEAD_TOKEN_RE.match(line)
         if not m:
             continue
         scope = ""
