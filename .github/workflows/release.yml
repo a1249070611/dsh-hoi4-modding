@@ -23,6 +23,8 @@ jobs:
       - name: Verify package
         run: |
           python -m py_compile mcp-server/*.py
+          find . -type d -name __pycache__ -prune -exec rm -rf {} +
+          find . -name '*.pyc' -delete
           node -e "const p=require('./package.json');const t=process.env.GITHUB_REF_NAME.replace(/^v/,'');if(p.version!==t){console.error('tag='+t+' package='+p.version);process.exit(1)}"
           npm pack --dry-run
       # npm Trusted Publishing (OIDC): no NODE_AUTH_TOKEN / repository secret needed.
