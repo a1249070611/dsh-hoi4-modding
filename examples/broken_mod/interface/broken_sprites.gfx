@@ -1,0 +1,8 @@
+spriteTypes = {
+
+	spriteType = {
+		name = "GFX_bad_focus_icon"
+		texturefile = "gfx/interface/broken/missing_icon.dds"
+	}
+
+}

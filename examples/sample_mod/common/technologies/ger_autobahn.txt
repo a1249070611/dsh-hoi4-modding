@@ -1,0 +1,36 @@
+technologies = {
+
+	GER_autobahn_1 = {
+		start_year = 1936
+		research_cost = 1.0
+		folder = {
+			name = GER_autobahn_folder
+			position = { x = 0 y = 0 }
+		}
+		path = {
+			leads_to_tech = GER_autobahn_2
+			research_cost_coeff = 1
+		}
+		categories = {
+			industry
+		}
+		ai_will_do = { factor = 1 }
+	}
+
+	GER_autobahn_2 = {
+		start_year = 1939
+		research_cost = 1.5
+		folder = {
+			name = GER_autobahn_folder
+			position = { x = 0 y = 2 }
+		}
+		dependencies = {
+			GER_autobahn_1 = 1
+		}
+		categories = {
+			industry
+		}
+		ai_will_do = { factor = 1 }
+	}
+
+}

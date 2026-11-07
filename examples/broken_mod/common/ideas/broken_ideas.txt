@@ -1,0 +1,14 @@
+# 提供 known("idea") 数据源：check_history 需要 ideas 集非空才会检查
+# add_ideas 的引用（ideas 为空时整条检查静默跳过）。
+# BAD_defined_idea 是「真的存在」的 idea；BAD_missing_idea（写在
+# history/countries/BAD_country.txt 的 add_ideas 里）不存在，应当被报。
+ideas = {
+	country = {
+		BAD_defined_idea = {
+			picture = idea_generic
+			allowed = {
+				always = yes
+			}
+		}
+	}
+}

@@ -1,0 +1,17 @@
+focus_tree = {
+	id = broken_tree_dup
+	country = {
+		factor = 0
+	}
+	# 缺陷 1 的重灾区：和 broken_focus.txt 里同名
+	focus = {
+		id = BAD_focus_a
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 0
+		cost = 10
+		completion_reward = {
+			add_political_power = 10
+		}
+	}
+}

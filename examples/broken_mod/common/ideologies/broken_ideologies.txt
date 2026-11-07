@@ -1,0 +1,10 @@
+# 缺陷 3：这个文件少一个右花括号 → 解析到文件尾仍未闭合
+ideology = {
+
+	Broken_Ideology = {
+		types = {
+			Broken_Ideology = {
+				can_be_randomly_selected = no
+			}
+		}
+	}

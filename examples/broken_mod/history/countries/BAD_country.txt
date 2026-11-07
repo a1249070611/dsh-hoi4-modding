@@ -1,0 +1,4 @@
+# 裸 token 列表：引用的 BAD_missing_idea 不存在。
+# 之前用 stmts() 遍历，裸 token 整块被跳过，这条检查静默失效。
+# add_ideas 在国家历史文件里是顶层语句，不包在国家块里。
+add_ideas = { BAD_missing_idea }

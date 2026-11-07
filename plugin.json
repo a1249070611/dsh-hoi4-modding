@@ -1,0 +1,166 @@
+{
+  "name": "dsh-hoi4-modding",
+  "version": "3.0.1",
+  "description": "kiant 出品的 Hearts of Iron IV 全方位模组开发平台：模组工程师 agent、15 个技能、20 个工具、153 篇分级参考库（含 24 条错题本与 10 条方案库正文，以及对原版 1.19.4.2 的实证解析：文件格式、资源管线、引擎底层，另有同类开源工具 hagane-studio 的工程解剖）、以原版游戏文档为基准的两级资料库（平台优先、本地兜底）。每条结论可溯源（游戏文件行号 / 官方文档 / 外部链接），按可信度分三级，案例区不当规范。零经验可按 GETTING-STARTED 走通第一个国策。面向 1.19.x。",
+  "license": "MIT",
+  "author": "kiant",
+  "keywords": [
+    "hoi4",
+    "hearts-of-iron",
+    "paradox",
+    "modding",
+    "clausewitz",
+    "game-dev",
+    "knowledge-base"
+  ],
+  "targets": {
+    "game": "Hearts of Iron IV",
+    "supported_version": "1.19.*"
+  },
+  "runtime": {
+    "python": ">=3.9",
+    "dependencies": []
+  },
+  "capabilities": {
+    "agents": [
+      {
+        "path": "agents/kiant-hoi4-modder.md",
+        "name": "kiant-hoi4-modder",
+        "description": "全流程模组工程师：先查真实实现再动手，改完必做机器校验"
+      }
+    ],
+    "skills": [
+      {
+        "path": "skills/kiant-hoi4-mod-skeleton",
+        "name": "kiant-hoi4-mod-skeleton",
+        "covers": "工程骨架、descriptor、加载顺序"
+      },
+      {
+        "path": "skills/kiant-hoi4-clausewitz-script",
+        "name": "kiant-hoi4-clausewitz-script",
+        "covers": "语法、作用域、trigger/effect"
+      },
+      {
+        "path": "skills/kiant-hoi4-localisation",
+        "name": "kiant-hoi4-localisation",
+        "covers": "BOM、语言头、富文本、乱码"
+      },
+      {
+        "path": "skills/kiant-hoi4-focus-tree",
+        "name": "kiant-hoi4-focus-tree",
+        "covers": "国策树、坐标、前置互斥"
+      },
+      {
+        "path": "skills/kiant-hoi4-events-decisions",
+        "name": "kiant-hoi4-events-decisions",
+        "covers": "事件、决议、MTTH、AI 概率"
+      },
+      {
+        "path": "skills/kiant-hoi4-technology",
+        "name": "kiant-hoi4-technology",
+        "covers": "科技树、folder、依赖、装备解锁"
+      },
+      {
+        "path": "skills/kiant-hoi4-models-3d",
+        "name": "kiant-hoi4-models-3d",
+        "covers": "mesh/asset、entity、模型替换"
+      },
+      {
+        "path": "skills/kiant-hoi4-ui-interface",
+        "name": "kiant-hoi4-ui-interface",
+        "covers": ".gui、sprite、九宫格、scripted GUI"
+      },
+      {
+        "path": "skills/kiant-hoi4-game-framework",
+        "name": "kiant-hoi4-game-framework",
+        "covers": "defines、on_actions、game rules、国家历史"
+      },
+      {
+        "path": "skills/kiant-hoi4-gfx-interface",
+        "name": "kiant-hoi4-gfx-interface",
+        "covers": "贴图规格、sprite 注册、前缀规则"
+      },
+      {
+        "path": "skills/kiant-hoi4-debug-validate",
+        "name": "kiant-hoi4-debug-validate",
+        "covers": "-debug、控制台、报错对照、分诊"
+      },
+      {
+        "path": "skills/kiant-hoi4-compat-release",
+        "name": "kiant-hoi4-compat-release",
+        "covers": "加载顺序、覆盖策略、submod、发布"
+      },
+      {
+        "path": "skills/kiant-hoi4-knowledge-base",
+        "name": "kiant-hoi4-knowledge-base",
+        "covers": "索引、检索、学习原版写法"
+      },
+      {
+        "path": "skills/kiant-hoi4-planning",
+        "name": "kiant-hoi4-planning",
+        "covers": "分阶段规划、验收门槛"
+      },
+      {
+        "path": "skills/kiant-hoi4-validator-trust",
+        "name": "kiant-hoi4-validator-trust",
+        "covers": "判断校验器报错可不可信：分类、找原版对照、哪些可以先跳过"
+      }
+    ],
+    "mcpServers": {
+      "kiant-hoi4-modkit": {
+        "transport": "stdio",
+        "command": "python",
+        "args": [
+          "mcp-server/server.py"
+        ],
+        "tools": [
+          "kiant_hoi4_analyze_error_log",
+          "kiant_hoi4_error_book",
+          "kiant_hoi4_find_duplicate_ids",
+          "kiant_hoi4_fix_localisation",
+          "kiant_hoi4_kb_build",
+          "kiant_hoi4_kb_lookup",
+          "kiant_hoi4_kb_note",
+          "kiant_hoi4_kb_search",
+          "kiant_hoi4_kb_stats",
+          "kiant_hoi4_kb_symbol",
+          "kiant_hoi4_kb_sync",
+          "kiant_hoi4_list_overrides",
+          "kiant_hoi4_parse_script",
+          "kiant_hoi4_plan",
+          "kiant_hoi4_preview",
+          "kiant_hoi4_scaffold",
+          "kiant_hoi4_scan_localisation",
+          "kiant_hoi4_self_check",
+          "kiant_hoi4_solutions",
+          "kiant_hoi4_validate_mod"
+        ]
+      }
+    }
+  },
+  "resources": {
+    "architecture": "ARCHITECTURE.md",
+    "attribution": "references/ATTRIBUTION.md",
+    "authority": "references/AUTHORITY.md",
+    "benchmark": "mcp-server/bench.py",
+    "broken_example": "examples/broken_mod",
+    "error_book": "references/91_error-book/",
+    "examples": "examples/sample_mod",
+    "getting_started": "GETTING-STARTED.md",
+    "knowledge": "knowledge/",
+    "publishing_kb": "PUBLISHING-KB.md",
+    "publishing_library": "PUBLISHING-LIBRARY.md",
+    "readme": "README.md",
+    "references": "references/",
+    "remote_config": "knowledge/remote.json",
+    "selftest": "mcp-server/selftest.py",
+    "solutions": "references/92_solutions/",
+    "structure": "STRUCTURE.md"
+  },
+  "platform_adapters": {
+    "cursor": "platform/README.md",
+    "claude-code": "platform/README.md",
+    "workbuddy": "platform/workbuddy/README.md",
+    "codex": "platform/README.md"
+  }
+}

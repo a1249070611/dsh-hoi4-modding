@@ -1,0 +1,15 @@
+# 缺陷 4：没有 add_namespace，事件不会被注册
+# 缺陷 5：picture 引用的 sprite 在 mod 里不存在
+# 缺陷 6：选项没有 name，也找不到 BAD.1.a
+country_event = {
+	id = BAD.1
+	title = BAD.1.t
+	desc = BAD.1.d
+	picture = GFX_this_sprite_does_not_exist
+
+	is_triggered_only = yes
+
+	option = {
+		add_political_power = 20
+	}
+}

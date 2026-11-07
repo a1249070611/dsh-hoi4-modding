@@ -1,0 +1,17 @@
+# 缺陷 8：path 指向一个不存在的科技
+# 缺陷 9：科技没有本地化键（BAD_tech_1 不在 yml 里）
+technologies = {
+
+	BAD_tech_1 = {
+		start_year = 1936
+		research_cost = 1
+		path = {
+			leads_to_tech = BAD_tech_does_not_exist
+			research_cost_coeff = 1
+		}
+		categories = {
+			industry
+		}
+	}
+
+}

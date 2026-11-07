@@ -1,0 +1,10 @@
+ideas = {
+	country = {
+		GER_autobahn = {
+			picture = GFX_idea_generic_build_infrastructure
+			modifier = {
+				stability_factor = 0.05
+			}
+		}
+	}
+}

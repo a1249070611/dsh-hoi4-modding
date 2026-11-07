@@ -1,0 +1,15 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			# 两个写法都是主流形态，两个 id 都不存在：
+			#   events 裸 token 列表 + random_events 权重写法，且都藏在
+			#   effect 块里（不在 hook 直接子层）。三个条件缺一不可，
+			#   之前的三处盲区（stmts 跳过裸 token / 只查直接子层 /
+			#   events 在 effect 里）合起来等于完全不检查。
+			events = { BAD_on_action_event }
+			random_events = {
+				100 = BAD_random_event
+			}
+		}
+	}
+}

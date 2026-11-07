@@ -1,0 +1,5 @@
+# 注意：这个文件故意不带 UTF-8 BOM —— 缺陷 7
+# 游戏会直接忽略整个文件，但不会报错
+l_english:
+ BAD_focus_a:0 "Broken Focus A"
+ BAD_focus_a_desc:0 "This one is fine."

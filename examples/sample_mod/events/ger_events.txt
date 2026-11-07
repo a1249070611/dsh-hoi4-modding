@@ -1,0 +1,24 @@
+add_namespace = ger
+
+country_event = {
+	id = ger.1
+	title = ger.1.t
+	desc = ger.1.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = ger_autobahn_opened
+	}
+
+	option = {
+		name = ger.1.a
+		add_political_power = 25
+	}
+
+	option = {
+		name = ger.1.b
+		add_stability = 0.05
+		ai_chance = { factor = 30 }
+	}
+}

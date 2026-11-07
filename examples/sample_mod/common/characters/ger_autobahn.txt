@@ -1,0 +1,20 @@
+characters = {
+	GER = {
+		GER_autobahn = {
+			name = GER_autobahn_name
+			portraits = {
+				civilian = {
+					# 复用原版已有 sprite。换成自己的肖像要同时做两件事：
+					# 放 gfx/leaders/GER/xxx.dds，并在 interface/*.gfx 里注册同名 sprite
+					large = GFX_portrait_GER_fritz_todt
+				}
+			}
+			country_leader = {
+				ideology = despotism
+				traits = { }
+				expire = "1965.1.1"
+				id = -1
+			}
+		}
+	}
+}

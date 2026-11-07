@@ -1,0 +1,18 @@
+{
+  "_comment": "复制为 sources.json 后按需改。存在此文件时自动探测会被跳过，只索引这里列出的源。",
+  "_tip": "多数情况不必建这个文件：直接跑 kiant_hoi4_kb_build action=discover 让工具自己找原版和已装模组。",
+  "_path_rule": "path 支持三种写法：① 相对路径以插件根目录为基准（推荐给插件自带的 notes/refs，换电脑不用改）；② ~/ 开头的家目录路径；③ 绝对路径（只在你要固定某个本机位置时才用）。",
+  "sources": [
+    {
+      "name": "vanilla",
+      "path": "../steamapps/common/Hearts of Iron IV",
+      "_path_note": "换成你自己的路径，或用 HOI4_GAME 环境变量，或删掉这条让工具自动探测。",
+      "kind": "game"
+    },
+    {
+      "name": "mod:我的模组",
+      "path": "~/Documents/Paradox Interactive/Hearts of Iron IV/mod/我的模组",
+      "kind": "mod"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+focus_tree = {
+	id = broken_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = GER
+		}
+	}
+	# 缺陷 1：BAD_focus_a 在 broken_focus_dup.txt 里又定义了一次 → 重复 id
+	focus = {
+		id = BAD_focus_a
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 0
+		cost = 10
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+	# 缺陷 2：BAD_focus_b 没有任何本地化键 → 缺键
+	focus = {
+		id = BAD_focus_b
+		icon = GFX_goal_generic_construct_civilian
+		x = 2
+		y = 0
+		cost = 10
+		prerequisite = { focus = BAD_focus_a }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+}

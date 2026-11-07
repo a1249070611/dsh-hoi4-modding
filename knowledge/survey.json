@@ -1,0 +1,3652 @@
+{
+ "game_root": "",
+ "total_files": 60366,
+ "total_mb": 10670.0,
+ "extensions": {
+  "dds": {
+   "count": 33007,
+   "mb": 4879.74,
+   "dirs": {
+    "gfx/interface": 16923,
+    "gfx/leaders": 1138,
+    "dlc/dlc043_gotterdammerung": 1057,
+    "gfx/models": 984,
+    "gfx/event_pictures": 885,
+    "gfx/achievements": 882,
+    "dlc/dlc028_la_resistance": 839,
+    "dlc/dlc049_no_compromise_no_surrender": 763,
+    "dlc/dlc052_thunder_at_our_gates": 734,
+    "dlc/dlc040_trial_of_allegiance": 731,
+    "dlc/dlc038_arms_against_tyranny": 688,
+    "dlc/dlc046_graveyard_of_empires": 672
+   },
+   "samples": [
+    "railway_mapicon_bg.dds",
+    "dlc/dlc001_german_historical_portraits/gfx/event_pictures/news_event_heinrich_himmler.dds",
+    "dlc/dlc001_german_historical_portraits/gfx/event_pictures/news_event_herman_goring.dds",
+    "dlc/dlc001_german_historical_portraits/gfx/event_pictures/news_event_hitler_handshake.dds",
+    "dlc/dlc001_german_historical_portraits/gfx/event_pictures/news_event_hitler_speech.dds",
+    "dlc/dlc001_german_historical_portraits/gfx/event_pictures/report_event_GER_bormann.dds"
+   ]
+  },
+  "tga": {
+   "count": 6889,
+   "mb": 172.94,
+   "dirs": {
+    "gfx/flags": 6747,
+    "gfx/interface": 40,
+    "gfx/fonts": 36,
+    "gfx/world": 26,
+    "tweakergui_assets/gfx": 13,
+    "pdx_launcher/common": 9,
+    "pdx_launcher/game": 7,
+    "previewer_assets/gfx": 7,
+    "gfx/mapitems": 2,
+    "pdx_online_assets/gfx": 2
+   },
+   "samples": [
+    "gfx/flags/ABK_communism.tga",
+    "gfx/flags/ABK_democratic.tga",
+    "gfx/flags/ABK_fascism.tga",
+    "gfx/flags/ABK_neutrality.tga",
+    "gfx/flags/ADU.tga",
+    "gfx/flags/ADU_communism.tga"
+   ]
+  },
+  "wav": {
+   "count": 5074,
+   "mb": 2274.48,
+   "dirs": {
+    "integrated_dlc/dlc018_together_for_victory": 1017,
+    "dlc/dlc046_graveyard_of_empires": 480,
+    "dlc/dlc034_no_step_back": 401,
+    "sound/animations": 390,
+    "sound/menu": 382,
+    "dlc/dlc052_thunder_at_our_gates": 330,
+    "dlc/dlc031_battle_for_the_bosporus": 329,
+    "dlc/dlc040_trial_of_allegiance": 288,
+    "integrated_dlc/dlc020_death_or_dishonor": 273,
+    "dlc/dlc043_gotterdammerung": 192,
+    "dlc/dlc032_eastern_front_planes_pack": 149,
+    "integrated_dlc/dlc023_man_the_guns": 125
+   },
+   "samples": [
+    "dlc/dlc021_anniversary_pack/sound/pol/pol_idle_001.wav",
+    "dlc/dlc021_anniversary_pack/sound/pol/pol_idle_002.wav",
+    "dlc/dlc021_anniversary_pack/sound/pol/pol_idle_003.wav",
+    "dlc/dlc021_anniversary_pack/sound/pol/pol_idle_004.wav",
+    "dlc/dlc021_anniversary_pack/sound/pol/pol_idle_005.wav",
+    "dlc/dlc021_anniversary_pack/sound/pol/pol_idle_006.wav"
+   ]
+  },
+  "txt": {
+   "count": 4892,
+   "mb": 90.91,
+   "dirs": {
+    "history/states": 1081,
+    "history/units": 609,
+    "common/countries": 442,
+    "history/countries": 364,
+    "map/strategicregions": 304,
+    "common/units": 296,
+    "common/characters": 232,
+    "common/ideas": 213,
+    "common/decisions": 146,
+    "common/ai_strategy_plans": 128,
+    "events": 128,
+    "common/national_focus": 81
+   },
+   "samples": [
+    "buildings_nudger_markers.txt",
+    "changelog.txt",
+    "checksum_manifest.txt",
+    "clausewitz_branch.txt",
+    "clausewitz_rev.txt",
+    "console_history.txt"
+   ]
+  },
+  "yml": {
+   "count": 2114,
+   "mb": 152.96,
+   "dirs": {
+    "localisation/french": 212,
+    "localisation/german": 210,
+    "localisation/braz_por": 209,
+    "localisation/japanese": 209,
+    "localisation/polish": 209,
+    "localisation/russian": 209,
+    "localisation/simp_chinese": 209,
+    "localisation/spanish": 209,
+    "localisation/english": 208,
+    "localisation/korean": 208,
+    "pdx_launcher/common": 21,
+    "localisation": 1
+   },
+   "samples": [
+    "localisation/languages.yml",
+    "localisation/braz_por/aat_bop_l_braz_por.yml",
+    "localisation/braz_por/aat_characters_l_braz_por.yml",
+    "localisation/braz_por/aat_decisions_l_braz_por.yml",
+    "localisation/braz_por/aat_events_l_braz_por.yml",
+    "localisation/braz_por/aat_focus_l_braz_por.yml"
+   ]
+  },
+  "anim": {
+   "count": 2043,
+   "mb": 36.95,
+   "dirs": {
+    "gfx/models": 535,
+    "dlc/dlc043_gotterdammerung": 247,
+    "dlc/dlc025_axis_armor_pack": 160,
+    "dlc/dlc029_allied_armor_pack": 135,
+    "dlc/dlc047_prototype_vehicles": 106,
+    "dlc/dlc050_warships_of_the_pacific": 98,
+    "integrated_dlc/dlc023_man_the_guns": 92,
+    "dlc/dlc038_arms_against_tyranny": 75,
+    "dlc/dlc049_no_compromise_no_surrender": 59,
+    "dlc/dlc031_battle_for_the_bosporus": 54,
+    "dlc/dlc040_trial_of_allegiance": 54,
+    "dlc/dlc028_la_resistance": 51
+   },
+   "samples": [
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/POL_infantry_march_mg.anim",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/POL_infantry_march_rifle.anim",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_motorized_01_idle.anim",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_motorized_01_moving.anim",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/POL_tank_light_attack.anim",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/POL_tank_light_idle.anim"
+   ]
+  },
+  "mesh": {
+   "count": 1527,
+   "mb": 311.3,
+   "dirs": {
+    "gfx/models": 435,
+    "dlc/dlc043_gotterdammerung": 145,
+    "dlc/dlc036_by_blood_alone": 119,
+    "dlc/dlc038_arms_against_tyranny": 82,
+    "dlc/dlc049_no_compromise_no_surrender": 78,
+    "dlc/dlc052_thunder_at_our_gates": 75,
+    "dlc/dlc025_axis_armor_pack": 54,
+    "dlc/dlc032_eastern_front_planes_pack": 54,
+    "dlc/dlc040_trial_of_allegiance": 46,
+    "dlc/dlc029_allied_armor_pack": 45,
+    "dlc/dlc034_no_step_back": 43,
+    "integrated_dlc/dlc022_waking_the_tiger": 39
+   },
+   "samples": [
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_infantry.mesh",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_motorized_01.mesh",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_plane_heavy.mesh",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_plane_light_plz_37.mesh",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_plane_light_plz_38.mesh",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_plane_light_plz_p11.mesh"
+   ]
+  },
+  "html": {
+   "count": 1327,
+   "mb": 32.59,
+   "dirs": {
+    "wiki": 667,
+    "wiki/Special%3AWhatLinksHere": 488,
+    "wiki/Special%3ARecentChangesLinked": 75,
+    "wiki/Special%3AUndelete": 15,
+    "wiki/Special%3AContributions": 14,
+    "documentation": 11,
+    "wiki/Special%3ALog": 11,
+    "wiki/User%3AGeneral_Baker": 5,
+    "wiki/Template%3AAmbox": 2,
+    "wiki/Template%3AIcon": 2,
+    "tools": 1,
+    "tools/history_viewer": 1
+   },
+   "samples": [
+    "documentation/console_commands_documentation.html",
+    "documentation/dynamic_variables_documentation.html",
+    "documentation/effects_documentation.html",
+    "documentation/loc_formatter_documentation.html",
+    "documentation/loc_objects_documentation.html",
+    "documentation/modifiers_documentation.html"
+   ]
+  },
+  "png": {
+   "count": 998,
+   "mb": 88.78,
+   "dirs": {
+    "wiki/images": 829,
+    "gfx/cursors": 57,
+    "gfx/interface": 38,
+    "dlc/dlc014_wallpaper": 12,
+    "assets": 5,
+    "dlc/dlc028_la_resistance": 5,
+    "tools/art": 3,
+    "(根目录)": 1,
+    "dlc/dlc001_german_historical_portraits": 1,
+    "dlc/dlc002_polish_content_pack": 1,
+    "dlc/dlc003_rocket_launcher_unit_pack": 1,
+    "dlc/dlc005_heavy_cruisers_unit_pack": 1
+   },
+   "samples": [
+    "tut_supply_mapmode_img.png",
+    "assets/app-background.png",
+    "assets/button.png",
+    "assets/button_hover.png",
+    "assets/game-icon.png",
+    "assets/game-logo.png"
+   ]
+  },
+  "asset": {
+   "count": 500,
+   "mb": 8.74,
+   "dirs": {
+    "gfx/particles": 141,
+    "gfx/models": 46,
+    "dlc/dlc034_no_step_back": 39,
+    "dlc/dlc043_gotterdammerung": 28,
+    "gfx/entities": 26,
+    "integrated_dlc/dlc023_man_the_guns": 16,
+    "dlc/dlc040_trial_of_allegiance": 15,
+    "dlc/dlc031_battle_for_the_bosporus": 13,
+    "dlc/dlc049_no_compromise_no_surrender": 13,
+    "dlc/dlc052_thunder_at_our_gates": 13,
+    "integrated_dlc/dlc018_together_for_victory": 13,
+    "dlc/dlc038_arms_against_tyranny": 12
+   },
+   "samples": [
+    "dlc/dlc002_polish_content_pack/gfx/entities/pcp_units_infantry.asset",
+    "dlc/dlc002_polish_content_pack/gfx/models/units/pol_dlc/pol_dlc_animations.asset",
+    "dlc/dlc006_soviet_tanks_unit_pack/gfx/entities/_units_soviet_tanks_DLC.asset",
+    "dlc/dlc006_soviet_tanks_unit_pack/gfx/models/units/tanks/_soviet_tanks_DLC_animations.asset",
+    "dlc/dlc007_german_tanks_unit_pack/gfx/entities/_units_german_tanks_DLC.asset",
+    "dlc/dlc007_german_tanks_unit_pack/gfx/models/units/tanks/_german_tanks_DLC_animations.asset"
+   ]
+  },
+  "gui": {
+   "count": 480,
+   "mb": 4.45,
+   "dirs": {
+    "interface/equipmentdesigner": 268,
+    "interface": 132,
+    "interface/career_profile": 10,
+    "interface/international_market": 9,
+    "interface/factions": 7,
+    "interface/special_projects": 7,
+    "pdx_launcher/common": 7,
+    "interface/military_industrial_organization": 5,
+    "interface/notifications": 4,
+    "dlc/dlc026_radio_pack": 3,
+    "interface/building_roster": 3,
+    "interface/widgets": 3
+   },
+   "samples": [
+    "dlc/dlc011_german_march_order_music_pack/interface/axis_music.gui",
+    "dlc/dlc012_allied_radio_music_pack/interface/allied_music.gui",
+    "dlc/dlc013_sabaton/interface/sabaton_music.gui",
+    "dlc/dlc019_sabaton_vol2/interface/sabaton_music.gui",
+    "dlc/dlc026_radio_pack/interface/allied_music.gui",
+    "dlc/dlc026_radio_pack/interface/axis_music.gui"
+   ]
+  },
+  "gfx": {
+   "count": 415,
+   "mb": 11.02,
+   "dirs": {
+    "interface": 145,
+    "gfx/entities": 27,
+    "dlc/dlc043_gotterdammerung": 18,
+    "integrated_dlc/dlc023_man_the_guns": 14,
+    "integrated_dlc/dlc022_waking_the_tiger": 12,
+    "dlc/dlc028_la_resistance": 11,
+    "integrated_dlc/dlc018_together_for_victory": 11,
+    "dlc/dlc038_arms_against_tyranny": 10,
+    "dlc/dlc049_no_compromise_no_surrender": 10,
+    "dlc/dlc052_thunder_at_our_gates": 10,
+    "pdx_launcher/common": 10,
+    "dlc/dlc031_battle_for_the_bosporus": 9
+   },
+   "samples": [
+    "dlc/dlc002_polish_content_pack/gfx/entities/pcp_infantry.gfx",
+    "dlc/dlc002_polish_content_pack/interface/pol_ideas.gfx",
+    "dlc/dlc002_polish_content_pack/interface/pol_ideas_characters.gfx",
+    "dlc/dlc002_polish_content_pack/interface/pol_leader_portraits.gfx",
+    "dlc/dlc002_polish_content_pack/interface/pol_technologies.gfx",
+    "dlc/dlc006_soviet_tanks_unit_pack/gfx/entities/_soviet_tanks_DLC.gfx"
+   ]
+  },
+  "fnt": {
+   "count": 415,
+   "mb": 184.41,
+   "dirs": {
+    "gfx/fonts": 379,
+    "pdx_launcher/game": 17,
+    "pdx_online_assets/gfx": 6,
+    "tweakergui_assets/gfx": 5,
+    "pdx_launcher/common": 4,
+    "previewer_assets/gfx": 4
+   },
+   "samples": [
+    "gfx/fonts/Arial12.fnt",
+    "gfx/fonts/cg_16b.fnt",
+    "gfx/fonts/cg_18b.fnt",
+    "gfx/fonts/garamond_12.fnt",
+    "gfx/fonts/garamond_14.fnt",
+    "gfx/fonts/garamond_14_bold.fnt"
+   ]
+  },
+  "ogg": {
+   "count": 231,
+   "mb": 1892.87,
+   "dirs": {
+    "dlc/dlc026_radio_pack": 28,
+    "music": 26,
+    "music/hoi3": 19,
+    "music/hoi2": 16,
+    "dlc/dlc030_allied_speeches_pack": 13,
+    "dlc/dlc033_songs_of_the_eastern_front": 13,
+    "dlc/dlc036_by_blood_alone": 12,
+    "dlc/dlc043_gotterdammerung": 11,
+    "dlc/dlc019_sabaton_vol2": 10,
+    "dlc/dlc049_no_compromise_no_surrender": 10,
+    "dlc/dlc038_arms_against_tyranny": 9,
+    "dlc/dlc046_graveyard_of_empires": 8
+   },
+   "samples": [
+    "dlc/dlc011_german_march_order_music_pack/music/gmomp_dermachtigstekonigimluftrevier.ogg",
+    "dlc/dlc011_german_march_order_music_pack/music/gmomp_panzerlied.ogg",
+    "dlc/dlc011_german_march_order_music_pack/music/gmomp_schwarzbraunistdiehaselnuss.ogg",
+    "dlc/dlc012_allied_radio_music_pack/music/armp_dance_your_troubles_away_main.ogg",
+    "dlc/dlc012_allied_radio_music_pack/music/armp_from_glen_to_glen_main.ogg",
+    "dlc/dlc012_allied_radio_music_pack/music/armp_the_man_on_the_british_countryside_main.ogg"
+   ]
+  },
+  "jpeg": {
+   "count": 62,
+   "mb": 9.75,
+   "dirs": {
+    "wiki/images": 62
+   },
+   "samples": [
+    "wiki/images/1/14/Italy_navies.jpeg",
+    "wiki/images/1/17/France_National_Focus_Tree.jpeg",
+    "wiki/images/3/3c/France_Maginot_Line.jpeg",
+    "wiki/images/3/3e/Swiss_wargoal.jpeg",
+    "wiki/images/3/3f/Peace_conference.jpeg",
+    "wiki/images/4/40/TurkeyMapScreenshot.jpeg"
+   ]
+  },
+  "shader": {
+   "count": 52,
+   "mb": 0.21,
+   "dirs": {
+    "gfx/FX": 45,
+    "pdx_launcher/common": 2,
+    "pdx_online_assets/gfx": 2,
+    "tweakergui_assets/gfx": 2,
+    "gfx/models": 1
+   },
+   "samples": [
+    "gfx/FX/arrow.shader",
+    "gfx/FX/bloom.shader",
+    "gfx/FX/border.shader",
+    "gfx/FX/buttonstate.shader",
+    "gfx/FX/buttonstate_blendframes.shader",
+    "gfx/FX/buttonstate_fade_frames_to_black.shader"
+   ]
+  },
+  "md": {
+   "count": 50,
+   "mb": 0.94,
+   "dirs": {
+    "documentation": 11,
+    "common/doctrines": 5,
+    "common/special_projects": 4,
+    "common/military_industrial_organization": 3,
+    "common/ai_navy": 2,
+    "common/peace_conference": 2,
+    "common/ai_equipment": 1,
+    "common/ai_faction_theaters": 1,
+    "common/ai_strategy": 1,
+    "common/ai_templates": 1,
+    "common/characters": 1,
+    "common/collections": 1
+   },
+   "samples": [
+    "common/ai_equipment/_documentation.md",
+    "common/ai_faction_theaters/_documentation.md",
+    "common/ai_navy/_documentation.md",
+    "common/ai_navy/taskforce/_documentation.md",
+    "common/ai_strategy/_documentation.md",
+    "common/ai_templates/_documentation.md"
+   ]
+  },
+  "cur": {
+   "count": 50,
+   "mb": 0.21,
+   "dirs": {
+    "gfx/cursors": 49,
+    "previewer_assets/gfx": 1
+   },
+   "samples": [
+    "gfx/cursors/add_units.cur",
+    "gfx/cursors/assign_operative.cur",
+    "gfx/cursors/attach_air.cur",
+    "gfx/cursors/brush.cur",
+    "gfx/cursors/brush_delete.cur",
+    "gfx/cursors/brush_detach.cur"
+   ]
+  },
+  "dlc": {
+   "count": 46,
+   "mb": 0.01,
+   "dirs": {
+    "dlc/dlc001_german_historical_portraits": 1,
+    "dlc/dlc002_polish_content_pack": 1,
+    "dlc/dlc003_rocket_launcher_unit_pack": 1,
+    "dlc/dlc005_heavy_cruisers_unit_pack": 1,
+    "dlc/dlc006_soviet_tanks_unit_pack": 1,
+    "dlc/dlc007_german_tanks_unit_pack": 1,
+    "dlc/dlc008_french_tanks_unit_pack": 1,
+    "dlc/dlc009_british_tanks_unit_pack": 1,
+    "dlc/dlc010_us_tanks_unit_pack": 1,
+    "dlc/dlc011_german_march_order_music_pack": 1,
+    "dlc/dlc012_allied_radio_music_pack": 1,
+    "dlc/dlc013_sabaton": 1
+   },
+   "samples": [
+    "dlc/dlc001_german_historical_portraits/dlc001.dlc",
+    "dlc/dlc002_polish_content_pack/dlc002.dlc",
+    "dlc/dlc003_rocket_launcher_unit_pack/dlc003.dlc",
+    "dlc/dlc005_heavy_cruisers_unit_pack/dlc005.dlc",
+    "dlc/dlc006_soviet_tanks_unit_pack/dlc006.dlc",
+    "dlc/dlc007_german_tanks_unit_pack/dlc007.dlc"
+   ]
+  },
+  "jpg": {
+   "count": 38,
+   "mb": 6.27,
+   "dirs": {
+    "wiki/images": 38
+   },
+   "samples": [
+    "wiki/images/0/0a/Kw9sU47.jpg",
+    "wiki/images/0/0e/Trade_Chromoium.jpg",
+    "wiki/images/1/1a/Odense_nuclear_bomb_pre-alpha.jpg",
+    "wiki/images/4/4b/Unit_preview_tank.jpg",
+    "wiki/images/8/81/HeartsofIronIV_d-day_landing.jpg",
+    "wiki/images/a/ac/HeartsofIronIV_rommel_desert_fox.jpg"
+   ]
+  },
+  "fxh": {
+   "count": 13,
+   "mb": 0.07,
+   "dirs": {
+    "gfx/FX": 13
+   },
+   "samples": [
+    "gfx/FX/buttonstate.fxh",
+    "gfx/FX/constants.fxh",
+    "gfx/FX/defines_glsl.fxh",
+    "gfx/FX/defines_hlsl.fxh",
+    "gfx/FX/defines_hlsl_dx11.fxh",
+    "gfx/FX/fade_frames_to_black_constants.fxh"
+   ]
+  },
+  "pak": {
+   "count": 12,
+   "mb": 22.7,
+   "dirs": {
+    "cef/linux": 6,
+    "cef/win32": 6
+   },
+   "samples": [
+    "cef/linux/cef.pak",
+    "cef/linux/cef_100_percent.pak",
+    "cef/linux/cef_200_percent.pak",
+    "cef/linux/cef_extensions.pak",
+    "cef/linux/devtools_resources.pak",
+    "cef/linux/locales/en-US.pak"
+   ]
+  },
+  "ico": {
+   "count": 11,
+   "mb": 0.04,
+   "dirs": {
+    "gfx/cursors": 10,
+    "wiki": 1
+   },
+   "samples": [
+    "gfx/cursors/brush.ico",
+    "gfx/cursors/brush_delete.ico",
+    "gfx/cursors/brush_detach.ico",
+    "gfx/cursors/brush_detach_disabled.ico",
+    "gfx/cursors/brush_front.ico",
+    "gfx/cursors/brush_move.ico"
+   ]
+  },
+  "bmp": {
+   "count": 10,
+   "mb": 86.21,
+   "dirs": {
+    "map": 7,
+    "map/terrain": 2,
+    "gfx": 1
+   },
+   "samples": [
+    "gfx/HOI4_icon.bmp",
+    "map/cities.bmp",
+    "map/heightmap.bmp",
+    "map/provinces.bmp",
+    "map/rivers.bmp",
+    "map/terrain.bmp"
+   ]
+  },
+  "ani": {
+   "count": 10,
+   "mb": 0.26,
+   "dirs": {
+    "gfx/cursors": 10
+   },
+   "samples": [
+    "gfx/cursors/assign_air.ani",
+    "gfx/cursors/attack_move.ani",
+    "gfx/cursors/build_buildings.ani",
+    "gfx/cursors/busy.ani",
+    "gfx/cursors/dragselect.ani",
+    "gfx/cursors/friendly_move.ani"
+   ]
+  },
+  "lua": {
+   "count": 8,
+   "mb": 0.48,
+   "dirs": {
+    "script": 5,
+    "common/defines": 3
+   },
+   "samples": [
+    "common/defines/00_defines.lua",
+    "common/defines/00_graphics.lua",
+    "common/defines/01_career_profile.lua",
+    "script/ai_diplomacy.lua",
+    "script/autoexec.lua",
+    "script/diplomacy.lua"
+   ]
+  },
+  "css": {
+   "count": 8,
+   "mb": 0.34,
+   "dirs": {
+    "wiki": 8
+   },
+   "samples": [
+    "wiki/load.php@debug=false&lang=en&modules=ext.categoryTree.css_01.css",
+    "wiki/load.php@debug=false&lang=en&modules=ext.categoryTree.css_02&only.css",
+    "wiki/load.php@debug=false&lang=en&modules=ext.cite.styles&only=styles&skin=vector.css",
+    "wiki/load.php@debug=false&lang=en&modules=mediawiki.action.view.categoryPage.style_03.css",
+    "wiki/load.php@debug=false&lang=en&modules=mediawiki.action.view.categoryPage.style_04&only=styles&skin=vector.css",
+    "wiki/load.php@debug=false&lang=en&modules=mediawiki.action.view.filepage_05&only=styles&skin=vector.css"
+   ]
+  },
+  "mp3": {
+   "count": 7,
+   "mb": 51.14,
+   "dirs": {
+    "soundtrack/dlc012_allied_radio_music_pack": 4,
+    "soundtrack/dlc011_german_march_order_music_pack": 3
+   },
+   "samples": [
+    "soundtrack/dlc011_german_march_order_music_pack/Der Machtigste Konig im Luftrevier.mp3",
+    "soundtrack/dlc011_german_march_order_music_pack/Panzerlied.mp3",
+    "soundtrack/dlc011_german_march_order_music_pack/Schwarzbraun ist die Haselnuss.mp3",
+    "soundtrack/dlc012_allied_radio_music_pack/Dance Your Troubles Away Main.mp3",
+    "soundtrack/dlc012_allied_radio_music_pack/From Glen To Glen Main.mp3",
+    "soundtrack/dlc012_allied_radio_music_pack/The Man On The British Countryside Main.mp3"
+   ]
+  },
+  "json": {
+   "count": 5,
+   "mb": 0.01,
+   "dirs": {
+    "(根目录)": 2,
+    "assets": 1,
+    "common": 1,
+    "tools": 1
+   },
+   "samples": [
+    "launcher-settings.json",
+    "settings-layout.json",
+    "assets/theme-settings.json",
+    "common/msgrdk_achievements.json",
+    "tools/texture_converter_settings.json"
+   ]
+  },
+  "exe": {
+   "count": 4,
+   "mb": 205.95,
+   "dirs": {
+    "(根目录)": 3,
+    "crash_reporter/binaries": 1
+   },
+   "samples": [
+    "dowser.exe",
+    "hoi4.exe",
+    "launcher-installer-windows_2024.14.exe",
+    "crash_reporter/binaries/CrashReporter.exe"
+   ]
+  },
+  "js": {
+   "count": 3,
+   "mb": 0.1,
+   "dirs": {
+    "tools/history_viewer": 2,
+    "browser": 1
+   },
+   "samples": [
+    "browser/hoi4wiki.js",
+    "tools/history_viewer/heatmap.min.js",
+    "tools/history_viewer/jszip.min.js"
+   ]
+  },
+  "info": {
+   "count": 3,
+   "mb": 0.01,
+   "dirs": {
+    "gfx/interface": 1,
+    "interface/equipmentdesigner": 1,
+    "tests": 1
+   },
+   "samples": [
+    "gfx/interface/equipmentdesigner/graphic_db/_documentation.info",
+    "interface/equipmentdesigner/_documentation.info",
+    "tests/_documentation.info"
+   ]
+  },
+  "manifest": {
+   "count": 2,
+   "mb": 0.0,
+   "dirs": {
+    "(根目录)": 1,
+    "crash_reporter/binaries": 1
+   },
+   "samples": [
+    "hoi4.exe.manifest",
+    "crash_reporter/binaries/CrashReporter.exe.manifest"
+   ]
+  },
+  "dll": {
+   "count": 2,
+   "mb": 2.68,
+   "dirs": {
+    "(根目录)": 2
+   },
+   "samples": [
+    "PDXSDK.dll",
+    "steam_api64.dll"
+   ]
+  },
+  "ttf": {
+   "count": 2,
+   "mb": 0.86,
+   "dirs": {
+    "assets": 1,
+    "previewer_assets/gfx": 1
+   },
+   "samples": [
+    "assets/font.ttf",
+    "previewer_assets/gfx/pdx_gui/previewer_arial.ttf"
+   ]
+  },
+  "zip": {
+   "count": 2,
+   "mb": 2.39,
+   "dirs": {
+    "dlc/dlc003_rocket_launcher_unit_pack": 1,
+    "dlc/dlc005_heavy_cruisers_unit_pack": 1
+   },
+   "samples": [
+    "dlc/dlc003_rocket_launcher_unit_pack/dlc003.zip",
+    "dlc/dlc005_heavy_cruisers_unit_pack/dlc005.zip"
+   ]
+  },
+  "sfx": {
+   "count": 2,
+   "mb": 0.01,
+   "dirs": {
+    "interface": 1,
+    "previewer_assets/assetviewer_interface": 1
+   },
+   "samples": [
+    "interface/sound.sfx",
+    "previewer_assets/assetviewer_interface/previewer_sound.sfx"
+   ]
+  },
+  "csv": {
+   "count": 2,
+   "mb": 0.46,
+   "dirs": {
+    "map": 2
+   },
+   "samples": [
+    "map/adjacencies.csv",
+    "map/definition.csv"
+   ]
+  },
+  "dat": {
+   "count": 1,
+   "mb": 9.73,
+   "dirs": {
+    "(根目录)": 1
+   },
+   "samples": [
+    "icudtl.dat"
+   ]
+  },
+  "ini": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "(根目录)": 1
+   },
+   "samples": [
+    "imgui.ini"
+   ]
+  },
+  "so": {
+   "count": 1,
+   "mb": 112.31,
+   "dirs": {
+    "(根目录)": 1
+   },
+   "samples": [
+    "libcef.so"
+   ]
+  },
+  "(无扩展名)": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "(根目录)": 1
+   },
+   "samples": [
+    "run_hoi4"
+   ]
+  },
+  "xnviewsort": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "gfx/interface": 1
+   },
+   "samples": [
+    "gfx/interface/counters/divisions_large/.XnViewSort"
+   ]
+  },
+  "pdn": {
+   "count": 1,
+   "mb": 0.03,
+   "dirs": {
+    "gfx/interface": 1
+   },
+   "samples": [
+    "gfx/interface/union_control/union_control_progressbar.pdn"
+   ]
+  },
+  "map": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "map": 1
+   },
+   "samples": [
+    "map/default.map"
+   ]
+  },
+  "ttc": {
+   "count": 1,
+   "mb": 14.61,
+   "dirs": {
+    "previewer_assets/gfx": 1
+   },
+   "samples": [
+    "previewer_assets/gfx/pdx_gui/previewer_simsun.ttc"
+   ]
+  },
+  "settings": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "tools": 1
+   },
+   "samples": [
+    "tools/pdxexporter.settings"
+   ]
+  },
+  "php@debug=false&lang=en&modules=startup&only=scripts&skin=vector": {
+   "count": 1,
+   "mb": 0.02,
+   "dirs": {
+    "wiki": 1
+   },
+   "samples": [
+    "wiki/load.php@debug=false&lang=en&modules=startup&only=scripts&skin=vector"
+   ]
+  },
+  "php": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki": 1
+   },
+   "samples": [
+    "wiki/opensearch_desc.php"
+   ]
+  },
+  "png@3d5b6": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki/images/help.png@3d5b6"
+   ]
+  },
+  "svg@b3daa": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki/images/help.svg@b3daa"
+   ]
+  },
+  "png@bdcf5": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.action/images/checker.png@bdcf5"
+   ]
+  },
+  "gif@57f34": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.legacy/images/ajax-loader.gif@57f34"
+   ]
+  },
+  "gif@53eb5": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.legacy/images/help-question-hover.gif@53eb5"
+   ]
+  },
+  "gif@346d8": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.legacy/images/help-question.gif@346d8"
+   ]
+  },
+  "gif@ca65b": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.legacy/images/spinner.gif@ca65b"
+   ]
+  },
+  "png@b5711": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.skinning/images/magnify-clip-ltr.png@b5711"
+   ]
+  },
+  "svg@7fa0a": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.skinning/images/magnify-clip-ltr.svg@7fa0a"
+   ]
+  },
+  "png@27d60": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.skinning/images/magnify-clip-rtl.png@27d60"
+   ]
+  },
+  "svg@96de0": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/resources": 1
+   },
+   "samples": [
+    "wiki/resources/src/mediawiki.skinning/images/magnify-clip-rtl.svg@96de0"
+   ]
+  },
+  "png@5c03c": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/arrow-down-focus-icon.png@5c03c"
+   ]
+  },
+  "svg@6cc06": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/arrow-down-focus-icon.svg@6cc06"
+   ]
+  },
+  "png@feb5c": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/arrow-down-icon.png@feb5c"
+   ]
+  },
+  "svg@92f5b": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/arrow-down-icon.svg@92f5b"
+   ]
+  },
+  "png@785dd": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/bullet-icon.png@785dd"
+   ]
+  },
+  "svg@90d59": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/bullet-icon.svg@90d59"
+   ]
+  },
+  "png@948bf": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/external-link-ltr-icon.png@948bf"
+   ]
+  },
+  "svg@445a3": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/external-link-ltr-icon.svg@445a3"
+   ]
+  },
+  "png@7c7b7": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/page-fade.png@7c7b7"
+   ]
+  },
+  "png@3ea1b": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/portal-break.png@3ea1b"
+   ]
+  },
+  "png@50f7b": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/search-fade.png@50f7b"
+   ]
+  },
+  "png@511c1": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/search-ltr.png@511c1"
+   ]
+  },
+  "svg@07752": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/search-ltr.svg@07752"
+   ]
+  },
+  "png@2df0f": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/tab-break.png@2df0f"
+   ]
+  },
+  "png@98160": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/tab-current-fade.png@98160"
+   ]
+  },
+  "png@ae13b": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/tab-normal-fade.png@ae13b"
+   ]
+  },
+  "png@f1f1e": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/unwatch-icon-hl.png@f1f1e"
+   ]
+  },
+  "svg@a3932": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/unwatch-icon-hl.svg@a3932"
+   ]
+  },
+  "png@c2550": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/unwatch-icon.png@c2550"
+   ]
+  },
+  "svg@95d18": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/unwatch-icon.svg@95d18"
+   ]
+  },
+  "png@9e7ea": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/user-icon.png@9e7ea"
+   ]
+  },
+  "svg@7b5d5": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/user-icon.svg@7b5d5"
+   ]
+  },
+  "png@df008": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/watch-icon-hl.png@df008"
+   ]
+  },
+  "svg@2b77d": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/watch-icon-hl.svg@2b77d"
+   ]
+  },
+  "png@cf2c3": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/watch-icon-loading.png@cf2c3"
+   ]
+  },
+  "svg@6ca63": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/watch-icon-loading.svg@6ca63"
+   ]
+  },
+  "png@0c329": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/watch-icon.png@0c329"
+   ]
+  },
+  "svg@200b7": {
+   "count": 1,
+   "mb": 0.0,
+   "dirs": {
+    "wiki/skins": 1
+   },
+   "samples": [
+    "wiki/skins/Vector/images/watch-icon.svg@200b7"
+   ]
+  }
+ },
+ "directories": {
+  "gfx/fonts": {
+   "count": 786,
+   "mb": 1737.5,
+   "exts": {
+    "fnt": 379,
+    "dds": 366,
+    "tga": 36,
+    "txt": 5
+   }
+  },
+  "gfx/interface": {
+   "count": 17007,
+   "mb": 1158.0,
+   "exts": {
+    "dds": 16923,
+    "tga": 40,
+    "png": 38,
+    "txt": 3,
+    "xnviewsort": 1,
+    "info": 1,
+    "pdn": 1
+   }
+  },
+  "dlc/dlc052_thunder_at_our_gates": {
+   "count": 1223,
+   "mb": 472.0,
+   "exts": {
+    "dds": 734,
+    "wav": 330,
+    "mesh": 75,
+    "anim": 49,
+    "asset": 13,
+    "gfx": 10,
+    "ogg": 6,
+    "txt": 4,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "sound/animations": {
+   "count": 390,
+   "mb": 404.0,
+   "exts": {
+    "wav": 390
+   }
+  },
+  "dlc/dlc034_no_step_back": {
+   "count": 822,
+   "mb": 383.7,
+   "exts": {
+    "wav": 401,
+    "dds": 309,
+    "mesh": 43,
+    "asset": 39,
+    "anim": 15,
+    "gfx": 7,
+    "ogg": 4,
+    "txt": 2,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc043_gotterdammerung": {
+   "count": 1704,
+   "mb": 377.4,
+   "exts": {
+    "dds": 1057,
+    "anim": 247,
+    "wav": 192,
+    "mesh": 145,
+    "asset": 28,
+    "gfx": 18,
+    "ogg": 11,
+    "txt": 4,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "(根目录)": {
+   "count": 30,
+   "mb": 328.2,
+   "exts": {
+    "txt": 16,
+    "exe": 3,
+    "json": 2,
+    "dll": 2,
+    "manifest": 1,
+    "dat": 1,
+    "ini": 1,
+    "so": 1,
+    "dds": 1,
+    "(无扩展名)": 1
+   }
+  },
+  "gfx/models": {
+   "count": 2009,
+   "mb": 323.3,
+   "exts": {
+    "dds": 984,
+    "anim": 535,
+    "mesh": 435,
+    "asset": 46,
+    "gfx": 8,
+    "shader": 1
+   }
+  },
+  "dlc/dlc032_eastern_front_planes_pack": {
+   "count": 457,
+   "mb": 309.4,
+   "exts": {
+    "dds": 245,
+    "wav": 149,
+    "mesh": 54,
+    "asset": 4,
+    "gfx": 2,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc038_arms_against_tyranny": {
+   "count": 880,
+   "mb": 266.5,
+   "exts": {
+    "dds": 688,
+    "mesh": 82,
+    "anim": 75,
+    "asset": 12,
+    "gfx": 10,
+    "ogg": 9,
+    "txt": 2,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc036_by_blood_alone": {
+   "count": 840,
+   "mb": 260.4,
+   "exts": {
+    "dds": 584,
+    "mesh": 119,
+    "wav": 96,
+    "ogg": 12,
+    "asset": 11,
+    "gfx": 7,
+    "anim": 6,
+    "txt": 3,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "integrated_dlc/dlc022_waking_the_tiger": {
+   "count": 569,
+   "mb": 256.9,
+   "exts": {
+    "dds": 426,
+    "wav": 55,
+    "mesh": 39,
+    "anim": 18,
+    "gfx": 12,
+    "asset": 11,
+    "ogg": 3,
+    "txt": 3,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc049_no_compromise_no_surrender": {
+   "count": 1034,
+   "mb": 253.3,
+   "exts": {
+    "dds": 763,
+    "wav": 96,
+    "mesh": 78,
+    "anim": 59,
+    "asset": 13,
+    "gfx": 10,
+    "ogg": 10,
+    "txt": 3,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc026_radio_pack": {
+   "count": 64,
+   "mb": 214.4,
+   "exts": {
+    "ogg": 28,
+    "dds": 24,
+    "gfx": 3,
+    "gui": 3,
+    "txt": 3,
+    "dlc": 1,
+    "png": 1,
+    "asset": 1
+   }
+  },
+  "music": {
+   "count": 28,
+   "mb": 208.9,
+   "exts": {
+    "ogg": 26,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc046_graveyard_of_empires": {
+   "count": 1274,
+   "mb": 199.6,
+   "exts": {
+    "dds": 672,
+    "wav": 480,
+    "anim": 51,
+    "mesh": 35,
+    "asset": 12,
+    "gfx": 9,
+    "ogg": 8,
+    "txt": 5,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc030_allied_speeches_pack": {
+   "count": 20,
+   "mb": 192.3,
+   "exts": {
+    "ogg": 13,
+    "dlc": 1,
+    "png": 1,
+    "dds": 1,
+    "gfx": 1,
+    "gui": 1,
+    "txt": 1,
+    "asset": 1
+   }
+  },
+  "sound/weather": {
+   "count": 30,
+   "mb": 182.1,
+   "exts": {
+    "wav": 30
+   }
+  },
+  "dlc/dlc040_trial_of_allegiance": {
+   "count": 1154,
+   "mb": 170.6,
+   "exts": {
+    "dds": 731,
+    "wav": 288,
+    "anim": 54,
+    "mesh": 46,
+    "asset": 15,
+    "gfx": 9,
+    "ogg": 6,
+    "txt": 3,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc028_la_resistance": {
+   "count": 1050,
+   "mb": 162.9,
+   "exts": {
+    "dds": 839,
+    "wav": 96,
+    "anim": 51,
+    "mesh": 30,
+    "gfx": 11,
+    "asset": 10,
+    "png": 5,
+    "ogg": 4,
+    "txt": 3,
+    "dlc": 1
+   }
+  },
+  "integrated_dlc/dlc018_together_for_victory": {
+   "count": 1524,
+   "mb": 162.2,
+   "exts": {
+    "wav": 1017,
+    "dds": 402,
+    "anim": 46,
+    "mesh": 29,
+    "asset": 13,
+    "gfx": 11,
+    "ogg": 3,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc031_battle_for_the_bosporus": {
+   "count": 909,
+   "mb": 159.4,
+   "exts": {
+    "dds": 472,
+    "wav": 329,
+    "anim": 54,
+    "mesh": 25,
+    "asset": 13,
+    "gfx": 9,
+    "ogg": 3,
+    "txt": 2,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "gfx/event_pictures": {
+   "count": 885,
+   "mb": 151.6,
+   "exts": {
+    "dds": 885
+   }
+  },
+  "sound/menu": {
+   "count": 382,
+   "mb": 138.1,
+   "exts": {
+    "wav": 382
+   }
+  },
+  "dlc/dlc033_songs_of_the_eastern_front": {
+   "count": 20,
+   "mb": 134.5,
+   "exts": {
+    "ogg": 13,
+    "dlc": 1,
+    "png": 1,
+    "dds": 1,
+    "gfx": 1,
+    "gui": 1,
+    "txt": 1,
+    "asset": 1
+   }
+  },
+  "integrated_dlc/dlc023_man_the_guns": {
+   "count": 692,
+   "mb": 130.0,
+   "exts": {
+    "dds": 401,
+    "wav": 125,
+    "anim": 92,
+    "mesh": 34,
+    "asset": 16,
+    "gfx": 14,
+    "ogg": 4,
+    "txt": 3,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "gfx/leaders": {
+   "count": 1139,
+   "mb": 123.6,
+   "exts": {
+    "dds": 1138,
+    "png": 1
+   }
+  },
+  "map": {
+   "count": 22,
+   "mb": 99.7,
+   "exts": {
+    "txt": 12,
+    "bmp": 7,
+    "csv": 2,
+    "map": 1
+   }
+  },
+  "gfx/loadingscreens": {
+   "count": 19,
+   "mb": 96.0,
+   "exts": {
+    "dds": 19
+   }
+  },
+  "dlc/dlc019_sabaton_vol2": {
+   "count": 18,
+   "mb": 94.4,
+   "exts": {
+    "ogg": 10,
+    "dds": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "gui": 1,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc025_axis_armor_pack": {
+   "count": 639,
+   "mb": 91.4,
+   "exts": {
+    "dds": 367,
+    "anim": 160,
+    "mesh": 54,
+    "wav": 50,
+    "asset": 3,
+    "gfx": 2,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "music/hoi3": {
+   "count": 21,
+   "mb": 88.6,
+   "exts": {
+    "ogg": 19,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "integrated_dlc/dlc020_death_or_dishonor": {
+   "count": 802,
+   "mb": 87.8,
+   "exts": {
+    "dds": 432,
+    "wav": 273,
+    "anim": 38,
+    "mesh": 33,
+    "asset": 11,
+    "gfx": 9,
+    "ogg": 3,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "music/hoi2": {
+   "count": 18,
+   "mb": 81.5,
+   "exts": {
+    "ogg": 16,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc029_allied_armor_pack": {
+   "count": 534,
+   "mb": 71.8,
+   "exts": {
+    "dds": 317,
+    "anim": 135,
+    "mesh": 45,
+    "wav": 29,
+    "asset": 3,
+    "gfx": 2,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc047_prototype_vehicles": {
+   "count": 312,
+   "mb": 71.7,
+   "exts": {
+    "dds": 152,
+    "anim": 106,
+    "mesh": 38,
+    "asset": 7,
+    "gfx": 4,
+    "txt": 2,
+    "dlc": 1,
+    "png": 1,
+    "wav": 1
+   }
+  },
+  "sound/gui": {
+   "count": 67,
+   "mb": 65.8,
+   "exts": {
+    "wav": 64,
+    "asset": 3
+   }
+  },
+  "dlc/dlc013_sabaton": {
+   "count": 13,
+   "mb": 52.5,
+   "exts": {
+    "ogg": 5,
+    "dds": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "gui": 1,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc050_warships_of_the_pacific": {
+   "count": 255,
+   "mb": 47.6,
+   "exts": {
+    "dds": 120,
+    "anim": 98,
+    "mesh": 30,
+    "gfx": 2,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "map/terrain": {
+   "count": 64,
+   "mb": 47.1,
+   "exts": {
+    "dds": 62,
+    "bmp": 2
+   }
+  },
+  "gfx/flags": {
+   "count": 6747,
+   "mb": 46.1,
+   "exts": {
+    "tga": 6747
+   }
+  },
+  "wiki/images": {
+   "count": 929,
+   "mb": 34.9,
+   "exts": {
+    "png": 829,
+    "jpeg": 62,
+    "jpg": 38
+   }
+  },
+  "sound/audiofiles": {
+   "count": 82,
+   "mb": 32.6,
+   "exts": {
+    "wav": 82
+   }
+  },
+  "dlc/dlc051_peace_for_our_time": {
+   "count": 191,
+   "mb": 31.4,
+   "exts": {
+    "dds": 176,
+    "asset": 5,
+    "gfx": 4,
+    "ogg": 2,
+    "dlc": 1,
+    "png": 1,
+    "mesh": 1,
+    "txt": 1
+   }
+  },
+  "soundtrack/dlc012_allied_radio_music_pack": {
+   "count": 4,
+   "mb": 30.0,
+   "exts": {
+    "mp3": 4
+   }
+  },
+  "dlc/dlc014_wallpaper": {
+   "count": 12,
+   "mb": 26.0,
+   "exts": {
+    "png": 12
+   }
+  },
+  "common/scripted_localisation": {
+   "count": 42,
+   "mb": 23.4,
+   "exts": {
+    "txt": 42
+   }
+  },
+  "localisation/russian": {
+   "count": 209,
+   "mb": 22.1,
+   "exts": {
+    "yml": 209
+   }
+  },
+  "dlc/dlc011_german_march_order_music_pack": {
+   "count": 17,
+   "mb": 21.8,
+   "exts": {
+    "dds": 8,
+    "ogg": 3,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "gui": 1,
+    "txt": 1,
+    "asset": 1
+   }
+  },
+  "dlc/dlc021_anniversary_pack": {
+   "count": 174,
+   "mb": 21.8,
+   "exts": {
+    "wav": 85,
+    "dds": 82,
+    "gfx": 3,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1,
+    "asset": 1
+   }
+  },
+  "soundtrack/dlc011_german_march_order_music_pack": {
+   "count": 3,
+   "mb": 21.1,
+   "exts": {
+    "mp3": 3
+   }
+  },
+  "dlc/dlc012_allied_radio_music_pack": {
+   "count": 18,
+   "mb": 19.8,
+   "exts": {
+    "dds": 8,
+    "ogg": 4,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "gui": 1,
+    "txt": 1,
+    "asset": 1
+   }
+  },
+  "pdx_launcher/game": {
+   "count": 88,
+   "mb": 19.5,
+   "exts": {
+    "dds": 55,
+    "fnt": 17,
+    "tga": 7,
+    "gfx": 3,
+    "asset": 3,
+    "gui": 2,
+    "txt": 1
+   }
+  },
+  "previewer_assets/gfx": {
+   "count": 38,
+   "mb": 18.9,
+   "exts": {
+    "dds": 21,
+    "tga": 7,
+    "fnt": 4,
+    "cur": 1,
+    "png": 1,
+    "gfx": 1,
+    "gui": 1,
+    "ttf": 1,
+    "ttc": 1
+   }
+  },
+  "wiki": {
+   "count": 679,
+   "mb": 17.1,
+   "exts": {
+    "html": 667,
+    "css": 8,
+    "ico": 1,
+    "php@debug=false&lang=en&modules=startup&only=scripts&skin=vector": 1,
+    "php": 1,
+    "txt": 1
+   }
+  },
+  "localisation/french": {
+   "count": 212,
+   "mb": 16.9,
+   "exts": {
+    "yml": 212
+   }
+  },
+  "localisation/japanese": {
+   "count": 209,
+   "mb": 15.1,
+   "exts": {
+    "yml": 209
+   }
+  },
+  "localisation/german": {
+   "count": 210,
+   "mb": 15.1,
+   "exts": {
+    "yml": 210
+   }
+  },
+  "localisation/korean": {
+   "count": 208,
+   "mb": 14.9,
+   "exts": {
+    "yml": 208
+   }
+  },
+  "localisation/spanish": {
+   "count": 209,
+   "mb": 14.4,
+   "exts": {
+    "yml": 209
+   }
+  },
+  "localisation/braz_por": {
+   "count": 209,
+   "mb": 14.2,
+   "exts": {
+    "yml": 209
+   }
+  },
+  "localisation/polish": {
+   "count": 209,
+   "mb": 14.1,
+   "exts": {
+    "yml": 209
+   }
+  },
+  "common/national_focus": {
+   "count": 81,
+   "mb": 13.6,
+   "exts": {
+    "txt": 81
+   }
+  },
+  "localisation/english": {
+   "count": 208,
+   "mb": 13.5,
+   "exts": {
+    "yml": 208
+   }
+  },
+  "sound/pistol_sound_assets": {
+   "count": 18,
+   "mb": 13.3,
+   "exts": {
+    "wav": 18
+   }
+  },
+  "gfx/maparrows": {
+   "count": 89,
+   "mb": 13.1,
+   "exts": {
+    "dds": 88,
+    "txt": 1
+   }
+  },
+  "gfx/achievements": {
+   "count": 882,
+   "mb": 13.0,
+   "exts": {
+    "dds": 882
+   }
+  },
+  "localisation/simp_chinese": {
+   "count": 209,
+   "mb": 12.5,
+   "exts": {
+    "yml": 209
+   }
+  },
+  "dlc/dlc042_content_creator_pack_soviet_union_2d_art": {
+   "count": 381,
+   "mb": 12.2,
+   "exts": {
+    "dds": 373,
+    "gfx": 4,
+    "txt": 2,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "cef/linux": {
+   "count": 6,
+   "mb": 11.4,
+   "exts": {
+    "pak": 6
+   }
+  },
+  "cef/win32": {
+   "count": 6,
+   "mb": 11.3,
+   "exts": {
+    "pak": 6
+   }
+  },
+  "dlc/dlc027_la_resistance_preorder_bonus": {
+   "count": 5,
+   "mb": 11.2,
+   "exts": {
+    "dlc": 1,
+    "png": 1,
+    "asset": 1,
+    "txt": 1,
+    "ogg": 1
+   }
+  },
+  "wiki/Special%3AWhatLinksHere": {
+   "count": 488,
+   "mb": 11.0,
+   "exts": {
+    "html": 488
+   }
+  },
+  "interface": {
+   "count": 280,
+   "mb": 9.8,
+   "exts": {
+    "gfx": 145,
+    "gui": 132,
+    "txt": 2,
+    "sfx": 1
+   }
+  },
+  "dlc/dlc037_by_blood_alone_preorder_bonus": {
+   "count": 5,
+   "mb": 9.6,
+   "exts": {
+    "dlc": 1,
+    "png": 1,
+    "txt": 1,
+    "ogg": 1,
+    "asset": 1
+   }
+  },
+  "dlc/dlc035_no_step_back_preorder_bonus": {
+   "count": 5,
+   "mb": 9.3,
+   "exts": {
+    "dlc": 1,
+    "png": 1,
+    "ogg": 1,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "events": {
+   "count": 128,
+   "mb": 7.7,
+   "exts": {
+    "txt": 128
+   }
+  },
+  "gfx/particles": {
+   "count": 213,
+   "mb": 7.3,
+   "exts": {
+    "asset": 141,
+    "dds": 70,
+    "txt": 1,
+    "gfx": 1
+   }
+  },
+  "dlc/dlc007_german_tanks_unit_pack": {
+   "count": 112,
+   "mb": 6.8,
+   "exts": {
+    "dds": 74,
+    "anim": 24,
+    "mesh": 8,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc009_british_tanks_unit_pack": {
+   "count": 81,
+   "mb": 6.7,
+   "exts": {
+    "dds": 43,
+    "anim": 24,
+    "mesh": 8,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "txt": 1
+   }
+  },
+  "common/decisions": {
+   "count": 147,
+   "mb": 6.6,
+   "exts": {
+    "txt": 146,
+    "md": 1
+   }
+  },
+  "dlc/dlc001_german_historical_portraits": {
+   "count": 106,
+   "mb": 6.2,
+   "exts": {
+    "dds": 104,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc008_french_tanks_unit_pack": {
+   "count": 119,
+   "mb": 6.1,
+   "exts": {
+    "dds": 81,
+    "anim": 24,
+    "mesh": 8,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc002_polish_content_pack": {
+   "count": 150,
+   "mb": 6.0,
+   "exts": {
+    "dds": 117,
+    "anim": 13,
+    "mesh": 11,
+    "gfx": 5,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1
+   }
+  },
+  "dlc/dlc010_us_tanks_unit_pack": {
+   "count": 70,
+   "mb": 5.5,
+   "exts": {
+    "dds": 32,
+    "anim": 24,
+    "mesh": 8,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "txt": 1
+   }
+  },
+  "gfx": {
+   "count": 4,
+   "mb": 5.4,
+   "exts": {
+    "txt": 2,
+    "bmp": 1,
+    "dds": 1
+   }
+  },
+  "dlc/dlc048_expansion_pass_2_seaplane_tenders": {
+   "count": 34,
+   "mb": 4.5,
+   "exts": {
+    "dds": 12,
+    "anim": 12,
+    "mesh": 3,
+    "gfx": 2,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "dlc/dlc006_soviet_tanks_unit_pack": {
+   "count": 70,
+   "mb": 4.4,
+   "exts": {
+    "dds": 32,
+    "anim": 24,
+    "mesh": 8,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "gfx": 1,
+    "txt": 1
+   }
+  },
+  "pdx_online_assets/gfx": {
+   "count": 26,
+   "mb": 4.0,
+   "exts": {
+    "dds": 16,
+    "fnt": 6,
+    "shader": 2,
+    "tga": 2
+   }
+  },
+  "pdx_launcher/common": {
+   "count": 96,
+   "mb": 4.0,
+   "exts": {
+    "dds": 43,
+    "yml": 21,
+    "gfx": 10,
+    "tga": 9,
+    "gui": 7,
+    "fnt": 4,
+    "shader": 2
+   }
+  },
+  "sound/awards": {
+   "count": 6,
+   "mb": 4.0,
+   "exts": {
+    "wav": 6
+   }
+  },
+  "dlc/dlc045_expansion_pass_1_supporter_pack": {
+   "count": 31,
+   "mb": 4.0,
+   "exts": {
+    "dds": 12,
+    "anim": 9,
+    "mesh": 3,
+    "gfx": 2,
+    "asset": 2,
+    "dlc": 1,
+    "png": 1,
+    "txt": 1
+   }
+  },
+  "assets": {
+   "count": 7,
+   "mb": 3.7,
+   "exts": {
+    "png": 5,
+    "ttf": 1,
+    "json": 1
+   }
+  },
+  "dlc/dlc041_trial_of_allegiance_preorder_bonus": {
+   "count": 5,
+   "mb": 3.7,
+   "exts": {
+    "dlc": 1,
+    "png": 1,
+    "ogg": 1,
+    "asset": 1,
+    "txt": 1
+   }
+  },
+  "history/units": {
+   "count": 609,
+   "mb": 3.1,
+   "exts": {
+    "txt": 609
+   }
+  },
+  "sound/placeholders": {
+   "count": 9,
+   "mb": 3.0,
+   "exts": {
+    "wav": 9
+   }
+  },
+  "tweakergui_assets/gfx": {
+   "count": 35,
+   "mb": 3.0,
+   "exts": {
+    "dds": 15,
+    "tga": 13,
+    "fnt": 5,
+    "shader": 2
+   }
+  },
+  "common/units": {
+   "count": 297,
+   "mb": 3.0,
+   "exts": {
+    "txt": 296,
+    "md": 1
+   }
+  },
+  "common/characters": {
+   "count": 233,
+   "mb": 2.8,
+   "exts": {
+    "txt": 232,
+    "md": 1
+   }
+  },
+  "crash_reporter/binaries": {
+   "count": 2,
+   "mb": 2.6,
+   "exts": {
+    "exe": 1,
+    "manifest": 1
+   }
+  },
+  "dlc/dlc039_arms_against_tyranny_preorder_bonus": {
+   "count": 5,
+   "mb": 2.5,
+   "exts": {
+    "dlc": 1,
+    "png": 1,
+    "txt": 1,
+    "asset": 1,
+    "ogg": 1
+   }
+  },
+  "gfx/world": {
+   "count": 26,
+   "mb": 2.4,
+   "exts": {
+    "tga": 26
+   }
+  },
+  "common/ideas": {
+   "count": 213,
+   "mb": 2.4,
+   "exts": {
+    "txt": 213
+   }
+  },
+  "dlc/dlc003_rocket_launcher_unit_pack": {
+   "count": 3,
+   "mb": 2.4,
+   "exts": {
+    "dlc": 1,
+    "zip": 1,
+    "png": 1
+   }
+  },
+  "gfx/mapitems": {
+   "count": 14,
+   "mb": 2.0,
+   "exts": {
+    "dds": 12,
+    "tga": 2
+   }
+  },
+  "common/scripted_effects": {
+   "count": 52,
+   "mb": 1.8,
+   "exts": {
+    "txt": 52
+   }
+  },
+  "history/countries": {
+   "count": 364,
+   "mb": 1.7,
+   "exts": {
+    "txt": 364
+   }
+  },
+  "documentation": {
+   "count": 22,
+   "mb": 1.7,
+   "exts": {
+    "html": 11,
+    "md": 11
+   }
+  },
+  "dlc/dlc044_expansion_pass_1_ride_of_the_valkyries": {
+   "count": 5,
+   "mb": 1.7,
+   "exts": {
+    "dlc": 1,
+    "png": 1,
+    "asset": 1,
+    "ogg": 1,
+    "txt": 1
+   }
+  },
+  "wiki/Special%3ARecentChangesLinked": {
+   "count": 75,
+   "mb": 1.6,
+   "exts": {
+    "html": 75
+   }
+  },
+  "interface/equipmentdesigner": {
+   "count": 270,
+   "mb": 1.4,
+   "exts": {
+    "gui": 268,
+    "dds": 1,
+    "info": 1
+   }
+  },
+  "gfx/army_icons": {
+   "count": 13,
+   "mb": 1.4,
+   "exts": {
+    "dds": 12,
+    "txt": 1
+   }
+  },
+  "gfx/entities": {
+   "count": 53,
+   "mb": 1.4,
+   "exts": {
+    "gfx": 27,
+    "asset": 26
+   }
+  },
+  "common/military_industrial_organization": {
+   "count": 63,
+   "mb": 0.9,
+   "exts": {
+    "txt": 60,
+    "md": 3
+   }
+  },
+  "map/strategicregions": {
+   "count": 304,
+   "mb": 0.9,
+   "exts": {
+    "txt": 304
+   }
+  },
+  "common/on_actions": {
+   "count": 18,
+   "mb": 0.8,
+   "exts": {
+    "txt": 17,
+    "md": 1
+   }
+  },
+  "common/ai_equipment": {
+   "count": 23,
+   "mb": 0.8,
+   "exts": {
+    "txt": 22,
+    "md": 1
+   }
+  },
+  "common/ai_strategy_plans": {
+   "count": 128,
+   "mb": 0.8,
+   "exts": {
+    "txt": 128
+   }
+  },
+  "sound": {
+   "count": 8,
+   "mb": 0.8,
+   "exts": {
+    "asset": 7,
+    "wav": 1
+   }
+  },
+  "gfx/cursors": {
+   "count": 126,
+   "mb": 0.7,
+   "exts": {
+    "png": 57,
+    "cur": 49,
+    "ani": 10,
+    "ico": 10
+   }
+  },
+  "gfx/texticons": {
+   "count": 331,
+   "mb": 0.7,
+   "exts": {
+    "dds": 331
+   }
+  },
+  "gfx/minimap": {
+   "count": 15,
+   "mb": 0.7,
+   "exts": {
+    "dds": 15
+   }
+  },
+  "gfx/aces": {
+   "count": 85,
+   "mb": 0.6,
+   "exts": {
+    "dds": 85
+   }
+  },
+  "wiki/Special%3AContributions": {
+   "count": 14,
+   "mb": 0.6,
+   "exts": {
+    "html": 14
+   }
+  },
+  "common/scripted_triggers": {
+   "count": 55,
+   "mb": 0.6,
+   "exts": {
+    "txt": 55
+   }
+  },
+  "common/ai_strategy": {
+   "count": 51,
+   "mb": 0.6,
+   "exts": {
+    "txt": 50,
+    "md": 1
+   }
+  },
+  "history/states": {
+   "count": 1081,
+   "mb": 0.5,
+   "exts": {
+    "txt": 1081
+   }
+  },
+  "common/defines": {
+   "count": 3,
+   "mb": 0.5,
+   "exts": {
+    "lua": 3
+   }
+  },
+  "common/dynamic_modifiers": {
+   "count": 11,
+   "mb": 0.5,
+   "exts": {
+    "txt": 11
+   }
+  },
+  "common/names": {
+   "count": 1,
+   "mb": 0.4,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/technologies": {
+   "count": 13,
+   "mb": 0.4,
+   "exts": {
+    "txt": 13
+   }
+  },
+  "common/factions": {
+   "count": 30,
+   "mb": 0.4,
+   "exts": {
+    "txt": 29,
+    "md": 1
+   }
+  },
+  "common/country_leader": {
+   "count": 4,
+   "mb": 0.4,
+   "exts": {
+    "txt": 4
+   }
+  },
+  "wiki/Special%3ALog": {
+   "count": 11,
+   "mb": 0.4,
+   "exts": {
+    "html": 11
+   }
+  },
+  "common/special_projects": {
+   "count": 17,
+   "mb": 0.3,
+   "exts": {
+    "txt": 13,
+    "md": 4
+   }
+  },
+  "interface/career_profile": {
+   "count": 17,
+   "mb": 0.3,
+   "exts": {
+    "gui": 10,
+    "gfx": 7
+   }
+  },
+  "gfx/FX": {
+   "count": 58,
+   "mb": 0.3,
+   "exts": {
+    "shader": 45,
+    "fxh": 13
+   }
+  },
+  "common/raids": {
+   "count": 10,
+   "mb": 0.3,
+   "exts": {
+    "txt": 9,
+    "md": 1
+   }
+  },
+  "tools/art": {
+   "count": 3,
+   "mb": 0.2,
+   "exts": {
+    "png": 3
+   }
+  },
+  "wiki/Special%3AUndelete": {
+   "count": 15,
+   "mb": 0.2,
+   "exts": {
+    "html": 15
+   }
+  },
+  "common": {
+   "count": 13,
+   "mb": 0.2,
+   "exts": {
+    "txt": 12,
+    "json": 1
+   }
+  },
+  "common/doctrines": {
+   "count": 27,
+   "mb": 0.2,
+   "exts": {
+    "txt": 22,
+    "md": 5
+   }
+  },
+  "tools/history_viewer": {
+   "count": 3,
+   "mb": 0.2,
+   "exts": {
+    "js": 2,
+    "html": 1
+   }
+  },
+  "tools": {
+   "count": 3,
+   "mb": 0.2,
+   "exts": {
+    "settings": 1,
+    "html": 1,
+    "json": 1
+   }
+  },
+  "interface/military_industrial_organization": {
+   "count": 7,
+   "mb": 0.2,
+   "exts": {
+    "gui": 5,
+    "gfx": 2
+   }
+  },
+  "common/peace_conference": {
+   "count": 37,
+   "mb": 0.2,
+   "exts": {
+    "txt": 35,
+    "md": 2
+   }
+  },
+  "interface/factions": {
+   "count": 8,
+   "mb": 0.2,
+   "exts": {
+    "gui": 7,
+    "gfx": 1
+   }
+  },
+  "common/operations": {
+   "count": 7,
+   "mb": 0.1,
+   "exts": {
+    "txt": 6,
+    "md": 1
+   }
+  },
+  "wiki/User%3AGeneral_Baker": {
+   "count": 5,
+   "mb": 0.1,
+   "exts": {
+    "html": 5
+   }
+  },
+  "gfx/keyicons": {
+   "count": 70,
+   "mb": 0.1,
+   "exts": {
+    "dds": 70
+   }
+  },
+  "common/ai_templates": {
+   "count": 16,
+   "mb": 0.1,
+   "exts": {
+    "txt": 15,
+    "md": 1
+   }
+  },
+  "common/unit_leader": {
+   "count": 13,
+   "mb": 0.1,
+   "exts": {
+    "txt": 13
+   }
+  },
+  "history/general": {
+   "count": 4,
+   "mb": 0.1,
+   "exts": {
+    "txt": 4
+   }
+  },
+  "common/countries": {
+   "count": 442,
+   "mb": 0.1,
+   "exts": {
+    "txt": 442
+   }
+  },
+  "common/bop": {
+   "count": 10,
+   "mb": 0.1,
+   "exts": {
+    "txt": 10
+   }
+  },
+  "common/game_rules": {
+   "count": 1,
+   "mb": 0.1,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "dlc/dlc005_heavy_cruisers_unit_pack": {
+   "count": 3,
+   "mb": 0.1,
+   "exts": {
+    "dlc": 1,
+    "zip": 1,
+    "png": 1
+   }
+  },
+  "interface/international_market": {
+   "count": 10,
+   "mb": 0.1,
+   "exts": {
+    "gui": 9,
+    "gfx": 1
+   }
+  },
+  "interface/special_projects": {
+   "count": 8,
+   "mb": 0.1,
+   "exts": {
+    "gui": 7,
+    "gfx": 1
+   }
+  },
+  "tests": {
+   "count": 35,
+   "mb": 0.1,
+   "exts": {
+    "txt": 34,
+    "info": 1
+   }
+  },
+  "wiki/User%3ASaintDaveUK": {
+   "count": 1,
+   "mb": 0.1,
+   "exts": {
+    "html": 1
+   }
+  },
+  "gfx/game_rules": {
+   "count": 17,
+   "mb": 0.1,
+   "exts": {
+    "dds": 17
+   }
+  },
+  "common/bookmarks": {
+   "count": 2,
+   "mb": 0.1,
+   "exts": {
+    "txt": 2
+   }
+  },
+  "common/focus_inlay_windows": {
+   "count": 7,
+   "mb": 0.1,
+   "exts": {
+    "txt": 6,
+    "md": 1
+   }
+  },
+  "common/opinion_modifiers": {
+   "count": 13,
+   "mb": 0.0,
+   "exts": {
+    "txt": 13
+   }
+  },
+  "portraits": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 2
+   }
+  },
+  "wiki/Template%3AIcon": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "html": 2
+   }
+  },
+  "common/ai_navy": {
+   "count": 26,
+   "mb": 0.0,
+   "exts": {
+    "txt": 24,
+    "md": 2
+   }
+  },
+  "interface/doctrines": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "gfx": 1,
+    "gui": 1
+   }
+  },
+  "interface/military_raids": {
+   "count": 3,
+   "mb": 0.0,
+   "exts": {
+    "gui": 2,
+    "gfx": 1
+   }
+  },
+  "wiki/Template%3AAmbox": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "html": 2
+   }
+  },
+  "common/medals": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/unit_medals": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/technology_sharing": {
+   "count": 11,
+   "mb": 0.0,
+   "exts": {
+    "txt": 11
+   }
+  },
+  "common/buildings": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 2
+   }
+  },
+  "common/autonomous_states": {
+   "count": 21,
+   "mb": 0.0,
+   "exts": {
+    "txt": 21
+   }
+  },
+  "common/operation_phases": {
+   "count": 17,
+   "mb": 0.0,
+   "exts": {
+    "txt": 16,
+    "md": 1
+   }
+  },
+  "common/scorers": {
+   "count": 4,
+   "mb": 0.0,
+   "exts": {
+    "txt": 4
+   }
+  },
+  "common/occupation_laws": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/ai_faction_theaters": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "md": 1
+   }
+  },
+  "pdx_online_assets/interface": {
+   "count": 7,
+   "mb": 0.0,
+   "exts": {
+    "gfx": 4,
+    "gui": 3
+   }
+  },
+  "common/modifiers": {
+   "count": 5,
+   "mb": 0.0,
+   "exts": {
+    "txt": 5
+   }
+  },
+  "interface/pdx_online": {
+   "count": 3,
+   "mb": 0.0,
+   "exts": {
+    "gui": 2,
+    "gfx": 1
+   }
+  },
+  "common/collections": {
+   "count": 3,
+   "mb": 0.0,
+   "exts": {
+    "txt": 2,
+    "md": 1
+   }
+  },
+  "tweakergui_assets/interface": {
+   "count": 3,
+   "mb": 0.0,
+   "exts": {
+    "gfx": 2,
+    "gui": 1
+   }
+  },
+  "common/ribbons": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "wiki/Template%3ADelete": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ASpeedDelete": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AExpand": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ACopy_edit": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ASplit": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ARewrite": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AUpdate": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AVersion": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AStub": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AUnder_construction": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ACategory": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AMerge": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AInUse": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AWikify": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3APOV": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AMove": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ACleanup": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ALinks": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ACurrent": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AProtect": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ATemplate_doc_page_transcluded": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AUnsigned": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AAchievement": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "common/intelligence_agencies": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/scripted_guis": {
+   "count": 20,
+   "mb": 0.0,
+   "exts": {
+    "txt": 19,
+    "md": 1
+   }
+  },
+  "wiki/Template%3ACountry_navbox": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "common/abilities": {
+   "count": 6,
+   "mb": 0.0,
+   "exts": {
+    "txt": 6
+   }
+  },
+  "wiki/Template%3ADuplicate": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AUnique_national_idea_bonus_list": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AAnchor": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AUnique_national_idea_bonus_table": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3AUserInfo": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ATemplate": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "common/country_tags": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 2
+   }
+  },
+  "wiki/Template%3AGreen": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ARed": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "wiki/Template%3ACountry": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "common/script_constants": {
+   "count": 5,
+   "mb": 0.0,
+   "exts": {
+    "txt": 4,
+    "md": 1
+   }
+  },
+  "wiki/Template%3AInfobox": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "html": 1
+   }
+  },
+  "common/ai_focuses": {
+   "count": 8,
+   "mb": 0.0,
+   "exts": {
+    "txt": 8
+   }
+  },
+  "common/resistance_activity": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "interface/widgets": {
+   "count": 3,
+   "mb": 0.0,
+   "exts": {
+    "gui": 3
+   }
+  },
+  "tutorial": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "previewer_assets/assetviewer_interface": {
+   "count": 6,
+   "mb": 0.0,
+   "exts": {
+    "gfx": 3,
+    "gui": 2,
+    "sfx": 1
+   }
+  },
+  "wiki/resources": {
+   "count": 12,
+   "mb": 0.0,
+   "exts": {
+    "png": 1,
+    "png@3d5b6": 1,
+    "svg@b3daa": 1,
+    "png@bdcf5": 1,
+    "gif@57f34": 1,
+    "gif@53eb5": 1,
+    "gif@346d8": 1,
+    "gif@ca65b": 1,
+    "png@b5711": 1,
+    "svg@7fa0a": 1
+   }
+  },
+  "common/intelligence_agency_upgrades": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "md": 1
+   }
+  },
+  "common/profile_pictures": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/equipment_groups": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "md": 1
+   }
+  },
+  "interface/buildings": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "gfx": 1
+   }
+  },
+  "interface/building_roster": {
+   "count": 4,
+   "mb": 0.0,
+   "exts": {
+    "gui": 3,
+    "gfx": 1
+   }
+  },
+  "common/continuous_focus": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "wiki/skins": {
+   "count": 28,
+   "mb": 0.0,
+   "exts": {
+    "png@5c03c": 1,
+    "svg@6cc06": 1,
+    "png@feb5c": 1,
+    "svg@92f5b": 1,
+    "png@785dd": 1,
+    "svg@90d59": 1,
+    "png@948bf": 1,
+    "svg@445a3": 1,
+    "png@7c7b7": 1,
+    "png@3ea1b": 1
+   }
+  },
+  "common/terrain": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "dlc_metadata/dlc_info": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/ai_areas": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "interface/notifications": {
+   "count": 4,
+   "mb": 0.0,
+   "exts": {
+    "gui": 4
+   }
+  },
+  "common/scientist_traits": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "md": 1
+   }
+  },
+  "common/ideologies": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/technology_tags": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/resistance_compliance_modifiers": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 2
+   }
+  },
+  "gfx/3dviewenv": {
+   "count": 13,
+   "mb": 0.0,
+   "exts": {
+    "txt": 13
+   }
+  },
+  "gfx/train_gfx_database": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/country_tag_aliases": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "script": {
+   "count": 5,
+   "mb": 0.0,
+   "exts": {
+    "lua": 5
+   }
+  },
+  "common/map_modes": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "md": 1
+   }
+  },
+  "common/scripted_diplomatic_actions": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/idea_tags": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/wargoals": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "localisation": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "yml": 1
+   }
+  },
+  "common/operation_tokens": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "md": 1
+   }
+  },
+  "common/aces": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/frontend": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/profile_backgrounds": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/modifier_definitions": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 2
+   }
+  },
+  "previewer_assets/interface": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "gfx": 2
+   }
+  },
+  "common/synchronized_dynamic_tokens": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/state_category": {
+   "count": 13,
+   "mb": 0.0,
+   "exts": {
+    "txt": 13
+   }
+  },
+  "common/generation": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/unit_tags": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/difficulty_settings": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "keybinds": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "country_metadata": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/strategic_locations": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "md": 1,
+    "txt": 1
+   }
+  },
+  "keybind_profiles": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "browser": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "js": 1
+   }
+  },
+  "common/resources": {
+   "count": 2,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1,
+    "md": 1
+   }
+  },
+  "interface/integrity": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "gui": 1
+   }
+  },
+  "common/mtth": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "previewer_assets": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "map/supplyareas": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "common/timed_activities": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  },
+  "pdx_launcher": {
+   "count": 1,
+   "mb": 0.0,
+   "exts": {
+    "txt": 1
+   }
+  }
+ },
+ "_note": "game_root 故意为空：这是入库的基线数据，不含任何机器路径。想用你本机的游戏目录，重跑 tools/kiant-hoi4-survey.py --game <路径>，它会写 survey.local.json（已 gitignore）。"
+}

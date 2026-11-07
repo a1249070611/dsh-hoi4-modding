@@ -1,0 +1,5 @@
+GER_economic_boom = {
+	add_political_power = 100
+	add_stability = 0.1
+	set_country_flag = GER_boom_active
+}

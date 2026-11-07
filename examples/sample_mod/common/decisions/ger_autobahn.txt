@@ -1,0 +1,27 @@
+GER_decisions = {
+	icon = GFX_decision_generic_political_rally
+	allowed = {
+		always = yes
+	}
+	visible = {
+		always = yes
+	}
+	available = {
+		always = yes
+	}
+
+	GER_autobahn = {
+		icon = GFX_decision_generic_political_rally
+		cost = 50
+		days_remove = 30
+		available = {
+			always = yes
+		}
+		complete_effect = {
+			add_stability = 0.05
+		}
+		ai_will_do = {
+			factor = 1
+		}
+	}
+}
