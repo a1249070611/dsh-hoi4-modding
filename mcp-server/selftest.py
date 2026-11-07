@@ -766,7 +766,7 @@ def test_mcp() -> None:
         # Count is asserted against plugin.json rather than hardcoded: the
         # manifest is the single source of truth other platforms may read.
         manifest = json.load(open(os.path.join(ROOT, "plugin.json"), encoding="utf-8"))
-        declared = manifest["capabilities"]["mcpServers"]["kiant-hoi4-modkit"]["tools"]
+        declared = manifest["capabilities"]["mcpServers"]["dsh-hoi4-modding"]["tools"]
         ok("工具数量与 plugin.json 一致", len(tools) == len(declared),
            f"MCP {len(tools)} / manifest {len(declared)}: {[t['name'] for t in tools]}")
         names = {t["name"] for t in tools}

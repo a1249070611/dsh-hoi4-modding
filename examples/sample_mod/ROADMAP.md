@@ -2,7 +2,7 @@
 
 进度：1/8（12%） · 更新于 2026-11-06 11:53
 
-> 由 kiant-hoi4-modkit 生成。改 plan.json 后重新生成即可，不要手改本文件的结构。
+> 由 dsh-hoi4-modding 生成。改 plan.json 后重新生成即可，不要手改本文件的结构。
 
 - [x] **s1** 建立模组骨架
     - 验收：descriptor.mod 与外层 .mod 齐全，启动器能看到 mod

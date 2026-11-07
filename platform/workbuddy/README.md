@@ -32,15 +32,15 @@ cp -r skills/* ~/.workbuddy/skills/
 ```json
 {
   "mcpServers": {
-    "kiant-hoi4-modkit": {
+    "dsh-hoi4-modding": {
       "command": "python",
-      "args": ["C:/绝对路径/kiant-hoi4-modkit/mcp-server/server.py"]
+      "args": ["C:/绝对路径/dsh-hoi4-modding/mcp-server/server.py"]
     }
   }
 }
 ```
 
-保存后**不会自动生效**。到连接器管理页面右上角的「自定义连接器」入口，找到 `kiant-hoi4-modkit` 点「信任」，才会真正启动。
+保存后**不会自动生效**。到连接器管理页面右上角的「自定义连接器」入口，找到 `dsh-hoi4-modding` 点「信任」，才会真正启动。
 
 这一步是刻意保留的：任何会自动拉起本地进程的配置，都该由你亲手确认一次。
 

@@ -35,4 +35,4 @@
 
 ---
 
-来源：`dsh-hoi4-modding` 参考库 + 本机实测。核对记录见 `kiant-hoi4-modkit/references/ATTRIBUTION.md`。
+来源：`dsh-hoi4-modding` 参考库 + 本机实测。核对记录见 `dsh-hoi4-modding/references/ATTRIBUTION.md`。

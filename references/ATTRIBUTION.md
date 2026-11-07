@@ -84,4 +84,4 @@ SOFTWARE.
 
 ## 本插件自身的许可
 
-`mcp-server/`、`agents/`、`skills/`、`knowledge/`、`examples/`、根目录文档均为 MIT，版权归 kiant-hoi4-modkit contributors。两套 MIT，互不冲突。
+`mcp-server/`、`agents/`、`skills/`、`knowledge/`、`examples/`、根目录文档均为 MIT，版权归 dsh-hoi4-modding contributors。两套 MIT，互不冲突。

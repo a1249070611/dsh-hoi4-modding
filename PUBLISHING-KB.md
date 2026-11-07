@@ -118,4 +118,4 @@ tarball 里要有一层顶层目录（GitHub 会自动加 `用户名-仓库名-s
 - [ ] `file_count` 和实际文件数一致（不一致只是提示不准，不影响功能）
 - [ ] 新增的 `.md` 放在 `paths` 列出的目录里，别放仓库根
 - [ ] 笔记里有可复核的坐标（`common/xxx.txt:123` 或官方文档行号），否则它只是 B 级线索
-- [ ] 没把 `~/.kiant-hoi4-modkit/kb.sqlite` 或 `sources.json` 提交上去
+- [ ] 没把 `~/.dsh-hoi4-modding/kb.sqlite` 或 `sources.json` 提交上去

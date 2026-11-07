@@ -188,10 +188,10 @@ kiant_hoi4_plan action=status   → 进度、下一步、依赖是否满足
 
 ```bash
 # 方式一：克隆仓库
-git clone https://github.com/Kiant98/dsh-hoi4-modding.git kiant-hoi4-modkit
-cd kiant-hoi4-modkit
+git clone https://github.com/Kiant98/dsh-hoi4-modding.git dsh-hoi4-modding
+cd dsh-hoi4-modding
 
-# 方式二：从 Releases 下载 kiant-hoi4-modkit-3.0.1.zip，解压后进入目录
+# 方式二：从 Releases 下载 dsh-hoi4-modding-3.0.1.zip，解压后进入目录
 ```
 
 **第二步：确认工具与知识库状态**
@@ -259,7 +259,7 @@ kiant_hoi4_kb_build action=build local_dirs=["D:/我的笔记","D:/旧mod文档"
 
 ```
 kiant_hoi4_kb_sync action=status   → 本地 2026.11.06 / 远端 2026.11.06-2 / 过期 true
-kiant_hoi4_kb_sync action=pull     → 下载约 1 MB，缓存到 ~/.kiant-hoi4-modkit/remote/
+kiant_hoi4_kb_sync action=pull     → 下载约 1 MB，缓存到 ~/.dsh-hoi4-modding/remote/
 kiant_hoi4_kb_build action=build   → 多出一个 remote 源，检索即可命中
 ```
 
@@ -380,7 +380,7 @@ agent → kiant_hoi4_kb_lookup kind=focus           看原版国策树结构
 每个文件、每个文件夹干什么用，见 [STRUCTURE.md](STRUCTURE.md)：一页看完，含分层图、逐文件说明、以及「想改东西时改哪」。这里只给树。
 
 ```
-kiant-hoi4-modkit/
+dsh-hoi4-modding/
 ├── plugin.json              跨平台能力清单（版本/技能/工具/资源的唯一真相来源）
 ├── README.md                本文件
 ├── STRUCTURE.md             组织架构：每层每文件干嘛用 + 改东西时改哪
@@ -439,8 +439,8 @@ kiant-hoi4-modkit/
 | `kiant_hoi4_list_overrides` | — | 只读 |
 | `kiant_hoi4_kb_search` / `lookup` / `symbol` / `stats` | — | 只读 |
 | `kiant_hoi4_error_book` / `solutions` | — | 只读，每次现读 md 文件，不依赖已建索引 |
-| `kiant_hoi4_kb_build` | ✅ | `~/.kiant-hoi4-modkit/kb.sqlite`（不在游戏目录，也不在 mod 目录）。`action=discover` 时纯只读 |
-| `kiant_hoi4_kb_sync` | ✅ | `~/.kiant-hoi4-modkit/remote/`（远端知识的缓存）。`action=status` 时纯只读；只有 pull 会联网 |
+| `kiant_hoi4_kb_build` | ✅ | `~/.dsh-hoi4-modding/kb.sqlite`（不在游戏目录，也不在 mod 目录）。`action=discover` 时纯只读 |
+| `kiant_hoi4_kb_sync` | ✅ | `~/.dsh-hoi4-modding/remote/`（远端知识的缓存）。`action=status` 时纯只读；只有 pull 会联网 |
 | `kiant_hoi4_kb_note` | ✅ | 同上，只往数据库加笔记 |
 | `kiant_hoi4_preview` | ✅ | 默认 `<mod>/.modkit/preview.html`。不想让 mod 目录多东西就传 `out_path` 指到别处 |
 | `kiant_hoi4_plan` | ✅ | `<mod>/.modkit/plan.json` + `<mod>/ROADMAP.md` |

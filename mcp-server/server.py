@@ -38,7 +38,7 @@ import remote
 import preview
 import scaffolder
 
-SERVER_NAME = "kiant-hoi4-modkit"
+SERVER_NAME = "dsh-hoi4-modding"
 
 
 def _read_plugin_version(default: str = "0.0.0") -> str:
@@ -551,7 +551,7 @@ TOOLS: dict[str, tuple[Callable[[dict], Any], dict]] = {
                         "type": "boolean",
                         "description": "跑全类型校验器。需要知识库已索引原版，否则引用类检查会降级",
                     },
-                    "db_path": {"type": "string", "description": "知识库路径，默认 ~/.kiant-hoi4-modkit/kb.sqlite"},
+                    "db_path": {"type": "string", "description": "知识库路径，默认 ~/.dsh-hoi4-modding/kb.sqlite"},
                     "per_check": {
                         "type": "integer",
                         "description": "每类最多返回几条明细，默认 10。原版量很大，别开太大",
@@ -580,7 +580,7 @@ TOOLS: dict[str, tuple[Callable[[dict], Any], dict]] = {
                 "properties": {
                     "mod_path": {"type": "string", "description": "mod 根目录，或外层 .mod 文件路径"},
                     "deep": {"type": "boolean", "description": "启用全类型校验器，跨文件引用检查需知识库支撑"},
-                    "db_path": {"type": "string", "description": "知识库路径，默认 ~/.kiant-hoi4-modkit/kb.sqlite"},
+                    "db_path": {"type": "string", "description": "知识库路径，默认 ~/.dsh-hoi4-modding/kb.sqlite"},
                     "only_validators": {
                         "type": "array",
                         "items": {"type": "string"},

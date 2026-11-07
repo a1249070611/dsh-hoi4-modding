@@ -28,7 +28,7 @@ import cw
 # 这样升级、换版本、重新解压都不会丢索引，也不会有任何本机路径被写进代码。
 # 需要换位置（多环境、CI、把库放到共享盘）时设 HOI4_KB_DB。
 DEFAULT_DB = os.environ.get("HOI4_KB_DB", "").strip() or os.path.join(
-    os.path.expanduser("~"), ".kiant-hoi4-modkit", "kb.sqlite"
+    os.path.expanduser("~"), ".dsh-hoi4-modding", "kb.sqlite"
 )
 
 CODE_EXT = {".txt", ".gui", ".gfx", ".asset", ".lua"}

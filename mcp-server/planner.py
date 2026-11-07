@@ -61,7 +61,7 @@ def _to_markdown(plan: dict) -> str:
         f"进度：{done}/{total}（{round(done / total * 100) if total else 0}%）"
         f" · 更新于 {plan.get('updated', '')}",
         "",
-        "> 由 kiant-hoi4-modkit 生成。改 plan.json 后重新生成即可，不要手改本文件的结构。",
+        "> 由 dsh-hoi4-modding 生成。改 plan.json 后重新生成即可，不要手改本文件的结构。",
         "",
     ]
     for step in steps:

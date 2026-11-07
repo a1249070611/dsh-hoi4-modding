@@ -31,7 +31,7 @@
 平台上的目录树与本地逐层对应，185 个 md 一个不少：
 
 ```
-kiant-hoi4-modkit/           = 资料库「hoi4-moding」文件夹
+dsh-hoi4-modding/           = 资料库「hoi4-moding」文件夹
 ├── README / ARCHITECTURE / GETTING-STARTED / PUBLISHING-KB / PUBLISHING-LIBRARY
 ├── agents/
 ├── mcp-server/              （只同步 .md，.py 不同步）

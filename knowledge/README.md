@@ -28,7 +28,7 @@
 
 ```
 kiant_hoi4_kb_sync action=status   → 看本地缓存与远端版本差
-kiant_hoi4_kb_sync action=pull     → 拉取约 1 MB，缓存到 ~/.kiant-hoi4-modkit/remote/
+kiant_hoi4_kb_sync action=pull     → 拉取约 1 MB，缓存到 ~/.dsh-hoi4-modding/remote/
 kiant_hoi4_kb_build action=build   → 多出一个 remote 源
 ```
 
@@ -101,7 +101,7 @@ HOI4_GAME="F:/Games/Hearts of Iron IV" python server.py --call kiant_hoi4_kb_bui
 | `HOI4_MODS_ROOT` | 扫描第三方模组的根目录 | mod 不装在默认的 `mod/` 下 |
 
 默认值全部由程序算出来，不含任何写死的本机路径：游戏目录靠探测，索引库在
-`~/.kiant-hoi4-modkit/kb.sqlite`。**换一台电脑不用改任何东西。**
+`~/.dsh-hoi4-modding/kb.sqlite`。**换一台电脑不用改任何东西。**
 
 ### 自己写 `sources.json` 时，路径怎么写
 
@@ -152,6 +152,6 @@ HOI4_GAME="F:/Games/Hearts of Iron IV" python server.py --call kiant_hoi4_kb_bui
 
 ## 位置
 
-默认 `~/.kiant-hoi4-modkit/kb.sqlite`，不在插件目录里，避免插件更新时丢失。用 `db_path` 可以指向别处（比如项目内共享一份）。
+默认 `~/.dsh-hoi4-modding/kb.sqlite`，不在插件目录里，避免插件更新时丢失。用 `db_path` 可以指向别处（比如项目内共享一份）。
 
 删掉重建是安全的，代价只是重新索引一次。

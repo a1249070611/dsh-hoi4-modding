@@ -7,9 +7,9 @@
 ```json
 {
   "mcpServers": {
-    "kiant-hoi4-modkit": {
+    "dsh-hoi4-modding": {
       "command": "python3",
-      "args": ["/绝对路径/kiant-hoi4-modkit/mcp-server/server.py"]
+      "args": ["/绝对路径/dsh-hoi4-modding/mcp-server/server.py"]
     }
   }
 }
@@ -20,9 +20,9 @@ Windows 上 `command` 用 `python`，路径用正斜杠或双反斜杠：
 ```json
 {
   "mcpServers": {
-    "kiant-hoi4-modkit": {
+    "dsh-hoi4-modding": {
       "command": "python",
-      "args": ["C:/Users/you/kiant-hoi4-modkit/mcp-server/server.py"]
+      "args": ["C:/Users/you/dsh-hoi4-modding/mcp-server/server.py"]
     }
   }
 }
@@ -47,7 +47,7 @@ mkdir -p .claude/agents && cp agents/kiant-hoi4-modder.md .claude/agents/
 **MCP 工具**：
 
 ```bash
-claude mcp add kiant-hoi4-modkit -- python3 /绝对路径/kiant-hoi4-modkit/mcp-server/server.py
+claude mcp add dsh-hoi4-modding -- python3 /绝对路径/dsh-hoi4-modding/mcp-server/server.py
 ```
 
 或手动编辑 `~/.claude.json`，把上面的 `mcpServers` 片段合并进去。
@@ -69,7 +69,7 @@ claude mcp add kiant-hoi4-modkit -- python3 /绝对路径/kiant-hoi4-modkit/mcp-
 **MCP**：`Cursor Settings → MCP → Add new MCP Server`，Type 选 `command`，Command 填：
 
 ```
-python3 /绝对路径/kiant-hoi4-modkit/mcp-server/server.py
+python3 /绝对路径/dsh-hoi4-modding/mcp-server/server.py
 ```
 
 或编辑 `~/.cursor/mcp.json`（全局）／项目根 `.cursor/mcp.json`（仅本项目），合并上面的片段。

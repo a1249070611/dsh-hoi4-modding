@@ -123,9 +123,9 @@ README 自己写清楚了边界，这点值得记：
 换句话说：**它承认"往返保真"是有损的**，只是损多少看内容类型。这不是缺陷隐瞒，
 是把限制写在最显眼的位置。
 
-## 七、和本库（kiant-hoi4-modkit）的定位差异
+## 七、和本库（dsh-hoi4-modding）的定位差异
 
-| | hagane-studio | kiant-hoi4-modkit（本库） |
+| | hagane-studio | dsh-hoi4-modding（本库） |
 |---|---|---|
 | 形态 | 桌面 GUI 应用 | MCP 工具 + Agent + 参考库 |
 | 使用者 | 人（可视化操作） | AI agent（自然语言驱动） |
