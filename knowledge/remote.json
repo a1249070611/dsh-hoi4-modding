@@ -4,7 +4,7 @@
   "_example": "填 repo 时要连 branch 一起改：上游 dsh-hoi4-modding 的默认分支是 master 不是 main，写错会 404。",
   "_checked_2026_11_07": "Kiant98/dsh-hoi4-modding（旧地址 a1249070611/dsh-hoi4-modding 已重定向）自 v3.0.1（2026-11-07）起已含 153 篇 references、根 manifest.json 与 knowledge/notes，可直接当平台知识库用；repo 留空是刻意的：默认离线优先，需要平台库时把 repo 与 branch=master 填上再跑 kb_sync action=pull。",
   "repo": "",
-  "branch": "main",
+  "branch": "master",
   "paths": [
     "knowledge/notes",
     "references"
